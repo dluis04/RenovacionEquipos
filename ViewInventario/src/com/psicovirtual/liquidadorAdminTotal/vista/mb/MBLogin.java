@@ -122,6 +122,12 @@ public class MBLogin implements Serializable {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("/ViewInventario/faces/index.xhtml");
 			}
 
+			Object session = FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+			HttpSession httpSession = (HttpSession) session;
+
+			httpSession.invalidate();
+
 		} catch (Exception e) {
 
 			e.printStackTrace();

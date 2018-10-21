@@ -58,11 +58,12 @@ public class MBComputador implements Serializable {
 	private Computador computadorSeleccionado;
 	private Computador computadorModificar;
 	private Computador computador;
-	
+
 	private boolean skip;
 	private Usuario usuario;
 
 	public MBComputador() {
+
 		computador = new Computador();
 		computadorSeleccionado = new Computador();
 		computadorModificar = new Computador();
@@ -100,26 +101,6 @@ public class MBComputador implements Serializable {
 		} catch (Exception e) {
 			System.out.println("Error en el metodo cargarListaComputadors -->> " + e);
 		}
-	}
-
-	public void limpiarTipoModelo() {
-		modeloComputoSeleccionado = null;
-		modeloComputoSeleccionado = new ModeloComputo();
-	}
-
-	public void limpiarCaracteristica() {
-		caracteristicasComputoSeleccionado = null;
-		caracteristicasComputoSeleccionado = new CaracteristicasComputo();
-	}
-
-	public void limpiarTipo() {
-		tipoComputoSeleccionado = null;
-		tipoComputoSeleccionado = new TipoComputo();
-	}
-
-	public void limpiarOperacion() {
-		operacionServicioSeleccionado = null;
-		operacionServicioSeleccionado = new OperacionServicio();
 	}
 
 	public void registrarComputador() {
@@ -195,6 +176,94 @@ public class MBComputador implements Serializable {
 		operacionServicioSeleccionado = new OperacionServicio();
 	}
 
+	public void limpiarIsNull() {
+
+		if (modeloComputoSeleccionado == null) {
+			modeloComputoSeleccionado = new ModeloComputo();
+		}
+
+		if (caracteristicasComputoSeleccionado == null) {
+			caracteristicasComputoSeleccionado = new CaracteristicasComputo();
+		}
+
+		if (tipoComputoSeleccionado == null) {
+			tipoComputoSeleccionado = new TipoComputo();
+		}
+
+		
+		if (sistemaOperativoSeleccionado == null) {
+			sistemaOperativoSeleccionado = new SistemaOperativo();
+		}
+
+	}
+
+	public void limpiarTipoModelo() {
+		modeloComputoSeleccionado = null;
+		modeloComputoSeleccionado = new ModeloComputo();
+		limpiarIsNull();
+	}
+
+	public void limpiarCaracteristica() {
+		caracteristicasComputoSeleccionado = null;
+		caracteristicasComputoSeleccionado = new CaracteristicasComputo();
+		limpiarIsNull();
+	}
+
+	public void limpiarTipo() {
+		tipoComputoSeleccionado = null;
+		tipoComputoSeleccionado = new TipoComputo();
+		limpiarIsNull();
+	}
+
+	public void limpiarSistema() {
+		sistemaOperativoSeleccionado = null;
+		sistemaOperativoSeleccionado = new SistemaOperativo();
+		limpiarIsNull();
+	}
+
+	public void limpiarOperacion() {
+		operacionServicioSeleccionado = null;
+		operacionServicioSeleccionado = new OperacionServicio();
+	}
+
+	public void seleccionarSistema() {
+		if (sistemaOperativoSeleccionado != null) {
+			mensajes.mostrarMensaje("Sistema Operativo seleccionado exitosamente", 1);
+		} else {
+			mensajes.mostrarMensaje("Debe seleccionar un Sistema Operativo", 2);
+		}
+		limpiarIsNull();
+	}
+
+	public void seleccionarTipoCompu() {
+		if (tipoComputoSeleccionado != null) {
+			mensajes.mostrarMensaje("Tipo computador seleccionado exitosamente", 1);
+		} else {
+			mensajes.mostrarMensaje("Debe seleccionar un Tipo computador", 2);
+		}
+		limpiarIsNull();
+	}
+
+	public void seleccionarTipoModelo() {
+		if (modeloComputoSeleccionado != null) {
+			mensajes.mostrarMensaje("Tipo modelo seleccionado exitosamente", 1);
+		} else {
+			mensajes.mostrarMensaje("Debe seleccionar un Tipo modelo", 2);
+		}
+		limpiarIsNull();
+	}
+
+	public void seleccionarCaracteristica() {
+
+		if (caracteristicasComputoSeleccionado != null) {
+			mensajes.mostrarMensaje("Caracteristica seleccionada exitosamente", 1);
+		} else {
+			mensajes.mostrarMensaje("Debe seleccionar una caracteristica", 2);
+		}
+		limpiarIsNull();
+
+	}
+
 	public void tabIsClosed() {
 
 		System.out.println("Cerrando sesion por browser");
@@ -238,7 +307,6 @@ public class MBComputador implements Serializable {
 	}
 
 	public String onFlowProcess(FlowEvent event) {
-		System.out.println("Skip -->> " + skip);
 		if (skip) {
 			skip = false; // reset in case user goes back
 			return "confirm";

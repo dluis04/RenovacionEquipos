@@ -17,187 +17,7 @@
 				</div>
 
 
-				<p:wizard flowListener="#{MBComputador.onFlowProcess}">
-
-					<p:tab id="tapModelo" title="Modelo">
-
-						<div align="center">
-
-							<p:panel id="panelModelo">
-
-								<p:dataTable id="tblModeloComputo" var="var"
-									selectionMode="single"
-									selection="#{MBComputador.modeloComputoSeleccionado}"
-									rowKey="#{var.idModelo}"
-									value="#{MBComputador.listModeloComputo}"
-									emptyMessage="No hay registros para mostrar">
-
-									<f:facet name="header">
-                                        Seleccione un Modelo Computador
-                                    </f:facet>
-
-									<p:column headerText="Codigo">
-										<h:outputText value="#{var.idModelo}" />
-									</p:column>
-
-									<p:column headerText="Modelo">
-										<h:outputText value="#{var.modelo}" />
-									</p:column>
-
-									<p:column headerText="Tipo">
-										<h:outputText value="#{var.tipo}" />
-									</p:column>
-									<p:column headerText="Fabricante">
-										<h:outputText value="#{var.fabricante}" />
-									</p:column>
-									<f:facet name="footer">
-										<p:commandButton value="Limpiar" style="width: 220px;"
-											update=":formPrincipal"
-											action="#{MBComputador.limpiarTipoModelo}" id="limpiarModelo">
-										</p:commandButton>
-									</f:facet>
-								</p:dataTable>
-
-							</p:panel>
-						</div>
-					</p:tab>
-
-
-					<p:tab id="tapCaracteristicas" title="Caracteristicas Computador">
-
-						<div align="center">
-
-							<p:panel id="panelCaracteristicas">
-
-								<p:dataTable id="tblCaracteristica" var="var"
-									selectionMode="single"
-									selection="#{MBComputador.caracteristicasComputoSeleccionado}"
-									rowKey="#{var.idCaracteristicas}"
-									value="#{MBComputador.listCaracteristicas}"
-									emptyMessage="No hay registros para mostrar">
-
-									<f:facet name="header">
-                                        Seleccione una Caracteristica
-                                    </f:facet>
-									<p:ajax event="rowSelect"
-										listener="#{MBComputador.onRowSelect}"
-										update=":formPrincipal:panelModificar" />
-
-									<p:column headerText="Codigo">
-										<h:outputText value="#{var.idCaracteristicas}" />
-									</p:column>
-
-									<p:column headerText="Procesador">
-										<h:outputText value="#{var.procesador}" />
-									</p:column>
-
-									<p:column headerText="Memoria">
-										<h:outputText value="#{var.memoria}" />
-									</p:column>
-									<p:column headerText="Disco Duro">
-										<h:outputText value="#{var.discoDuro}" />
-									</p:column>
-
-									<f:facet name="footer">
-										<p:commandButton value="Limpiar" style="width: 220px;"
-											update=":formPrincipal"
-											action="#{MBComputador.limpiarCaracteristica}"
-											id="limpiarCarectirsticas">
-										</p:commandButton>
-									</f:facet>
-
-								</p:dataTable>
-
-							</p:panel>
-						</div>
-					</p:tab>
-
-					<p:tab id="tapTipoComputo" title="Tipo Computador">
-
-						<div align="center">
-
-							<p:panel id="panelTipo">
-
-								<p:dataTable id="tblTipoComputo" var="var"
-									selectionMode="single"
-									selection="#{MBComputador.tipoComputoSeleccionado}"
-									rowKey="#{var.idTipo}" value="#{MBComputador.listTipoComputo}"
-									emptyMessage="No hay registros para mostrar">
-
-									<f:facet name="header">
-                                        Seleccione un tipo de computador
-                                    </f:facet>
-
-									<p:column headerText="Codigo">
-										<h:outputText value="#{var.idTipo}" />
-									</p:column>
-
-									<p:column headerText="Tipo">
-										<h:outputText value="#{var.tipoComputo}" />
-									</p:column>
-
-									<p:column headerText="Especificacion">
-										<h:outputText value="#{var.especificacionTd}" />
-									</p:column>
-
-
-									<f:facet name="footer">
-										<p:commandButton value="Limpiar" style="width: 220px;"
-											update=":formPrincipal" action="#{MBComputador.limpiarTipo}"
-											id="limpiarTipo">
-										</p:commandButton>
-									</f:facet>
-								</p:dataTable>
-							</p:panel>
-
-						</div>
-					</p:tab>
-
-					<p:tab id="tapSistemaOperativo" title="Sistema Operativo">
-
-						<div align="center">
-
-							<p:panel id="panelSistema">
-
-								<p:dataTable id="tblSistemaOperativo" var="var"
-									selectionMode="single"
-									selection="#{MBComputador.sistemaOperativoSeleccionado}"
-									rowKey="#{var.idSistema}"
-									value="#{MBComputador.listSistemaOperativo}"
-									emptyMessage="No hay registros para mostrar">
-
-									<f:facet name="header">
-                                        Seleccione un sistema operativo
-                                    </f:facet>
-
-									<p:column headerText="Codigo">
-										<h:outputText value="#{var.idSistema}" />
-									</p:column>
-
-									<p:column headerText="Sistema">
-										<h:outputText value="#{var.sistema}" />
-									</p:column>
-
-									<p:column headerText="Tipo">
-										<h:outputText value="#{var.tipoSistemaOp}" />
-									</p:column>
-
-									<p:column headerText="Version">
-										<h:outputText value="#{var.version}" />
-									</p:column>
-
-									<f:facet name="footer">
-										<p:commandButton value="Limpiar" style="width: 220px;"
-											update=":formPrincipal" action="#{MBComputador.limpiarTipo}"
-											id="limpiarTipo">
-										</p:commandButton>
-									</f:facet>
-
-								</p:dataTable>
-							</p:panel>
-
-						</div>
-					</p:tab>
+				<p:tabView id="tapView">
 
 					<p:tab id="tapRegistro" title="Registro">
 
@@ -225,6 +45,68 @@
 											value="#{MBComputador.computador.nombreComputo}">
 										</p:inputText>
 									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Modelo computador:" />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="Carac" maxlength="200"
+											value="#{MBComputador.modeloComputoSeleccionado.modelo}">
+										</p:inputText>
+
+										<p:commandButton value="Modelos" type="button"
+											onclick="PF('dlg2').show();" />
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Caracteristica computador:" />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="MComput" maxlength="200"
+											value="#{MBComputador.caracteristicasComputoSeleccionado.procesador}">
+										</p:inputText>
+
+										<p:commandButton value="Caracteristica" type="button"
+											onclick="PF('dlg3').show();" />
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Tipo Computador:" />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="TipoCo" maxlength="200"
+											value="#{MBComputador.tipoComputoSeleccionado.tipoComputo}">
+										</p:inputText>
+
+										<p:commandButton value="Tipo" type="button"
+											onclick="PF('dlg4').show();" />
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Sistema Operativo:" />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="sis" maxlength="200"
+											value="#{MBComputador.sistemaOperativoSeleccionado.sistema}">
+										</p:inputText>
+
+										<p:commandButton value="Sistema OP" type="button"
+											onclick="PF('dlg5').show();" />
+									</div>
+
+
 
 									<div class="ui-g-12 ui-lg-6">
 										<h:outputText style="    font-weight: bold; "
@@ -304,7 +186,7 @@
 										<p:column headerText="Operacion">
 											<h:outputText value="#{var.bancoPropio}" />
 										</p:column>
-										
+
 										<p:column headerText="Fecha Inicio">
 											<h:outputText value="#{var.fechaInicio}" />
 										</p:column>
@@ -328,8 +210,8 @@
 										<p:commandButton value="Registrar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
-											update=":formPrincipal:panelRegistrar,:formPrincipal:messages1
-							,:formPrincipal:tblComputador"
+											update=":formPrincipal:tapView:panelRegistrar,:formPrincipal:tapView:messages1
+							,:formPrincipal:tapView:tblComputador"
 											action="#{MBComputador.registrarComputador}" id="guardar">
 										</p:commandButton>
 									</div>
@@ -339,10 +221,260 @@
 										<p:commandButton value="Limpiar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
-											update=":formPrincipal:panelRegistrar"
+											update=":formPrincipal:tapView:panelRegistrar"
 											action="#{MBComputador.limpiar}" id="limpiar">
 										</p:commandButton>
 									</div>
+
+
+
+
+
+
+									<p:dialog header="Modelos" widgetVar="dlg2" modal="true">
+
+
+										<h1 class="brand_name">Modelo Computador</h1>
+
+										<p:dataTable id="tblModeloComputo" var="var"
+											selectionMode="single"
+											selection="#{MBComputador.modeloComputoSeleccionado}"
+											rowKey="#{var.idModelo}"
+											value="#{MBComputador.listModeloComputo}"
+											emptyMessage="No hay registros para mostrar">
+
+											<f:facet name="header">
+                                        Seleccione un Modelo Computador
+                                    </f:facet>
+
+											<p:column headerText="Codigo">
+												<h:outputText value="#{var.idModelo}" />
+											</p:column>
+
+											<p:column headerText="Modelo">
+												<h:outputText value="#{var.modelo}" />
+											</p:column>
+
+											<p:column headerText="Tipo">
+												<h:outputText value="#{var.tipo}" />
+											</p:column>
+											<p:column headerText="Fabricante">
+												<h:outputText value="#{var.fabricante}" />
+											</p:column>
+											<f:facet name="footer">
+
+												<p:commandButton value="Seleccionar" style="width: 100px;"
+													update=":formPrincipal"
+													action="#{MBComputador.seleccionarTipoModelo}"
+													id="seleccionarModelo">
+												</p:commandButton>
+
+												<p:commandButton value="Limpiar" style="width: 100px;"
+													update="tblModeloComputo"
+													action="#{MBComputador.limpiarTipoModelo}"
+													id="limpiarModelo">
+												</p:commandButton>
+
+												<p:commandButton value="Cancelar" style="width: 100px;"
+													update=":formPrincipal:tapView:panelRegistrar"
+													action="#{MBComputador.limpiarTipoModelo}"
+													id="cancelarModelo">
+												</p:commandButton>
+											</f:facet>
+										</p:dataTable>
+
+
+									</p:dialog>
+
+
+
+
+
+
+
+
+									<p:dialog header="Caracteristica" widgetVar="dlg3" modal="true">
+
+
+										<h1 class="brand_name">Caracteristica Computador</h1>
+
+										<p:dataTable id="tblCaracteristica" var="var"
+											selectionMode="single"
+											selection="#{MBComputador.caracteristicasComputoSeleccionado}"
+											rowKey="#{var.idCaracteristicas}"
+											value="#{MBComputador.listCaracteristicas}"
+											emptyMessage="No hay registros para mostrar">
+
+											<f:facet name="header">
+                                        Seleccione una Caracteristica
+                                    </f:facet>
+
+											<p:column headerText="Codigo">
+												<h:outputText value="#{var.idCaracteristicas}" />
+											</p:column>
+
+											<p:column headerText="Procesador">
+												<h:outputText value="#{var.procesador}" />
+											</p:column>
+
+											<p:column headerText="Memoria">
+												<h:outputText value="#{var.memoria}" />
+											</p:column>
+											<p:column headerText="Disco Duro">
+												<h:outputText value="#{var.discoDuro}" />
+											</p:column>
+
+											<f:facet name="footer">
+
+												<p:commandButton value="Seleccionar" style="width: 100px;"
+													update=":formPrincipal"
+													action="#{MBComputador.seleccionarCaracteristica}"
+													id="seleccionarModelo">
+												</p:commandButton>
+
+												<p:commandButton value="Limpiar" style="width: 100px;"
+													update="tblCaracteristica"
+													action="#{MBComputador.limpiarCaracteristica}"
+													id="limpiarCarectirsticas">
+												</p:commandButton>
+
+												<p:commandButton value="Cancelar" style="width: 100px;"
+													update=":formPrincipal"
+													action="#{MBComputador.limpiarCaracteristica}"
+													id="cancelarCarectirsticas">
+												</p:commandButton>
+
+
+											</f:facet>
+
+										</p:dataTable>
+
+									</p:dialog>
+
+
+
+
+
+
+									<p:dialog header="Caracteristica" widgetVar="dlg4" modal="true">
+
+
+										<h1 class="brand_name">Tipo Computador</h1>
+
+										<p:dataTable id="tblTipoComputo" var="var"
+											selectionMode="single"
+											selection="#{MBComputador.tipoComputoSeleccionado}"
+											rowKey="#{var.idTipo}"
+											value="#{MBComputador.listTipoComputo}"
+											emptyMessage="No hay registros para mostrar">
+
+											<f:facet name="header">
+                                        Seleccione un tipo computador
+                                    </f:facet>
+
+											<p:column headerText="Codigo">
+												<h:outputText value="#{var.idTipo}" />
+											</p:column>
+
+											<p:column headerText="Tipo">
+												<h:outputText value="#{var.tipoComputo}" />
+											</p:column>
+
+											<p:column headerText="Especificacion">
+												<h:outputText value="#{var.especificacionTd}" />
+											</p:column>
+
+
+											<f:facet name="footer">
+
+
+												<p:commandButton value="Seleccionar" style="width: 100px;"
+													update=":formPrincipal"
+													action="#{MBComputador.seleccionarTipoCompu}"
+													id="seleccionarTipoCom">
+												</p:commandButton>
+
+												<p:commandButton value="Limpiar" style="width: 100px;"
+													update="tblTipoComputo"
+													action="#{MBComputador.limpiarTipo}" id="limpiarTipo">
+												</p:commandButton>
+
+												<p:commandButton value="Cancelar" style="width: 100px;"
+													update=":formPrincipal"
+													action="#{MBComputador.limpiarTipo}" id="cancelarTipo">
+												</p:commandButton>
+
+											</f:facet>
+										</p:dataTable>
+
+
+									</p:dialog>
+
+
+
+
+
+									<p:dialog header="Sistema Operativo" widgetVar="dlg5"
+										modal="true">
+
+
+										<h1 class="brand_name">Sistema Operativo</h1>
+
+
+
+										<p:dataTable id="tblSistemaOperativo" var="var"
+											selectionMode="single"
+											selection="#{MBComputador.sistemaOperativoSeleccionado}"
+											rowKey="#{var.idSistema}"
+											value="#{MBComputador.listSistemaOperativo}"
+											emptyMessage="No hay registros para mostrar">
+
+											<f:facet name="header">
+                                        Seleccione un sistema operativo
+                                    </f:facet>
+
+											<p:column headerText="Codigo">
+												<h:outputText value="#{var.idSistema}" />
+											</p:column>
+
+											<p:column headerText="Sistema">
+												<h:outputText value="#{var.sistema}" />
+											</p:column>
+
+											<p:column headerText="Tipo">
+												<h:outputText value="#{var.tipoSistemaOp}" />
+											</p:column>
+
+											<p:column headerText="Version">
+												<h:outputText value="#{var.version}" />
+											</p:column>
+
+											<f:facet name="footer">
+
+												<p:commandButton value="Seleccionar" style="width: 100px;"
+													update=":formPrincipal"
+													action="#{MBComputador.seleccionarSistema}"
+													id="seleccionarSis">
+												</p:commandButton>
+
+												<p:commandButton value="Limpiar" style="width: 100px;"
+													update="tblSistemaOperativo"
+													action="#{MBComputador.limpiarSistema}" id="limpiarSis">
+												</p:commandButton>
+
+												<p:commandButton value="Cancelar" style="width: 100px;"
+													update=":formPrincipal"
+													action="#{MBComputador.limpiarSistema}" id="cancelarSis">
+												</p:commandButton>
+
+
+											</f:facet>
+
+										</p:dataTable>
+
+									</p:dialog>
+
+
 
 
 								</div>
@@ -432,7 +564,7 @@
 										<p:commandButton value="Modificar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
-											update=":formPrincipal:, messages1,:formPrincipal:tblComputador"
+											update=":formPrincipal:, messages1,:formPrincipal:tapView:tblComputador"
 											action="#{MBComputador.modificarComputador}" id="guardar2">
 										</p:commandButton>
 									</div>
@@ -455,7 +587,7 @@
                                     </f:facet>
 									<p:ajax event="rowSelect"
 										listener="#{MBComputador.onRowSelect}"
-										update=":formPrincipal:panelModificar" />
+										update=":formPrincipal:tapView:panelModificar" />
 
 									<p:column headerText="Codigo">
 										<h:outputText value="#{var.idComputador}" />
@@ -488,7 +620,7 @@
 						</div>
 					</p:tab>
 
-				</p:wizard>
+				</p:tabView>
 			</h:form>
 
 
