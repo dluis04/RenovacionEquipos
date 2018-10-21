@@ -1,0 +1,298 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+
+	<ui:composition
+		template="../../WEB-INF/templates/templatePrincipal.xhtml">
+		<ui:define name="content">
+			<h:form id="formPrincipal">
+				<div style="text-align: center;">
+					<div class="brand" style="text-align: center;">
+						<h1 class="brand_name">Usuarios</h1>
+					</div>
+				</div>
+
+
+				<p:tabView id="tapView">
+
+
+					<p:tab id="tapRegistro" title="Registro">
+
+						<p:growl id="messages1" />
+
+						<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+							closable="false" resizable="false" showHeader="false">
+							<p:graphicImage library="images" name="ajax-loader.gif" />
+						</p:dialog>
+
+
+						<p:panel id="panelRegistrar">
+
+							<div align="center">
+
+								<div class="ui-g">
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Nombre Completo: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="nombre" maxlength="200"
+											value="#{MBUsuario.usuario.nombre}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="cedula: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="cedula" maxlength="200"
+											value="#{MBUsuario.usuario.cedula}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Correo: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="email" maxlength="200"
+											value="#{MBUsuario.usuario.correo}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Telefono: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="telefono" maxlength="200"
+											value="#{MBUsuario.usuario.telefono}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Ext: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="ext" maxlength="200"
+											value="#{MBUsuario.usuario.extension}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Tipo Usuario: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:selectOneMenu id="tipoUsuario"
+											value="#{MBUsuario.idTipoUsuario}">
+											<f:selectItem itemLabel="Seleccione" itemValue="" />
+											<f:selectItems value="#{MBUsuario.listTiposUsuario}" />
+										</p:selectOneMenu>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Usuario: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="usuario" maxlength="200"
+											value="#{MBUsuario.usuario.usuario}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Contraseña: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:password id="password" maxlength="200"
+											value="#{MBUsuario.usuario.password}">
+										</p:password>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Confirmar Contraseña: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:password id="passwordConfir" maxlength="200"
+											value="#{MBUsuario.confirmarPass}">
+										</p:password>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Registrar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView:panelRegistrar, messages1
+							,:formPrincipal:tapView:tblUsuario"
+											action="#{MBUsuario.registrarUsuario}" id="guardar">
+										</p:commandButton>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Limpiar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView:panelRegistrar"
+											action="#{MBUsuario.limpiar}" id="limpiar">
+										</p:commandButton>
+									</div>
+
+
+								</div>
+
+							</div>
+						</p:panel>
+
+					</p:tab>
+
+					<p:tab id="tapConsulta" title="Consulta / Modificación">
+
+						<div align="center">
+
+							<p:panel id="panelModificar">
+
+								<div class="ui-g">
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Nombre Completo: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="nombre2" maxlength="200"
+											value="#{MBUsuario.usuarioModificar.nombre}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="cedula: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="cedula2" maxlength="200"
+											value="#{MBUsuario.usuarioModificar.cedula}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Correo: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="email2" maxlength="200"
+											value="#{MBUsuario.usuarioModificar.correo}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Telefono: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="telefono2" maxlength="200"
+											value="#{MBUsuario.usuarioModificar.telefono}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Ext: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="ext2" maxlength="200"
+											value="#{MBUsuario.usuarioModificar.extension}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Tipo Usuario: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:selectOneMenu id="tipoUsuario2"
+											value="#{MBUsuario.idTipoUsuarioModi}">
+											<f:selectItem itemLabel="Seleccione" itemValue="" />
+											<f:selectItems value="#{MBUsuario.listTiposUsuario}" />
+										</p:selectOneMenu>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Modificar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView, messages1,:formPrincipal:tapView:tblUsuario"
+											action="#{MBUsuario.modificarUsuario}" id="guardar2">
+										</p:commandButton>
+									</div>
+
+
+								</div>
+
+								<br></br>
+
+
+
+								<p:dataTable id="tblUsuario" var="var" selectionMode="single"
+									selection="#{MBUsuario.usuarioSeleccionado}"
+									rowKey="#{var.idUsuario}" value="#{MBUsuario.listUsuarios}">
+
+									<f:facet name="header">
+                                        Seleccione Usuario a modificar
+                                    </f:facet>
+									<p:ajax event="rowSelect" listener="#{MBUsuario.onRowSelect}"
+										update=":formPrincipal:tapView:panelModificar" />
+
+
+									<p:column headerText="Codigo">
+										<h:outputText value="#{var.idUsuario}" />
+									</p:column>
+
+									<p:column headerText="Nombre">
+										<h:outputText value="#{var.nombre}" />
+									</p:column>
+
+									<p:column headerText="Cedula">
+										<h:outputText value="#{var.cedula}" />
+									</p:column>
+								</p:dataTable>
+							</p:panel>
+
+
+						</div>
+					</p:tab>
+
+				</p:tabView>
+
+
+			</h:form>
+
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</body>
+</html>
+

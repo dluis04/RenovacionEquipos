@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+        >
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+            <meta http-equiv="X-UA-Compatible" content="EmulateIE8"/>
+           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <meta http-equiv="Pragma" content="no-cache"/>
+            <meta http-equiv="Expires" content="0"/>
+            <style type="text/css">
+                .centeredPanel {
+                    position: absolute;
+                    left: 35%;
+                    top: 35%;
+                }
+				
+	
+				body {
+				 background-color: rgba(0,0,0,0.8);
+        background-image: url("resources/fotos/foto2.jpg");
+	  background-position: center center;	  
+	  background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+} 
+	body::after {
+				 content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
+  z-index:-1;
+} 
+
+
+
+
+ .opacity{
+   background-color:rgb(255,0,0);
+   opacity:0.6; /* Opacidad 60% */
+   width:200px;
+   height:70px;
+}
+.ui-state-default{
+   background-color: #d58500;
+    border: 1px solid #ccc;
+    color: #fff;
+    border-radius: 8px;
+    padding: .6rem .5rem;
+    font-weight: lighter;
+    width: 273px;
+    height: 46px;
+    font-size: 20px;
+    position: relative;
+    top: -47px;
+
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+
+
+   background-color: #d58500;
+    border: 1px solid #ccc;
+    color: #fff;
+    border-radius: 8px;
+    padding: .6rem .5rem;
+    font-weight: lighter;
+    width: 273px;
+    height: 46px;
+    font-size: 20px;
+    position: relative;
+    top: -47px;
+
+}
+
+
+
+            </style>
+			            <link rel="stylesheet" type="text/css" href="resources/css2/estiloCampos2.css"/>  
+						
+						
+  
+	<link rel="stylesheet" type="text/css" href="resources/vendor/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/css2/util.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/css2/main.css"/>
+						
+						
+        </h:head>
+        <h:body  onload='document.getElementById("form1:txtUsuario").focus();'>
+         
+             
+			 
+
+            <h:form id="form1">
+                <p:growl id="messages" sticky="true"/>
+               
+			   
+			   
+			   
+			   <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				
+
+			
+				
+				
+				    <div class="login100-pic js-tilt" >
+					<img src="resources/fotos/logo.png" alt="IMG"/>
+				</div>
+				
+				<br></br>
+					<span class="login100-form-title">
+						INVENTARIO
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Debe ingresar el usuario">
+					
+						
+						
+						 <p:inputText
+
+style="        font-family: Poppins-Medium;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #666666;
+    display: block;
+    width: 100%;
+	top:0px;
+    background: #e6e6e6;
+    height: 50px;
+    border-radius: 25px;
+    padding: 0 30px 0 68px;"
+	value="#{MBLogin.usuarioLogin}"
+
+									id="txtUsuario" required="true"
+                                                 label="Usuario"/>
+						
+						
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Debe ingresar la contraseña">
+					
+					
+					
+					
+				      <p:password 
+					  
+					  style="     font-family: Poppins-Medium;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #666666;
+    display: block;
+    width: 100%;
+    background: #e6e6e6;
+    height: 50px;
+	top:0px;
+    border-radius: 25px;
+    padding: 0 30px 0 68px;"  id="txtContrasenia" required="true"
+    
+    	value="#{MBLogin.password}" 
+                                                label="contraseña" />
+												
+												
+												
+					
+			
+						
+						
+						
+						
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+				
+						
+						
+						
+							<h:commandButton
+
+style="
+   font-family: Montserrat-Bold;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #fff;
+    text-transform: uppercase;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    background: #0066b0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 25px;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+
+"
+					value = "Ingresar"  	action="#{MBLogin.navegarControl}"  /> 
+						
+						
+				
+
+					
+					<p:remoteCommand name="rc" update="messages" 	action="#{MBLogin.navegarControl}"  />
+					
+					
+				
+						<div class="container-login100-form-btn">
+					
+					</div>
+
+				
+				
+				
+			</div>
+		</div>
+	</div>
+	
+			   
+			   
+			   
+			   
+			   
+               
+         
+            </h:form>
+             
+            
+        </h:body>
+    </html>
+    <!--oracle-jdev-comment:auto-binding-backing-bean-name:MBLogin-->
+</f:view>

@@ -1,0 +1,204 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+
+	<ui:composition
+		template="../../WEB-INF/templates/templatePrincipal.xhtml">
+		<ui:define name="content">
+			<h:form id="formPrincipal">
+				<div style="text-align: center;">
+					<div class="brand" style="text-align: center;">
+						<h1 class="brand_name">Tipo Computador</h1>
+					</div>
+				</div>
+
+
+				<p:tabView id="tapView">
+
+
+					<p:tab id="tapRegistro" title="Registro">
+
+						<p:growl id="messages1" />
+
+						<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+							closable="false" resizable="false" showHeader="false">
+							<p:graphicImage library="images" name="ajax-loader.gif" />
+						</p:dialog>
+
+
+						<p:panel id="panelRegistrar">
+
+							<div align="center">
+
+								<div class="ui-g">
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Tipo Computador: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="tipo" maxlength="200"
+											value="#{MBTipoComputo.tipoComputo.tipoComputo}">
+										</p:inputText>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Especificacion TD " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="td" maxlength="200"
+											value="#{MBTipoComputo.tipoComputo.especificacionTd}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="AD: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="ad" maxlength="200"
+											value="#{MBTipoComputo.tipoComputo.ad}">
+										</p:inputText>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Registrar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView:panelRegistrar, messages1
+							,:formPrincipal:tapView:tblTipoComputo"
+											action="#{MBTipoComputo.registrarTipoComputo}" id="guardar">
+										</p:commandButton>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Limpiar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView:panelRegistrar"
+											action="#{MBTipoComputo.limpiar}" id="limpiar">
+										</p:commandButton>
+									</div>
+
+
+								</div>
+
+							</div>
+						</p:panel>
+
+					</p:tab>
+
+					<p:tab id="tapConsulta" title="Consulta / Modificación">
+
+						<div align="center">
+
+							<p:panel id="panelModificar">
+
+								<div class="ui-g">
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Tipo Computador: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="tipo2" maxlength="200"
+											value="#{MBTipoComputo.tipoComputoModificar.tipoComputo}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Especificacion TD " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="td2" maxlength="200"
+											value="#{MBTipoComputo.tipoComputoModificar.especificacionTd}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="AD: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="ad2" maxlength="200"
+											value="#{MBTipoComputo.tipoComputoModificar.ad}">
+										</p:inputText>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Modificar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView, messages1,:formPrincipal:tapView:tblTipoComputo"
+											action="#{MBTipoComputo.modificarTipoComputo}" id="guardar2">
+										</p:commandButton>
+									</div>
+
+
+								</div>
+
+								<br></br>
+
+
+
+								<p:dataTable id="tblTipoComputo" var="var"
+									selectionMode="single"
+									selection="#{MBTipoComputo.tipoComputoSeleccionado}"
+									rowKey="#{var.idTipo}"
+									value="#{MBTipoComputo.listTipoComputos}"
+									emptyMessage="No hay registros para mostrar">
+
+									<f:facet name="header">
+                                        Seleccione un tipo computo a modificar
+                                    </f:facet>
+									<p:ajax event="rowSelect"
+										listener="#{MBTipoComputo.onRowSelect}"
+										update=":formPrincipal:tapView:panelModificar" />
+
+									<p:column headerText="Codigo">
+										<h:outputText value="#{var.idTipo}" />
+									</p:column>
+
+									<p:column headerText="Tipo">
+										<h:outputText value="#{var.tipoComputo}" />
+									</p:column>
+
+									<p:column headerText="Especificacion">
+										<h:outputText value="#{var.especificacionTd}" />
+									</p:column>
+								</p:dataTable>
+							</p:panel>
+
+
+						</div>
+					</p:tab>
+
+				</p:tabView>
+
+
+			</h:form>
+
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</body>
+</html>
+

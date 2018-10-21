@@ -1,0 +1,166 @@
+body{
+  
+    margin: 0;
+    background-color: #beccd1;
+}
+ 
+ 
+.camposTexto{
+
+    height: 35px;
+    width: 240px;
+  
+}
+
+
+
+.campoButton{
+    
+    height: 45px;
+}
+	
+ 
+#contenedorPrincipal{
+  
+ 
+
+  width: 100%;
+  
+  padding-top: 250px;
+  text-align:center;
+}
+  .hide {
+  display: none !important;
+}
+.text-danger {
+    color: #a94442;
+}
+#contenedor{
+	
+      background-color: #bdbbb9;
+    width: 450px;
+    height: 368px;
+    margin: 0 auto;
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+    opacity: 0.7;
+    border-radius: 5px;
+}
+ 
+ 
+ #title{
+   
+    color: white;
+    left: 45px;
+    padding-top: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 97px;
+    width: 449px;
+    /* margin-bottom: -17px; */
+    top: -41px;
+    border-radius: 4px;
+    text-align: center;
+    /* background-color: #24854c; */
+    position: relative;
+}
+
+
+
+ #cabecera{
+    background-image: url(LogoElectrojaponesa.png);
+    background-repeat: no-repeat;
+    background-size: 120px;
+    color: white;
+    left: 40px;
+    padding-top: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 97px;
+    width: 449px;
+    /* margin-bottom: -17px; */
+    top: 0px;
+    border-radius: 4px;
+    text-align: center;
+    /* background-color: #24854c; */
+    position: relative;
+}
+
+
+#i{
+	
+	    width: 359px;
+    position: relative;
+    top: -83px;
+    height: 32px;
+	    background-color: transparent;
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+}
+
+
+
+#i2{
+	
+	    width: 359px;
+    position: relative;
+    top: -74px;
+
+    height: 32px;
+    background-color: transparent;
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+}
+
+
+
+#botton{
+	
+    background-color: ##ac3438;
+    border: 1px solid #ccc;
+    color: #fff;
+    border-radius: 8px;
+    padding: .6rem .5rem;
+    font-weight: lighter;
+    width: 273px;
+    height: 46px;
+    font-size: 20px;
+    position: relative;
+    top: -47px;
+
+}
+
+
+
+
+
+
+ 
+#pie{
+
+color: white;
+    padding-top: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 50px;
+    width: 449px;
+    /* margin-bottom: -17px; */
+    top: -19px;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #ac3438;
+    position: relative;
+}
+ 
+#cuerpo{
+    background:#2a445b;
+
+
+       padding-bottom: 7px;
+}
+ 
+ 
+
+ 

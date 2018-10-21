@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<title>Portal MSL</title>
+<link href="resources/css/styleLogin.css" rel="stylesheet" type="text/css" media="all"/>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+
+</h:head>
+<h:body>
+	<h:form >
+		<p:growl id="msgs" />
+			<div class="main">
+				<div class="login">
+					<div class="login-top">
+							
+					</div>
+					<h1>Portal MSL</h1>
+					<div class="login-bottom">
+					<form>
+						<input type="text" placeholder="Username" required=" "/>	
+										
+						<input type="password" class="password" placeholder="Password" required=" "/>	
+											
+				
+						
+						
+		<p:commandButton 			update="messages1" value="Iniciar sesión"
+			style=" font-size: 15px !important; font-size: 1.5em;
+    padding: .3em .3em;
+    width: 45%;
+    border: none;
+    text-transform: capitalize;
+    outline: none;
+    border-radius: 5px;
+    background: #f9580d;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'PT Sans Narrow', sans-serif;
+    margin: 0 auto;
+    display: block;"
+			action="#{MBLogin.navegarControl}" />
+						
+						
+					</form>
+					<a href="#"><p>Recordar Contraseña</p></a>
+					</div>
+				</div>
+			</div>
+		<div class="footer">
+			<p>Todos los derechos reservados| Diseñado por <a href="http://www.mycrosystems.com.co">www.mycrosystems.com.co</a></p>
+		</div>
+	</h:form>
+</h:body>
+</html>

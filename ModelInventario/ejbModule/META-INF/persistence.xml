@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="portal">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<jta-data-source>jdbc/InventarioEquiposDS</jta-data-source>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.CaracteristicasComputo</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.Ciudad</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.Computador</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.Cronograma</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.DetalleInventario</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.DetalleInventarioHistorial</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.DetalleListaComputo</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.EjecucionCronograma</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.EstadosSistema</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.ListaCheqeoComputador</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.ModeloComputo</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.OperacionServicio</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.PlantillaHito</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.PlantillaPlan</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.PlanCronograma</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.Sede</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.SistemaOperativo</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.TipoComputo</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.TipoUsuario</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.Ubicacion</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.UnidadEstrategicaServicio</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.Usuario</class>
+		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.UsuariosCronograma</class>
+		<properties>
+			<property name="eclipselink.target-server" value="SunAS9" />
+		</properties>
+	</persistence-unit>
+
+
+
+
+
+</persistence>

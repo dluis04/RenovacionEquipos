@@ -1,0 +1,184 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+
+	<ui:composition
+		template="../../WEB-INF/templates/templatePrincipal.xhtml">
+		<ui:define name="content">
+			<h:form id="formPrincipal">
+				<div style="text-align: center;">
+					<div class="brand" style="text-align: center;">
+						<h1 class="brand_name">Permisos Usuarios</h1>
+					</div>
+				</div>
+
+
+				<p:tabView id="tapView">
+
+
+					<p:tab id="tapRegistro" title="Registro">
+
+						<p:growl id="messages1" />
+
+						<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+							closable="false" resizable="false" showHeader="false">
+							<p:graphicImage library="images" name="ajax-loader.gif" />
+						</p:dialog>
+
+
+						<p:panel id="panelRegistrar">
+
+							<div align="center">
+
+								<div class="ui-g">
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Pagina: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="nit" maxlength="200"
+											value="#{MBPagina.pagina.pagina}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Descripcion: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="idNombre" maxlength="100"
+											value="#{MBPagina.pagina.descripcion}">
+										</p:inputText>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Guardar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView, messages1
+							,:formPrincipal:tapView:tbl"
+											action="#{MBPagina.registrarPagina}" id="guardar">
+										</p:commandButton>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Limpiar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView:panelRegistrar"
+											action="#{MBPagina.limpiar}" id="limpiar">
+										</p:commandButton>
+									</div>
+
+
+								</div>
+
+							</div>
+						</p:panel>
+
+					</p:tab>
+
+					<p:tab id="tapConsulta" title="Consulta / Modificación">
+
+						<div align="center">
+
+							<p:panel id="panelModificar">
+								<div class="ui-g">
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Pagina: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="nit2" maxlength="200"
+											value="#{MBPagina.paginaSeleccionada.pagina}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Descripcion: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="idNombre2" maxlength="100"
+											value="#{MBPagina.paginaSeleccionada.descripcion}">
+										</p:inputText>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Modificar" style="width: 220px;"
+											update=":formPrincipal:tapView:panelModificar, messages1
+							,:formPrincipal:tapView:tbl"
+											action="#{MBPagina.modificarPagina}" id="modificar">
+										</p:commandButton>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Limpiar" style="width: 220px;"
+											action="#{MBPagina.limpiar}"
+											update=":formPrincipal:tapView:panelModificar"
+											id="limpiarModificar">
+										</p:commandButton>
+									</div>
+
+
+
+								</div>
+
+
+								<br></br>
+
+
+
+								<p:dataTable id="tbl" var="var" selectionMode="single"
+									selection="#{MBPagina.paginaSeleccionada}"
+									rowKey="#{var.idPagina}" value="#{MBPagina.listPaginas}">
+
+
+									<p:ajax event="rowSelect"
+										update=":formPrincipal:tapView:panelModificar" />
+
+
+									<p:column headerText="Codigo">
+										<h:outputText value="#{var.idPagina}" />
+									</p:column>
+
+									<p:column headerText="Pagina">
+										<h:outputText value="#{var.pagina}" />
+									</p:column>
+
+									<p:column headerText="Descripcion">
+										<h:outputText value="#{var.descripcion}" />
+									</p:column>
+								</p:dataTable>
+							</p:panel>
+
+
+						</div>
+					</p:tab>
+
+				</p:tabView>
+
+
+			</h:form>
+
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</body>
+</html>
+

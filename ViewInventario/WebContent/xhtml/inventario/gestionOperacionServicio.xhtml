@@ -1,0 +1,283 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+
+	<ui:composition
+		template="../../WEB-INF/templates/templatePrincipal.xhtml">
+		<ui:define name="content">
+			<h:form id="formPrincipal">
+				<div style="text-align: center;">
+					<div class="brand" style="text-align: center;">
+						<h1 class="brand_name">Operacion Servicio</h1>
+					</div>
+				</div>
+
+
+				<p:tabView id="tapView">
+
+
+					<p:tab id="tapRegistro" title="Registro">
+
+						<p:growl id="messages1" />
+
+						<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+							closable="false" resizable="false" showHeader="false">
+							<p:graphicImage library="images" name="ajax-loader.gif" />
+						</p:dialog>
+
+
+						<p:panel id="panelRegistrar">
+
+							<div align="center">
+
+								<div class="ui-g">
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Codigo Servicio: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="codigoServicio" maxlength="200"
+											value="#{MBOperacionServicio.operacionServicio.codigoServicio}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Banco/Propio: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="banco" maxlength="200"
+											value="#{MBOperacionServicio.operacionServicio.bancoPropio}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Fecha Inicio: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+
+										<p:calendar id="fechaIni"
+											value="#{MBOperacionServicio.operacionServicio.fechaInicio}"
+											navigator="true" pattern="yyyy-MMM-dd" />
+
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Fecha Fin: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+
+										<p:calendar id="fechaFin"
+											value="#{MBOperacionServicio.operacionServicio.fechaFin}"
+											navigator="true" pattern="yyyy-MMM-dd" />
+
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Valor Mensual Computo: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="valorMenCo" maxlength="200"
+											value="#{MBOperacionServicio.operacionServicio.valorMensualCompu}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Valor Mensual Operacion: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="valorMenOperacion" maxlength="200"
+											value="#{MBOperacionServicio.operacionServicio.valorMensualOperacion}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Registrar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView:panelRegistrar, messages1
+							,:formPrincipal:tapView:tblOperacionServicio"
+											action="#{MBOperacionServicio.registrarOperacionServicio}"
+											id="guardar">
+										</p:commandButton>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Limpiar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView:panelRegistrar"
+											action="#{MBOperacionServicio.limpiar}" id="limpiar">
+										</p:commandButton>
+									</div>
+
+
+								</div>
+
+							</div>
+						</p:panel>
+
+					</p:tab>
+
+					<p:tab id="tapConsulta" title="Consulta / Modificación">
+
+						<div align="center">
+
+							<p:panel id="panelModificar">
+
+								<div class="ui-g">
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Codigo Servicio: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="codigoServicio2" maxlength="200"
+											value="#{MBOperacionServicio.operacionServicioModificar.codigoServicio}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Banco/Propio: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="banco2" maxlength="200"
+											value="#{MBOperacionServicio.operacionServicioModificar.bancoPropio}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Fecha Inicio: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+
+										<p:calendar id="fechaIni2"
+											value="#{MBOperacionServicio.operacionServicioModificar.fechaInicio}"
+											navigator="true" pattern="yyyy-MMM-dd" />
+
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Valor Mensual Computo: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="valorMenCo2" maxlength="200"
+											value="#{MBOperacionServicio.operacionServicioModificar.valorMensualCompu}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Valor Mensual Operacion: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="valorMenOperacion2" maxlength="200"
+											value="#{MBOperacionServicio.operacionServicioModificar.valorMensualOperacion}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Modificar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView, messages1,:formPrincipal:tapView:tblOperacionServicio"
+											action="#{MBOperacionServicio.modificarOperacionServicio}"
+											id="guardar2">
+										</p:commandButton>
+									</div>
+
+
+								</div>
+
+								<br></br>
+
+
+
+								<p:dataTable id="tblOperacionServicio" var="var"
+									selectionMode="single"
+									selection="#{MBOperacionServicio.operacionServicioSeleccionado}"
+									rowKey="#{var.idServicio}"
+									value="#{MBOperacionServicio.listOperacionServicios}"
+									emptyMessage="No hay registros para mostrar">
+
+									<f:facet name="header">
+                                        Seleccione una Operacion a modificar
+                                    </f:facet>
+									<p:ajax event="rowSelect"
+										listener="#{MBOperacionServicio.onRowSelect}"
+										update=":formPrincipal:tapView:panelModificar" />
+
+									<p:column headerText="Codigo">
+										<h:outputText value="#{var.idServicio}" />
+									</p:column>
+
+									<p:column headerText="Codigo Servicio">
+										<h:outputText value="#{var.codigoServicio}" />
+									</p:column>
+
+									<p:column headerText="Operacion">
+										<h:outputText value="#{var.bancoPropio}" />
+									</p:column>
+
+									<p:column headerText="Fecha Inicio">
+										<h:outputText value="#{var.fechaInicio}" />
+									</p:column>
+
+									<p:column headerText="Fecha Fin">
+										<h:outputText value="#{var.fechaFin}" />
+									</p:column>
+
+									<p:column headerText="Valor Mensual Compu">
+										<h:outputText value="#{var.valorMensualCompu}" />
+									</p:column>
+
+									<p:column headerText="Valor Mensual Compu">
+										<h:outputText value="#{var.valorMensualOperacion}" />
+									</p:column>
+
+								</p:dataTable>
+							</p:panel>
+
+
+						</div>
+					</p:tab>
+
+				</p:tabView>
+
+
+			</h:form>
+
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</body>
+</html>
+
