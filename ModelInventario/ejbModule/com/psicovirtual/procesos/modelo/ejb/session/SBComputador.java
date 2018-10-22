@@ -57,4 +57,13 @@ public class SBComputador implements SBComputadorLocal {
 		return listComputador;
 	}
 
+	@Override
+	public List<Computador> consultarAllComputadorNuevos() throws Exception {
+		String query = "SELECT u FROM Computador u where u.idEstadoCompu='1' ";
+
+		List<Computador> listComputador = sbFacade.executeQuery(query, null);
+
+		return listComputador;
+	}
+
 }

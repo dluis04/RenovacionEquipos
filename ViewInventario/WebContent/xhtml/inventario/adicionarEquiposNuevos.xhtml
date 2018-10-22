@@ -1,0 +1,224 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+
+	<ui:composition
+		template="../../WEB-INF/templates/templatePrincipal.xhtml">
+		<ui:define name="content">
+			<h:form id="formPrincipal">
+				<div style="text-align: center;">
+					<div class="brand" style="text-align: center;">
+						<h1 class="brand_name">Adicionar Equipos Nuevos Inventario</h1>
+					</div>
+				</div>
+
+
+				<p:tabView id="tapView">
+
+
+					<p:tab id="tapRegistro" title="Registro">
+
+						<p:growl id="messages1" />
+
+						<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+							closable="false" resizable="false" showHeader="false">
+							<p:graphicImage library="images" name="ajax-loader.gif" />
+						</p:dialog>
+
+
+						<p:panel id="panelRegistrar">
+
+							<div align="center">
+
+
+								<p:dataTable id="tblComputador" var="var" selectionMode="single"
+									selection="#{MBInventario.computadorSeleccionado}"
+									rowKey="#{var.idComputador}"
+									value="#{MBInventario.listComputadorNuevos}"
+									emptyMessage="No hay registros para mostrar">
+
+									<f:facet name="header">
+                                        Seleccione un computador nuevo
+                                    </f:facet>
+									<p:ajax event="rowSelect"
+										listener="#{MBComputador.onRowSelect}"
+										update=":formPrincipal:tapView:panelModificar" />
+
+									<p:column headerText="Codigo">
+										<h:outputText value="#{var.idComputador}" />
+									</p:column>
+
+									<p:column headerText="Nombre">
+										<h:outputText value="#{var.nombreComputo}" />
+									</p:column>
+
+									<p:column headerText="Serial Monitor">
+										<h:outputText value="#{var.serialMonitor}" />
+									</p:column>
+
+									<p:column headerText="Serial Teclado">
+										<h:outputText value="#{var.serialTeclado}" />
+									</p:column>
+
+									<p:column headerText="Serial Mouse">
+										<h:outputText value="#{var.serialMouse}" />
+									</p:column>
+
+									<p:column headerText="Tipo">
+										<h:outputText value="#{var.tipoComputo.tipoComputo}" />
+									</p:column>
+
+									<p:column headerText="Modelo">
+										<h:outputText value="#{var.modeloComputo.modelo}" />
+									</p:column>
+
+									<p:column headerText="Sistema Operativo">
+										<h:outputText value="#{var.sistemaOperativo.sistema}" />
+									</p:column>
+
+									<p:column headerText="Direccion IP">
+										<h:outputText value="#{var.direccionIp}" />
+									</p:column>
+
+								</p:dataTable>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Registrar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView:panelRegistrar, messages1
+							,:formPrincipal:tapView:tblModeloComputo"
+											action="#{MBModeloComputo.registrarModeloComputo}"
+											id="guardar">
+										</p:commandButton>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Limpiar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView:panelRegistrar"
+											action="#{MBModeloComputo.limpiar}" id="limpiar">
+										</p:commandButton>
+									</div>
+
+
+								</div>
+
+							</div>
+						</p:panel>
+
+					</p:tab>
+
+					<p:tab id="tapConsulta" title="Consulta / Modificación">
+
+						<div align="center">
+
+							<p:panel id="panelModificar">
+
+								<div class="ui-g">
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Modelo: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="modelo2" maxlength="200"
+											value="#{MBModeloComputo.modeloComputoModificar.modelo}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Tipo: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="tipo2" maxlength="200"
+											value="#{MBModeloComputo.modeloComputoModificar.tipo}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Fabricante: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="fabricante2" maxlength="200"
+											value="#{MBModeloComputo.modeloComputoModificar.fabricante}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Modificar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView, messages1,:formPrincipal:tapView:tblModeloComputo"
+											action="#{MBModeloComputo.modificarModeloComputo}"
+											id="guardar2">
+										</p:commandButton>
+									</div>
+
+
+								</div>
+
+								<br></br>
+
+
+
+								<p:dataTable id="tblModeloComputo" var="var"
+									selectionMode="single"
+									selection="#{MBModeloComputo.modeloComputoSeleccionado}"
+									rowKey="#{var.idModelo}"
+									value="#{MBModeloComputo.listModeloComputos}"
+									emptyMessage="No hay registros para mostrar">
+
+									<f:facet name="header">
+                                        Seleccione un Modelo Computador a modificar
+                                    </f:facet>
+									<p:ajax event="rowSelect"
+										listener="#{MBModeloComputo.onRowSelect}"
+										update=":formPrincipal:tapView:panelModificar" />
+
+									<p:column headerText="Codigo">
+										<h:outputText value="#{var.idModelo}" />
+									</p:column>
+
+									<p:column headerText="Modelo">
+										<h:outputText value="#{var.modelo}" />
+									</p:column>
+
+									<p:column headerText="Tipo">
+										<h:outputText value="#{var.tipo}" />
+									</p:column>
+									<p:column headerText="Fabricante">
+										<h:outputText value="#{var.fabricante}" />
+									</p:column>
+								</p:dataTable>
+							</p:panel>
+
+
+						</div>
+					</p:tab>
+
+				</p:tabView>
+
+
+			</h:form>
+
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</body>
+</html>
+

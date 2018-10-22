@@ -1,0 +1,213 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+
+	<ui:composition
+		template="../../WEB-INF/templates/templatePrincipal.xhtml">
+		<ui:define name="content">
+			<h:form id="formPrincipal">
+				<div style="text-align: center;">
+					<div class="brand" style="text-align: center;">
+						<h1 class="brand_name">Lista Chequeo</h1>
+					</div>
+				</div>
+
+				<p:tabView id="tapView">
+
+
+					<p:tab id="tapRegistro" title="Registro">
+
+						<p:growl id="messages1" />
+
+						<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+							closable="false" resizable="false" showHeader="false">
+							<p:graphicImage library="images" name="ajax-loader.gif" />
+						</p:dialog>
+
+
+						<p:panel id="panelRegistrar">
+
+							<div align="center">
+
+								<div class="ui-g">
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Orden: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="Orden" maxlength="200"
+											value="#{MBListaChequeo.listaCheqeoComputador.orden}">
+										</p:inputText>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Lista Item: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="item" maxlength="200"
+											value="#{MBListaChequeo.listaCheqeoComputador.itemLista}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Tipo Actividad: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:selectOneMenu id="tipoLista2"
+											value="#{MBListaChequeo.tipoLista}">
+											<f:selectItem itemLabel="Seleccione" itemValue="" />
+											<f:selectItem itemLabel="Equipo Nuevo" itemValue="NUEVO" />
+											<f:selectItem itemLabel="Equipo Base" itemValue="BASE" />
+										</p:selectOneMenu>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Registrar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView:panelRegistrar, messages1
+							,:formPrincipal:tapView:tblLista"
+											action="#{MBListaChequeo.registrarListaCheqeoComputador}"
+											id="guardar">
+
+										</p:commandButton>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Limpiar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView:panelRegistrar"
+											action="#{MBListaChequeo.limpiar}" id="limpiar">
+										</p:commandButton>
+									</div>
+
+
+								</div>
+
+							</div>
+						</p:panel>
+
+					</p:tab>
+
+					<p:tab id="tapConsulta" title="Consulta / Modificación">
+
+						<div align="center">
+
+							<p:panel id="panelModificar">
+
+								<div class="ui-g">
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Orden: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="Orden2" maxlength="200"
+											value="#{MBListaChequeo.listaChequeoComputadorModificar.orden}">
+										</p:inputText>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Lista Item: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="item2" maxlength="200"
+											value="#{MBListaChequeo.listaChequeoComputadorModificar.itemLista}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Tipo Actividad: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:selectOneMenu id="tipoLista3"
+											value="#{MBListaChequeo.tipoListaModi}">
+											<f:selectItem itemLabel="Seleccione" itemValue="" />
+											<f:selectItem itemLabel="Equipo Nuevo" itemValue="NUEVO" />
+											<f:selectItem itemLabel="Equipo Base" itemValue="BASE" />
+										</p:selectOneMenu>
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Modificar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView, messages1,:formPrincipal:tapView:tblLista"
+											action="#{MBListaChequeo.modificarListaCheqeoComputador}"
+											id="guardar2">
+										</p:commandButton>
+									</div>
+
+
+								</div>
+
+								<br></br>
+
+
+
+								<p:dataTable id="tblLista" var="var" selectionMode="single"
+									selection="#{MBListaChequeo.listaChequeoComputadorSeleccionado}"
+									rowKey="#{var.idLista}"
+									value="#{MBListaChequeo.listListaChequeoComputadors}"
+									emptyMessage="No hay registros para mostrar">
+
+									<f:facet name="header">
+                                        Seleccione una item a modificar
+                                    </f:facet>
+									<p:ajax event="rowSelect"
+										listener="#{MBListaChequeo.onRowSelect}"
+										update=":formPrincipal:tapView:panelModificar" />
+
+									<p:column headerText="Orden">
+										<h:outputText value="#{var.orden}" />
+									</p:column>
+
+									<p:column headerText="Item">
+										<h:outputText value="#{var.itemLista}" />
+									</p:column>
+
+									<p:column headerText="Actividad">
+										<h:outputText value="#{var.tipoLista}" />
+									</p:column>
+
+								</p:dataTable>
+							</p:panel>
+
+
+						</div>
+					</p:tab>
+
+				</p:tabView>
+
+			</h:form>
+
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</body>
+</html>
+

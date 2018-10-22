@@ -50,6 +50,9 @@ public class MBComputador implements Serializable {
 	List<SistemaOperativo> listSistemaOperativo;
 	List<OperacionServicio> listOperacionServicios;
 
+	String idEstadoCompuModi;
+	String idEstadoCompu;
+
 	private ModeloComputo modeloComputoSeleccionado;
 	private OperacionServicio operacionServicioSeleccionado;
 	private CaracteristicasComputo caracteristicasComputoSeleccionado;
@@ -116,6 +119,7 @@ public class MBComputador implements Serializable {
 					|| caracteristicasComputoSeleccionado.getIdCaracteristicas() != 0
 					|| tipoComputoSeleccionado.getIdTipo() != 0 || sistemaOperativoSeleccionado.getIdSistema() != 0) {
 
+				computador.setIdEstadoCompu(Integer.parseInt(idEstadoCompu));
 				computador.setOperacionServicio(operacionServicioSeleccionado);
 				computador.setModeloComputo(modeloComputoSeleccionado);
 				computador.setCaracteristicasComputo(caracteristicasComputoSeleccionado);
@@ -148,6 +152,7 @@ public class MBComputador implements Serializable {
 			Date fecha = new Date();
 			Timestamp time = new Timestamp(fecha.getTime());
 
+			computador.setIdEstadoCompu(Integer.parseInt(idEstadoCompuModi));
 			computador.setIdUsuarioReg(usuario.getIdUsuario());
 			computador.setFechaMod(time);
 			if (dnComputadors.actualizarComputador(computadorModificar) != null) {
@@ -162,6 +167,7 @@ public class MBComputador implements Serializable {
 	}
 
 	public void onRowSelect() {
+		idEstadoCompuModi = "" + computadorSeleccionado.getIdEstadoCompu();
 		computadorModificar = computadorSeleccionado;
 	}
 
@@ -174,6 +180,8 @@ public class MBComputador implements Serializable {
 		tipoComputoSeleccionado = new TipoComputo();
 		sistemaOperativoSeleccionado = new SistemaOperativo();
 		operacionServicioSeleccionado = new OperacionServicio();
+		idEstadoCompuModi = "";
+		idEstadoCompu = "";
 	}
 
 	public void limpiarIsNull() {
@@ -190,7 +198,6 @@ public class MBComputador implements Serializable {
 			tipoComputoSeleccionado = new TipoComputo();
 		}
 
-		
 		if (sistemaOperativoSeleccionado == null) {
 			sistemaOperativoSeleccionado = new SistemaOperativo();
 		}
@@ -313,6 +320,22 @@ public class MBComputador implements Serializable {
 		} else {
 			return event.getNewStep();
 		}
+	}
+
+	public String getIdEstadoCompuModi() {
+		return idEstadoCompuModi;
+	}
+
+	public void setIdEstadoCompuModi(String idEstadoCompuModi) {
+		this.idEstadoCompuModi = idEstadoCompuModi;
+	}
+
+	public String getIdEstadoCompu() {
+		return idEstadoCompu;
+	}
+
+	public void setIdEstadoCompu(String idEstadoCompu) {
+		this.idEstadoCompu = idEstadoCompu;
 	}
 
 	public List<OperacionServicio> getListOperacionServicios() {

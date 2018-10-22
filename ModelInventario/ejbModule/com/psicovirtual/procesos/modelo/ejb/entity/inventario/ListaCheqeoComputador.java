@@ -4,29 +4,34 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the LISTA_CHEQEO_COMPUTADOR database table.
  * 
  */
 @Entity
-@Table(name="LISTA_CHEQEO_COMPUTADOR")
-@NamedQuery(name="ListaCheqeoComputador.findAll", query="SELECT l FROM ListaCheqeoComputador l")
+@Table(name = "LISTA_CHEQEO_COMPUTADOR")
+@NamedQuery(name = "ListaCheqeoComputador.findAll", query = "SELECT l FROM ListaCheqeoComputador l")
 public class ListaCheqeoComputador implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ID_LISTA")
+	@Column(name = "ID_LISTA")
 	private int idLista;
 
-	@Column(name="ITEM_LISTA")
+	@Column(name = "ITEM_LISTA")
 	private String itemLista;
 
-	@Column(name="ORDEN")
+	@Column(name = "ORDEN")
 	private int orden;
 
-	//bi-directional many-to-one association to DetalleListaComputo
-	@OneToMany(mappedBy="listaCheqeoComputador")
+	@Column(name = "TIPO_LISTA")
+	private String tipoLista;
+
+	@Column(name = "ID_ESTADO")
+	private int idEstado;
+
+	// bi-directional many-to-one association to DetalleListaComputo
+	@OneToMany(mappedBy = "listaCheqeoComputador")
 	private List<DetalleListaComputo> detalleListaComputos;
 
 	public ListaCheqeoComputador() {
@@ -48,6 +53,14 @@ public class ListaCheqeoComputador implements Serializable {
 		this.itemLista = itemLista;
 	}
 
+	public String getTipoLista() {
+		return tipoLista;
+	}
+
+	public void setTipoLista(String tipoLista) {
+		this.tipoLista = tipoLista;
+	}
+
 	public int getOrden() {
 		return this.orden;
 	}
@@ -62,6 +75,14 @@ public class ListaCheqeoComputador implements Serializable {
 
 	public void setDetalleListaComputos(List<DetalleListaComputo> detalleListaComputos) {
 		this.detalleListaComputos = detalleListaComputos;
+	}
+
+	public int getIdEstado() {
+		return idEstado;
+	}
+
+	public void setIdEstado(int idEstado) {
+		this.idEstado = idEstado;
 	}
 
 	public DetalleListaComputo addDetalleListaComputo(DetalleListaComputo detalleListaComputo) {

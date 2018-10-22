@@ -164,6 +164,20 @@
 										</p:inputText>
 									</div>
 
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Estado Computador: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:selectOneMenu id="estadoCompu"
+											value="#{MBComputador.idEstadoCompu}">
+											<f:selectItem itemLabel="Seleccione" itemValue="" />
+											<f:selectItem itemLabel="Nuevo" itemValue="1" />
+											<f:selectItem itemLabel="Antiguo" itemValue="2" />
+										</p:selectOneMenu>
+									</div>
+
 									<p:dataTable id="tblOperacionServicio" var="var"
 										selectionMode="single"
 										selection="#{MBComputador.operacionServicioSeleccionado}"
@@ -546,6 +560,20 @@
 										<p:inputText id="direccionIP2" maxlength="200"
 											value="#{MBComputador.computadorModificar.direccionIp}">
 										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Estado Computador: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:selectOneMenu id="estadoCompu2"
+											value="#{MBComputador.idEstadoCompuModi}">
+											<f:selectItem itemLabel="Seleccione" itemValue="" />
+											<f:selectItem itemLabel="Nuevo" itemValue="1" />
+											<f:selectItem itemLabel="Antiguo" itemValue="2" />
+										</p:selectOneMenu>
 									</div>
 
 									<div class="ui-g-12 ui-lg-6">

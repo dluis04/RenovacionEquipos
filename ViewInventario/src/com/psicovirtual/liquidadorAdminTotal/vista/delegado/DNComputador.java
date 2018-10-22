@@ -38,4 +38,8 @@ public class DNComputador {
 		return sBComputadorLocal.consultarAllComputadorActivos();
 	}
 
+	public List<Computador> consultarAllComputadorNuevos() throws Exception {
+		return sBComputadorLocal.consultarAllComputadorNuevos();
+	}
+
 }
