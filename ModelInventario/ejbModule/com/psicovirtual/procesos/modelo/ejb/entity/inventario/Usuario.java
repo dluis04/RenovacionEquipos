@@ -28,6 +28,9 @@ public class Usuario implements Serializable {
 	@Column(name="EXTENSION")
 	private String extension;
 
+	@Column(name="ID_ESTADO")
+	private int idEstado;
+
 	@Column(name="NOMBRE")
 	private String nombre;
 
@@ -39,9 +42,6 @@ public class Usuario implements Serializable {
 
 	@Column(name="USUARIO")
 	private String usuario;
-	
-	@Column(name="ID_ESTADO")
-	private int idEstado;
 
 	//bi-directional many-to-one association to DetalleInventario
 	@OneToMany(mappedBy="usuario")
@@ -91,6 +91,14 @@ public class Usuario implements Serializable {
 		this.extension = extension;
 	}
 
+	public int getIdEstado() {
+		return this.idEstado;
+	}
+
+	public void setIdEstado(int idEstado) {
+		this.idEstado = idEstado;
+	}
+
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -121,14 +129,6 @@ public class Usuario implements Serializable {
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
-	}
-
-	public int getIdEstado() {
-		return idEstado;
-	}
-
-	public void setIdEstado(int idEstado) {
-		this.idEstado = idEstado;
 	}
 
 	public List<DetalleInventario> getDetalleInventarios() {

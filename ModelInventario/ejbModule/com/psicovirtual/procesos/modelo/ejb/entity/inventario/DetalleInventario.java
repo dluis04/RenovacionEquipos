@@ -64,10 +64,10 @@ public class DetalleInventario implements Serializable {
 	@OneToMany(mappedBy="detalleInventario")
 	private List<DetalleInventario> detalleInventarios;
 
-	//bi-directional many-to-one association to Ubicacion
+	//bi-directional many-to-one association to Sede
 	@ManyToOne
-	@JoinColumn(name="ID_UBICACION")
-	private Ubicacion ubicacion;
+	@JoinColumn(name="ID_SEDE")
+	private Sede sede;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
@@ -207,12 +207,12 @@ public class DetalleInventario implements Serializable {
 		return detalleInventario;
 	}
 
-	public Ubicacion getUbicacion() {
-		return this.ubicacion;
+	public Sede getSede() {
+		return this.sede;
 	}
 
-	public void setUbicacion(Ubicacion ubicacion) {
-		this.ubicacion = ubicacion;
+	public void setSede(Sede sede) {
+		this.sede = sede;
 	}
 
 	public Usuario getUsuario() {

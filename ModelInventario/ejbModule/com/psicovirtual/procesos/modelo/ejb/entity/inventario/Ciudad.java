@@ -25,9 +25,9 @@ public class Ciudad implements Serializable {
 	@Column(name="NOMBRE")
 	private String nombre;
 
-	//bi-directional many-to-one association to UnidadEstrategicaServicio
+	//bi-directional many-to-one association to Sede
 	@OneToMany(mappedBy="ciudad")
-	private List<UnidadEstrategicaServicio> unidadEstrategicaServicios;
+	private List<Sede> sedes;
 
 	public Ciudad() {
 	}
@@ -56,26 +56,26 @@ public class Ciudad implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<UnidadEstrategicaServicio> getUnidadEstrategicaServicios() {
-		return this.unidadEstrategicaServicios;
+	public List<Sede> getSedes() {
+		return this.sedes;
 	}
 
-	public void setUnidadEstrategicaServicios(List<UnidadEstrategicaServicio> unidadEstrategicaServicios) {
-		this.unidadEstrategicaServicios = unidadEstrategicaServicios;
+	public void setSedes(List<Sede> sedes) {
+		this.sedes = sedes;
 	}
 
-	public UnidadEstrategicaServicio addUnidadEstrategicaServicio(UnidadEstrategicaServicio unidadEstrategicaServicio) {
-		getUnidadEstrategicaServicios().add(unidadEstrategicaServicio);
-		unidadEstrategicaServicio.setCiudad(this);
+	public Sede addSede(Sede sede) {
+		getSedes().add(sede);
+		sede.setCiudad(this);
 
-		return unidadEstrategicaServicio;
+		return sede;
 	}
 
-	public UnidadEstrategicaServicio removeUnidadEstrategicaServicio(UnidadEstrategicaServicio unidadEstrategicaServicio) {
-		getUnidadEstrategicaServicios().remove(unidadEstrategicaServicio);
-		unidadEstrategicaServicio.setCiudad(null);
+	public Sede removeSede(Sede sede) {
+		getSedes().remove(sede);
+		sede.setCiudad(null);
 
-		return unidadEstrategicaServicio;
+		return sede;
 	}
 
 }

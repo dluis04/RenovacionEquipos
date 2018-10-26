@@ -19,20 +19,26 @@ public class Sede implements Serializable {
 	@Column(name="ID_SEDE")
 	private int idSede;
 
+	@Column(name="DIRECCION")
+	private String direccion;
+
 	@Column(name="ID_ESTADO")
 	private int idEstado;
 
 	@Column(name="NOMBRE")
 	private String nombre;
 
-	//bi-directional many-to-one association to UnidadEstrategicaServicio
-	@ManyToOne
-	@JoinColumn(name="ID_UNIDAD")
-	private UnidadEstrategicaServicio unidadEstrategicaServicio;
+	@Column(name="PISO")
+	private String piso;
 
-	//bi-directional many-to-one association to Ubicacion
+	//bi-directional many-to-one association to DetalleInventario
 	@OneToMany(mappedBy="sede")
-	private List<Ubicacion> ubicacions;
+	private List<DetalleInventario> detalleInventarios;
+
+	//bi-directional many-to-one association to Ciudad
+	@ManyToOne
+	@JoinColumn(name="ID_CIUDAD")
+	private Ciudad ciudad;
 
 	public Sede() {
 	}
@@ -43,6 +49,14 @@ public class Sede implements Serializable {
 
 	public void setIdSede(int idSede) {
 		this.idSede = idSede;
+	}
+
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
 	public int getIdEstado() {
@@ -61,34 +75,42 @@ public class Sede implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public UnidadEstrategicaServicio getUnidadEstrategicaServicio() {
-		return this.unidadEstrategicaServicio;
+	public String getPiso() {
+		return this.piso;
 	}
 
-	public void setUnidadEstrategicaServicio(UnidadEstrategicaServicio unidadEstrategicaServicio) {
-		this.unidadEstrategicaServicio = unidadEstrategicaServicio;
+	public void setPiso(String piso) {
+		this.piso = piso;
 	}
 
-	public List<Ubicacion> getUbicacions() {
-		return this.ubicacions;
+	public List<DetalleInventario> getDetalleInventarios() {
+		return this.detalleInventarios;
 	}
 
-	public void setUbicacions(List<Ubicacion> ubicacions) {
-		this.ubicacions = ubicacions;
+	public void setDetalleInventarios(List<DetalleInventario> detalleInventarios) {
+		this.detalleInventarios = detalleInventarios;
 	}
 
-	public Ubicacion addUbicacion(Ubicacion ubicacion) {
-		getUbicacions().add(ubicacion);
-		ubicacion.setSede(this);
+	public DetalleInventario addDetalleInventario(DetalleInventario detalleInventario) {
+		getDetalleInventarios().add(detalleInventario);
+		detalleInventario.setSede(this);
 
-		return ubicacion;
+		return detalleInventario;
 	}
 
-	public Ubicacion removeUbicacion(Ubicacion ubicacion) {
-		getUbicacions().remove(ubicacion);
-		ubicacion.setSede(null);
+	public DetalleInventario removeDetalleInventario(DetalleInventario detalleInventario) {
+		getDetalleInventarios().remove(detalleInventario);
+		detalleInventario.setSede(null);
 
-		return ubicacion;
+		return detalleInventario;
+	}
+
+	public Ciudad getCiudad() {
+		return this.ciudad;
+	}
+
+	public void setCiudad(Ciudad ciudad) {
+		this.ciudad = ciudad;
 	}
 
 }

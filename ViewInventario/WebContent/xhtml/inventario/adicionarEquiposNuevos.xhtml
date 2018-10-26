@@ -19,7 +19,6 @@
 
 				<p:tabView id="tapView">
 
-
 					<p:tab id="tapRegistro" title="Registro">
 
 						<p:growl id="messages1" />
@@ -29,191 +28,384 @@
 							<p:graphicImage library="images" name="ajax-loader.gif" />
 						</p:dialog>
 
-
 						<p:panel id="panelRegistrar">
 
 							<div align="center">
 
-
-								<p:dataTable id="tblComputador" var="var" selectionMode="single"
-									selection="#{MBInventario.computadorSeleccionado}"
-									rowKey="#{var.idComputador}"
-									value="#{MBInventario.listComputadorNuevos}"
-									emptyMessage="No hay registros para mostrar">
-
-									<f:facet name="header">
-                                        Seleccione un computador nuevo
-                                    </f:facet>
-									<p:ajax event="rowSelect"
-										listener="#{MBComputador.onRowSelect}"
-										update=":formPrincipal:tapView:panelModificar" />
-
-									<p:column headerText="Codigo">
-										<h:outputText value="#{var.idComputador}" />
-									</p:column>
-
-									<p:column headerText="Nombre">
-										<h:outputText value="#{var.nombreComputo}" />
-									</p:column>
-
-									<p:column headerText="Serial Monitor">
-										<h:outputText value="#{var.serialMonitor}" />
-									</p:column>
-
-									<p:column headerText="Serial Teclado">
-										<h:outputText value="#{var.serialTeclado}" />
-									</p:column>
-
-									<p:column headerText="Serial Mouse">
-										<h:outputText value="#{var.serialMouse}" />
-									</p:column>
-
-									<p:column headerText="Tipo">
-										<h:outputText value="#{var.tipoComputo.tipoComputo}" />
-									</p:column>
-
-									<p:column headerText="Modelo">
-										<h:outputText value="#{var.modeloComputo.modelo}" />
-									</p:column>
-
-									<p:column headerText="Sistema Operativo">
-										<h:outputText value="#{var.sistemaOperativo.sistema}" />
-									</p:column>
-
-									<p:column headerText="Direccion IP">
-										<h:outputText value="#{var.direccionIp}" />
-									</p:column>
-
-								</p:dataTable>
-
-
-									<div class="ui-g-12 ui-lg-6">
-										<p:commandButton value="Registrar" style="width: 220px;"
-											onstart="PF('statusDialog').show();  "
-											oncomplete="PF('statusDialog').hide();"
-											update=":formPrincipal:tapView:panelRegistrar, messages1
-							,:formPrincipal:tapView:tblModeloComputo"
-											action="#{MBModeloComputo.registrarModeloComputo}"
-											id="guardar">
-										</p:commandButton>
-									</div>
-
-
-									<div class="ui-g-12 ui-lg-6">
-										<p:commandButton value="Limpiar" style="width: 220px;"
-											onstart="PF('statusDialog').show();  "
-											oncomplete="PF('statusDialog').hide();"
-											update=":formPrincipal:tapView:panelRegistrar"
-											action="#{MBModeloComputo.limpiar}" id="limpiar">
-										</p:commandButton>
-									</div>
-
-
-								</div>
-
-							</div>
-						</p:panel>
-
-					</p:tab>
-
-					<p:tab id="tapConsulta" title="Consulta / Modificación">
-
-						<div align="center">
-
-							<p:panel id="panelModificar">
-
 								<div class="ui-g">
 
 									<div class="ui-g-12 ui-lg-6">
-										<h:outputText style="    font-weight: bold; " value="Modelo: " />
+										<h:outputText style="    font-weight: bold; "
+											value="Computador: " />
 									</div>
 
 									<div class="ui-g-12 ui-lg-6">
-										<p:inputText id="modelo2" maxlength="200"
-											value="#{MBModeloComputo.modeloComputoModificar.modelo}">
+										<p:inputText id="computadorNuevo" maxlength="200"
+											value="#{MBInventario.computadorSeleccionado.nombreComputo}">
 										</p:inputText>
+
+										<p:commandButton value="Computador Nuevo" type="button"
+											onclick="PF('dlg2').show();" />
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Unidad Estrategica: " />
 									</div>
 
 									<div class="ui-g-12 ui-lg-6">
-										<h:outputText style="    font-weight: bold; " value="Tipo: " />
+										<p:inputText id="ues" maxlength="200"
+											value="#{MBInventario.ubicacionSeleccionado.sede.unidadEstrategicaServicio.nombre}">
+										</p:inputText>
+
+										<p:commandButton value="Unidad Estrategica" type="button"
+											onclick="PF('dlg3').show();" />
 									</div>
 
 									<div class="ui-g-12 ui-lg-6">
-										<p:inputText id="tipo2" maxlength="200"
-											value="#{MBModeloComputo.modeloComputoModificar.tipo}">
+										<h:outputText style="    font-weight: bold; " value="Sede: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="sede" maxlength="200"
+											value="#{MBInventario.ubicacionSeleccionado.sede.nombre}">
 										</p:inputText>
 									</div>
 
 									<div class="ui-g-12 ui-lg-6">
 										<h:outputText style="    font-weight: bold; "
-											value="Fabricante: " />
+											value="Serial Inventario: " />
 									</div>
 
 									<div class="ui-g-12 ui-lg-6">
-										<p:inputText id="fabricante2" maxlength="200"
-											value="#{MBModeloComputo.modeloComputoModificar.fabricante}">
+										<p:inputText id="serialI" maxlength="200"
+											value="#{MBInventario.inventario.serialInventario}">
 										</p:inputText>
 									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Placa Inventario: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="placa" maxlength="200"
+											value="#{MBInventario.inventario.placaInventario}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Segunda Placa: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="segundaPlaca" maxlength="200"
+											value="#{MBInventario.inventario.segundaPlaca}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Observacion: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputTextarea id="observacion" maxlength="200" rows="5"
+											cols="30" counter="display"
+											counterTemplate="{0} Caracteres disponibles"
+											autoResize="false"
+											value="#{MBInventario.inventario.observacion}">
+										</p:inputTextarea>
+										<h:outputText id="display" />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:commandButton value="Registrar" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView:panelRegistrar,:formPrincipal:tapView:messages1"
+											action="#{MBInventario.registrarInventarioCompuNuevo}"
+											id="guardar">
+										</p:commandButton>
+									</div>
+
+								</div>
+
+								<p:dialog header="Computador" widgetVar="dlg2" modal="true">
+
+
+									<h1 class="brand_name">Computador Nuevo</h1>
+
+									<p:dataTable id="tblComputador" var="var"
+										selectionMode="single"
+										selection="#{MBInventario.computadorSeleccionado}"
+										rowKey="#{var.idComputador}"
+										value="#{MBInventario.listComputadorNuevos}"
+										emptyMessage="No hay registros para mostrar">
+
+										<f:facet name="header">
+                                        Seleccione un computador nuevo
+                                    </f:facet>
+
+										<p:column headerText="Codigo">
+											<h:outputText value="#{var.idComputador}" />
+										</p:column>
+
+										<p:column headerText="Nombre">
+											<h:outputText value="#{var.nombreComputo}" />
+										</p:column>
+
+										<p:column headerText="Serial Monitor">
+											<h:outputText value="#{var.serialMonitor}" />
+										</p:column>
+
+										<p:column headerText="Serial Teclado">
+											<h:outputText value="#{var.serialTeclado}" />
+										</p:column>
+
+										<p:column headerText="Serial Mouse">
+											<h:outputText value="#{var.serialMouse}" />
+										</p:column>
+
+										<p:column headerText="Tipo">
+											<h:outputText value="#{var.tipoComputo.tipoComputo}" />
+										</p:column>
+
+										<p:column headerText="Modelo">
+											<h:outputText value="#{var.modeloComputo.modelo}" />
+										</p:column>
+
+										<p:column headerText="Sistema Operativo">
+											<h:outputText value="#{var.sistemaOperativo.sistema}" />
+										</p:column>
+
+										<p:column headerText="Direccion IP">
+											<h:outputText value="#{var.direccionIp}" />
+										</p:column>
+
+										<f:facet name="footer">
+
+											<p:commandButton value="Seleccionar" style="width: 100px;"
+												update=":formPrincipal"
+												action="#{MBInventario.seleccionarCompu}"
+												id="seleccionarComputadorNuevo">
+											</p:commandButton>
+
+											<p:commandButton value="Limpiar" style="width: 100px;"
+												update="tblComputador"
+												action="#{MBInventario.limpiarComputadorNuevo}"
+												id="limpiarCompu">
+											</p:commandButton>
+
+											<p:commandButton value="Cancelar" style="width: 100px;"
+												update=":formPrincipal"
+												action="#{MBInventario.limpiarComputadorNuevo}"
+												id="cancelarCompu">
+											</p:commandButton>
+										</f:facet>
+
+									</p:dataTable>
+
+								</p:dialog>
+
+
+
+
+								<p:dialog header="Computador" widgetVar="dlg3" modal="true">
+
+
+									<h1 class="brand_name">Sede / Ubicacion</h1>
+
+									<p:dataTable id="tblUbicacion" var="var" selectionMode="single"
+										selection="#{MBInventario.ubicacionSeleccionado}"
+										rowKey="#{var.idUbicacion}"
+										value="#{MBInventario.listUbicacions}"
+										emptyMessage="No hay registros para mostrar">
+
+										<f:facet name="header">
+                                        Seleccione una ubicacion
+                                    </f:facet>
+
+										<p:column headerText="Codigo">
+											<h:outputText value="#{var.idUbicacion}" />
+										</p:column>
+
+										<p:column headerText="Ciudad">
+											<h:outputText
+												value="#{var.sede.unidadEstrategicaServicio.ciudad.nombre}" />
+										</p:column>
+
+										<p:column headerText="Unidad Estrategica Servicio">
+											<h:outputText
+												value="#{var.sede.unidadEstrategicaServicio.nombre}" />
+										</p:column>
+
+										<p:column headerText="Sede">
+											<h:outputText value="#{var.sede.nombre}" />
+										</p:column>
+
+										<p:column headerText="Direccion">
+											<h:outputText value="#{var.nombre}" />
+										</p:column>
+
+										<p:column headerText="Piso">
+											<h:outputText value="#{var.piso}" />
+										</p:column>
+
+										<f:facet name="footer">
+
+											<p:commandButton value="Seleccionar" style="width: 100px;"
+												update=":formPrincipal"
+												action="#{MBInventario.seleccionarUbicacion}"
+												id="seleccionarUbicacion">
+											</p:commandButton>
+
+											<p:commandButton value="Limpiar" style="width: 100px;"
+												update="tblUbicacion"
+												action="#{MBInventario.limpiarUbicacion}"
+												id="limpiarUbicacion">
+											</p:commandButton>
+
+											<p:commandButton value="Cancelar" style="width: 100px;"
+												update=":formPrincipal"
+												action="#{MBInventario.limpiarUbicacion}"
+												id="cancelarUbicacion">
+											</p:commandButton>
+										</f:facet>
+
+
+									</p:dataTable>
+								</p:dialog>
+
+							</div>
+
+						</p:panel>
+					</p:tab>
+
+					<p:tab id="tapConsulta" title="Modificacion">
+
+						<div align="center">
+							<p:panel id="panelModificar">
+								<div class="ui-g">
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Serial Inventario: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="serialI2" maxlength="200"
+											value="#{MBInventario.modificarInventario.serialInventario}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Placa Inventario: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="placa2" maxlength="200"
+											value="#{MBInventario.modificarInventario.placaInventario}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Segundo Placa: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="segundaPlaca2" maxlength="200"
+											value="#{MBInventario.modificarInventario.segundaPlaca}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; "
+											value="Observacion: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputTextarea id="observacion2" maxlength="200" rows="5"
+											cols="30" counter="display2"
+											counterTemplate="{0} Caracteres disponibles"
+											autoResize="false"
+											value="#{MBInventario.modificarInventario.observacion}">
+										</p:inputTextarea>
+										<h:outputText id="display2" />
+									</div>
+									<p:dataTable id="tblInventario" var="var"
+										selectionMode="single"
+										selection="#{MBInventario.inventarioSeleccionado}"
+										rowKey="#{var.idInventario}"
+										value="#{MBInventario.listInventarioNuevo}"
+										emptyMessage="No hay registros para mostrar">
+
+										<f:facet name="header">
+                                        Seleccione un computador 
+                                    </f:facet>
+
+										<p:ajax event="rowSelect"
+											listener="#{MBInventario.onRowSelect}"
+											update=":formPrincipal:tapView:panelModificar,:formPrincipal:tapView:messages1" />
+
+										<p:column headerText="Codigo">
+											<h:outputText value="#{var.idInventario}" />
+										</p:column>
+
+										<p:column headerText="Computador">
+											<h:outputText value="#{var.computador.nombreComputo}" />
+										</p:column>
+
+										<p:column headerText="Ciudad">
+											<h:outputText
+												value="#{var.ubicacion.sede.unidadEstrategicaServicio.ciudad.nombre}" />
+										</p:column>
+
+										<p:column headerText="Unidad Estrategica Servicio">
+											<h:outputText
+												value="#{var.ubicacion.sede.unidadEstrategicaServicio.nombre}" />
+										</p:column>
+
+										<p:column headerText="Sede">
+											<h:outputText value="#{var.ubicacion.sede.nombre}" />
+										</p:column>
+
+										<p:column headerText="Direccion">
+											<h:outputText value="#{var.ubicacion.nombre}" />
+										</p:column>
+
+										<p:column headerText="Piso">
+											<h:outputText value="#{var.ubicacion.piso}" />
+										</p:column>
+
+									</p:dataTable>
+
+
 
 									<div class="ui-g-12 ui-lg-6">
 										<p:commandButton value="Modificar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
-											update=":formPrincipal:tapView, messages1,:formPrincipal:tapView:tblModeloComputo"
-											action="#{MBModeloComputo.modificarModeloComputo}"
-											id="guardar2">
+											update=":formPrincipal:tapView,:formPrincipal:tapView:messages1"
+											action="#{MBInventario.modificarInventarioCompuNuevo}"
+											id="modificar">
 										</p:commandButton>
 									</div>
 
-
 								</div>
-
-								<br></br>
-
-
-
-								<p:dataTable id="tblModeloComputo" var="var"
-									selectionMode="single"
-									selection="#{MBModeloComputo.modeloComputoSeleccionado}"
-									rowKey="#{var.idModelo}"
-									value="#{MBModeloComputo.listModeloComputos}"
-									emptyMessage="No hay registros para mostrar">
-
-									<f:facet name="header">
-                                        Seleccione un Modelo Computador a modificar
-                                    </f:facet>
-									<p:ajax event="rowSelect"
-										listener="#{MBModeloComputo.onRowSelect}"
-										update=":formPrincipal:tapView:panelModificar" />
-
-									<p:column headerText="Codigo">
-										<h:outputText value="#{var.idModelo}" />
-									</p:column>
-
-									<p:column headerText="Modelo">
-										<h:outputText value="#{var.modelo}" />
-									</p:column>
-
-									<p:column headerText="Tipo">
-										<h:outputText value="#{var.tipo}" />
-									</p:column>
-									<p:column headerText="Fabricante">
-										<h:outputText value="#{var.fabricante}" />
-									</p:column>
-								</p:dataTable>
 							</p:panel>
-
-
 						</div>
+
 					</p:tab>
 
 				</p:tabView>
 
 
 			</h:form>
-
-
-
 
 		</ui:define>
 

@@ -38,4 +38,8 @@ public class DNDetalleInventario {
 		return sBDetalleInventarioLocal.consultarAllDetalleInventarioActivos();
 	}
 
+	public List<DetalleInventario> consultarAllDetalleInventarioComputadorNuevos() throws Exception {
+		return sBDetalleInventarioLocal.consultarAllDetalleInventarioComputadorNuevos();
+	}
+
 }

@@ -37,9 +37,6 @@ public class DetalleInventarioHistorial implements Serializable {
 	@Column(name="ID_INVENTARIO_RENO")
 	private int idInventarioReno;
 
-	@Column(name="ID_SERVICIO")
-	private int idServicio;
-
 	@Column(name="ID_UBICACION")
 	private int idUbicacion;
 
@@ -121,14 +118,6 @@ public class DetalleInventarioHistorial implements Serializable {
 
 	public void setIdInventarioReno(int idInventarioReno) {
 		this.idInventarioReno = idInventarioReno;
-	}
-
-	public int getIdServicio() {
-		return this.idServicio;
-	}
-
-	public void setIdServicio(int idServicio) {
-		this.idServicio = idServicio;
 	}
 
 	public int getIdUbicacion() {

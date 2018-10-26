@@ -46,17 +46,6 @@
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
-										<h:outputText style="    font-weight: bold; " value="Ciudad: " />
-									</div>
-
-									<div class="ui-g-12 ui-lg-6">
-										<p:selectOneMenu id="ciudad"
-											value="#{MBUnidadEstrategica.idCiudad}">
-											<f:selectItem itemLabel="Seleccione" itemValue="" />
-											<f:selectItems value="#{MBUnidadEstrategica.listCiudad}" />
-										</p:selectOneMenu>
-									</div>
 
 									<div class="ui-g-12 ui-lg-6">
 										<p:commandButton value="Registrar" style="width: 220px;"
@@ -108,18 +97,6 @@
 
 
 									<div class="ui-g-12 ui-lg-6">
-										<h:outputText style="    font-weight: bold; " value="Ciudad: " />
-									</div>
-
-									<div class="ui-g-12 ui-lg-6">
-										<p:selectOneMenu id="ciudad2"
-											value="#{MBUnidadEstrategica.idCiudadModif}">
-											<f:selectItem itemLabel="Seleccione" itemValue="" />
-											<f:selectItems value="#{MBUnidadEstrategica.listCiudad}" />
-										</p:selectOneMenu>
-									</div>
-
-									<div class="ui-g-12 ui-lg-6">
 										<p:commandButton value="Modificar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
@@ -156,10 +133,6 @@
 
 									<p:column headerText="Nombre">
 										<h:outputText value="#{var.nombre}" />
-									</p:column>
-
-									<p:column headerText="Ciudad">
-										<h:outputText value="#{var.ciudad.nombre}" />
 									</p:column>
 
 								</p:dataTable>

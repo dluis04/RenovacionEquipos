@@ -5,98 +5,96 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+
 /**
  * The persistent class for the COMPUTADOR database table.
  * 
  */
 @Entity
-@Table(name = "COMPUTADOR")
-@NamedQuery(name = "Computador.findAll", query = "SELECT c FROM Computador c")
+@Table(name="COMPUTADOR")
+@NamedQuery(name="Computador.findAll", query="SELECT c FROM Computador c")
 public class Computador implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ID_COMPUTADOR")
+	@Column(name="ID_COMPUTADOR")
 	private int idComputador;
 
-	@Column(name = "DIRECCION_IP")
+	@Column(name="DIRECCION_IP")
 	private String direccionIp;
 
-	@Column(name = "FECHA_MOD")
+	@Column(name="FECHA_MOD")
 	private Timestamp fechaMod;
 
-	@Column(name = "FECHA_REG")
+	@Column(name="FECHA_REG")
 	private Timestamp fechaReg;
 
-	@Column(name = "ID_ESTADO")
+	@Column(name="ID_ESTADO")
 	private int idEstado;
 
-	@Column(name = "ID_ESTADO_COMPU")
+	@Column(name="ID_ESTADO_COMPU")
 	private int idEstadoCompu;
 
-	@Column(name = "ID_USUARIO_MOD")
+	@Column(name="ID_USUARIO_MOD")
 	private int idUsuarioMod;
 
-	@Column(name = "ID_USUARIO_REG")
+	@Column(name="ID_USUARIO_REG")
 	private int idUsuarioReg;
 
-	@Column(name = "MAC")
+	@Column(name="MAC")
 	private String mac;
 
-	@Column(name = "NOMBRE_COMPUTO")
+	@Column(name="NOMBRE_COMPUTO")
 	private String nombreComputo;
 
-	@Column(name = "SERIAL__MONITOR")
+	@Column(name="SERIAL__MONITOR")
 	private String serialMonitor;
 
-	@Column(name = "SERIAL_MOUSE")
+	@Column(name="SERIAL_MOUSE")
 	private String serialMouse;
 
-	@Column(name = "SERIAL_TECLADO")
+	@Column(name="SERIAL_TECLADO")
 	private String serialTeclado;
 
-	// bi-directional many-to-one association to CaracteristicasComputo
+	//bi-directional many-to-one association to CaracteristicasComputo
 	@ManyToOne
-	@JoinColumn(name = "ID_CARACTERISTICAS")
+	@JoinColumn(name="ID_CARACTERISTICAS")
 	private CaracteristicasComputo caracteristicasComputo;
 
-	// bi-directional many-to-one association to ModeloComputo
+	//bi-directional many-to-one association to ModeloComputo
 	@ManyToOne
-	@JoinColumn(name = "ID_MODELO")
+	@JoinColumn(name="ID_MODELO")
 	private ModeloComputo modeloComputo;
 
-	// bi-directional many-to-one association to OperacionServicio
+	//bi-directional many-to-one association to OperacionServicio
 	@ManyToOne
-	@JoinColumn(name = "ID_SERVICIO")
+	@JoinColumn(name="ID_SERVICIO")
 	private OperacionServicio operacionServicio;
 
-	// bi-directional many-to-one association to SistemaOperativo
+	//bi-directional many-to-one association to SistemaOperativo
 	@ManyToOne
-	@JoinColumn(name = "ID_SISTEMA")
+	@JoinColumn(name="ID_SISTEMA")
 	private SistemaOperativo sistemaOperativo;
 
-	// bi-directional many-to-one association to TipoComputo
+	//bi-directional many-to-one association to TipoComputo
 	@ManyToOne
-	@JoinColumn(name = "ID_TIPO")
+	@JoinColumn(name="ID_TIPO")
 	private TipoComputo tipoComputo;
 
-	// bi-directional many-to-one association to DetalleInventario
-	@OneToMany(mappedBy = "computador")
+	//bi-directional many-to-one association to UnidadEstrategicaServicio
+	@ManyToOne
+	@JoinColumn(name="ID_UNIDAD")
+	private UnidadEstrategicaServicio unidadEstrategicaServicio;
+
+	//bi-directional many-to-one association to DetalleInventario
+	@OneToMany(mappedBy="computador")
 	private List<DetalleInventario> detalleInventarios;
 
-	// bi-directional many-to-one association to DetalleListaComputo
-	@OneToMany(mappedBy = "computador")
+	//bi-directional many-to-one association to DetalleListaComputo
+	@OneToMany(mappedBy="computador")
 	private List<DetalleListaComputo> detalleListaComputos;
 
 	public Computador() {
-	}
-
-	public int getIdEstadoCompu() {
-		return idEstadoCompu;
-	}
-
-	public void setIdEstadoCompu(int idEstadoCompu) {
-		this.idEstadoCompu = idEstadoCompu;
 	}
 
 	public int getIdComputador() {
@@ -137,6 +135,14 @@ public class Computador implements Serializable {
 
 	public void setIdEstado(int idEstado) {
 		this.idEstado = idEstado;
+	}
+
+	public int getIdEstadoCompu() {
+		return this.idEstadoCompu;
+	}
+
+	public void setIdEstadoCompu(int idEstadoCompu) {
+		this.idEstadoCompu = idEstadoCompu;
 	}
 
 	public int getIdUsuarioMod() {
@@ -233,6 +239,14 @@ public class Computador implements Serializable {
 
 	public void setTipoComputo(TipoComputo tipoComputo) {
 		this.tipoComputo = tipoComputo;
+	}
+
+	public UnidadEstrategicaServicio getUnidadEstrategicaServicio() {
+		return this.unidadEstrategicaServicio;
+	}
+
+	public void setUnidadEstrategicaServicio(UnidadEstrategicaServicio unidadEstrategicaServicio) {
+		this.unidadEstrategicaServicio = unidadEstrategicaServicio;
 	}
 
 	public List<DetalleInventario> getDetalleInventarios() {

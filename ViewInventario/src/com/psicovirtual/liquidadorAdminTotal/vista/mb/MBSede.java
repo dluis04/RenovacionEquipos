@@ -1,21 +1,19 @@
 package com.psicovirtual.liquidadorAdminTotal.vista.mb;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 
 import com.psicovirtual.estandar.vista.mb.MBMensajes;
+import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNCiudad;
 import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNSede;
-import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNUnidadEstrategica;
+import com.psicovirtual.procesos.modelo.ejb.entity.inventario.Ciudad;
 import com.psicovirtual.procesos.modelo.ejb.entity.inventario.Sede;
-import com.psicovirtual.procesos.modelo.ejb.entity.inventario.UnidadEstrategicaServicio;
 
 @ManagedBean(name = "MBSede")
 @SessionScoped
@@ -23,12 +21,12 @@ public class MBSede implements Serializable {
 
 	MBMensajes mensajes = new MBMensajes();
 	DNSede dnSedes;
-	DNUnidadEstrategica dNUnidadEstrategica;
+	DNCiudad dNCiudad;
 	List<Sede> listSedes;
-	List<SelectItem> listUnidadEstrategica;
-	String idUnidadEstrategica;
-	String idUnidadEstrategicaModif;
+	List<Ciudad> listCiudad;
 
+	private Ciudad ciudadSeleccionado;
+	private Ciudad ciudadModifica;
 	private Sede sedeSeleccionado;
 	private Sede sedeModificar;
 	private Sede sede;
@@ -37,20 +35,16 @@ public class MBSede implements Serializable {
 		sede = new Sede();
 		sedeSeleccionado = new Sede();
 		sedeModificar = new Sede();
+		ciudadModifica = new Ciudad();
+		ciudadSeleccionado = new Ciudad();
 		cargarListaSedes();
-		idUnidadEstrategica = "";
 	}
 
 	public void cargarListaSedes() {
 		try {
 			inicializarDelegados();
-
+			listCiudad = dNCiudad.consultarAllCiudadActivos();
 			listSedes = dnSedes.consultarAllSedeActivos();
-
-			listUnidadEstrategica = new ArrayList<>();
-			for (UnidadEstrategicaServicio list : dNUnidadEstrategica.consultarAllUnidadEstrategicaServicioActivos()) {
-				listUnidadEstrategica.add(new SelectItem(list.getIdUnidad(), list.getNombre()));
-			}
 
 		} catch (Exception e) {
 			System.out.println("Error en el metodo cargarListaSedes -->> " + e);
@@ -61,13 +55,11 @@ public class MBSede implements Serializable {
 		try {
 			inicializarDelegados();
 
-			sede.setIdEstado(1);
-			if (idUnidadEstrategica.equals("")) {
-				mensajes.mostrarMensaje("Debe seleccionar una UnidadEstrategica", 2);
+			if (ciudadSeleccionado == null) {
+				mensajes.mostrarMensaje("Debe seleccionar una Ciudad", 2);
 			} else {
-				UnidadEstrategicaServicio UnidadEstrategica = dNUnidadEstrategica
-						.consultarDetalleUnidadEstrategicaServicio(idUnidadEstrategica);
-				sede.setUnidadEstrategicaServicio(UnidadEstrategica);
+				sede.setIdEstado(1);
+				sede.setCiudad(ciudadSeleccionado);
 
 				if (dnSedes.crearSede(sede) != null) {
 					limpiar();
@@ -77,7 +69,6 @@ public class MBSede implements Serializable {
 					mensajes.mostrarMensaje("El registro no se pudo realizar, valide con el administrador", 3);
 				}
 			}
-
 		} catch (Exception e) {
 			System.out.println("Error en el metodo registrarSede -->> " + e);
 		}
@@ -87,38 +78,67 @@ public class MBSede implements Serializable {
 		try {
 			inicializarDelegados();
 
-			if (idUnidadEstrategica.equals("")) {
-				mensajes.mostrarMensaje("Debe seleccionar una UnidadEstrategica", 2);
+			if (dnSedes.actualizarSede(sedeModificar) != null) {
+				limpiar();
+				cargarListaSedes();
+				mensajes.mostrarMensaje("Modificación Exitosa", 1);
+
 			} else {
-
-				UnidadEstrategicaServicio UnidadEstrategica = dNUnidadEstrategica
-						.consultarDetalleUnidadEstrategicaServicio(idUnidadEstrategica);
-				sedeModificar.setUnidadEstrategicaServicio(UnidadEstrategica);
-
-				if (dnSedes.actualizarSede(sedeModificar) != null) {
-					cargarListaSedes();
-					mensajes.mostrarMensaje("Modificación Exitosa", 1);
-				} else {
-					mensajes.mostrarMensaje("No se pudo realizar la modificación, valide con el administrador", 3);
-				}
-
+				mensajes.mostrarMensaje("No se pudo realizar la modificación, valide con el administrador", 3);
 			}
+
 		} catch (Exception e) {
 			System.out.println("Error en el metodo registrarSede -->> " + e);
 		}
 	}
 
 	public void onRowSelect() {
-		idUnidadEstrategicaModif = "" + sedeSeleccionado.getUnidadEstrategicaServicio().getIdUnidad();
 		sedeModificar = sedeSeleccionado;
+		ciudadModifica.setIdCiudad(sedeSeleccionado.getCiudad().getIdCiudad());
+		ciudadModifica.setNombre(sedeSeleccionado.getCiudad().getNombre());
+	}
+
+	public void seleccionarCiudad() {
+		if (ciudadSeleccionado != null) {
+			mensajes.mostrarMensaje("Ciudad seleccionada exitosamente", 1);
+		} else {
+			mensajes.mostrarMensaje("Debe seleccionar una Ciudad", 2);
+		}
+		limpiarIsNull();
+	}
+
+	public void seleccionarCiudadModi() {
+		if (ciudadModifica != null) {
+			mensajes.mostrarMensaje("Ciudad seleccionada exitosamente", 1);
+		} else {
+			mensajes.mostrarMensaje("Debe seleccionar una Ciudad", 2);
+		}
+		limpiarIsNull();
+	}
+
+	public void limpiarCiudad() {
+		ciudadSeleccionado = null;
+		ciudadSeleccionado = new Ciudad();
+		ciudadModifica = null;
+		ciudadModifica = new Ciudad();
+	}
+
+	public void limpiarIsNull() {
+		if (ciudadSeleccionado == null) {
+			ciudadSeleccionado = new Ciudad();
+		}
+
+		if (ciudadModifica == null) {
+			ciudadModifica = new Ciudad();
+		}
 	}
 
 	public void limpiar() {
 		sede = new Sede();
 		sedeSeleccionado = new Sede();
 		sedeModificar = new Sede();
-		idUnidadEstrategica = "";
-		idUnidadEstrategicaModif = "";
+		ciudadModifica = new Ciudad();
+		ciudadSeleccionado = new Ciudad();
 	}
 
 	public void tabIsClosed() {
@@ -141,9 +161,34 @@ public class MBSede implements Serializable {
 			dnSedes = new DNSede();
 		}
 
-		if (dNUnidadEstrategica == null) {
-			dNUnidadEstrategica = new DNUnidadEstrategica();
+		if (dNCiudad == null) {
+			dNCiudad = new DNCiudad();
 		}
+
+	}
+
+	public List<Ciudad> getListCiudad() {
+		return listCiudad;
+	}
+
+	public void setListCiudad(List<Ciudad> listCiudad) {
+		this.listCiudad = listCiudad;
+	}
+
+	public Ciudad getCiudadSeleccionado() {
+		return ciudadSeleccionado;
+	}
+
+	public void setCiudadSeleccionado(Ciudad ciudadSeleccionado) {
+		this.ciudadSeleccionado = ciudadSeleccionado;
+	}
+
+	public Ciudad getCiudadModifica() {
+		return ciudadModifica;
+	}
+
+	public void setCiudadModifica(Ciudad ciudadModifica) {
+		this.ciudadModifica = ciudadModifica;
 	}
 
 	public Sede getSede() {
@@ -160,30 +205,6 @@ public class MBSede implements Serializable {
 
 	public void setListSedes(List<Sede> listSedes) {
 		this.listSedes = listSedes;
-	}
-
-	public List<SelectItem> getListUnidadEstrategica() {
-		return listUnidadEstrategica;
-	}
-
-	public void setListUnidadEstrategica(List<SelectItem> listUnidadEstrategica) {
-		this.listUnidadEstrategica = listUnidadEstrategica;
-	}
-
-	public String getIdUnidadEstrategica() {
-		return idUnidadEstrategica;
-	}
-
-	public void setIdUnidadEstrategica(String idUnidadEstrategica) {
-		this.idUnidadEstrategica = idUnidadEstrategica;
-	}
-
-	public String getIdUnidadEstrategicaModif() {
-		return idUnidadEstrategicaModif;
-	}
-
-	public void setIdUnidadEstrategicaModif(String idUnidadEstrategicaModif) {
-		this.idUnidadEstrategicaModif = idUnidadEstrategicaModif;
 	}
 
 	public Sede getSedeSeleccionado() {

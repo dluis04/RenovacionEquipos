@@ -35,6 +35,22 @@
 
 								<div class="ui-g">
 
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Ciudad: " />
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="ciudad" maxlength="200"
+											value="#{MBSede.ciudadSeleccionado.nombre}">
+										</p:inputText>
+
+										<p:commandButton value="Ciudad" type="button"
+											onclick="PF('dlg1').show();" />
+									</div>
+
+
 									<div class="ui-g-12 ui-lg-6">
 										<h:outputText style="    font-weight: bold; " value="Nombre: " />
 									</div>
@@ -47,16 +63,27 @@
 
 									<div class="ui-g-12 ui-lg-6">
 										<h:outputText style="    font-weight: bold; "
-											value="Unidad Estrategica: " />
+											value="Direccion: " />
 									</div>
 
 									<div class="ui-g-12 ui-lg-6">
-										<p:selectOneMenu id="ues"
-											value="#{MBSede.idUnidadEstrategica}">
-											<f:selectItem itemLabel="Seleccione" itemValue="" />
-											<f:selectItems value="#{MBSede.listUnidadEstrategica}" />
-										</p:selectOneMenu>
+										<p:inputText id="direccion" maxlength="200"
+											value="#{MBSede.sede.direccion}">
+										</p:inputText>
 									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Piso: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="piso" maxlength="200"
+											value="#{MBSede.sede.piso}">
+										</p:inputText>
+									</div>
+
+
+
 
 									<div class="ui-g-12 ui-lg-6">
 										<p:commandButton value="Registrar" style="width: 220px;"
@@ -81,10 +108,58 @@
 
 								</div>
 
+								<p:dialog header="Ciudad" widgetVar="dlg1" modal="true">
+
+									<h1 class="brand_name">Ciudades</h1>
+
+									<p:dataTable id="tblCiudad" var="var" selectionMode="single"
+										selection="#{MBSede.ciudadSeleccionado}"
+										rowKey="#{var.idCiudad}" value="#{MBSede.listCiudad}"
+										emptyMessage="No hay registros para mostrar" rows="10"
+										paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<f:facet name="header">
+                                        Seleccione una Ciudad
+                                    </f:facet>
+
+										<p:column headerText="Codigo">
+											<h:outputText value="#{var.idCiudad}" />
+										</p:column>
+
+										<p:column headerText="Sede">
+											<h:outputText value="#{var.nombre}" />
+										</p:column>
+
+										<f:facet name="footer">
+
+											<p:commandButton value="Seleccionar" style="width: 100px;"
+												update=":formPrincipal" action="#{MBSede.seleccionarCiudad}"
+												id="seleccionarCiudad">
+											</p:commandButton>
+
+											<p:commandButton value="Limpiar" style="width: 100px;"
+												update="tblCiudad" action="#{MBSede.limpiarCiudad}"
+												id="limpiarCiudad">
+											</p:commandButton>
+
+											<p:commandButton value="Cancelar" style="width: 100px;"
+												update=":formPrincipal" action="#{MBSede.limpiarCiudad}"
+												id="cancelarCiudad">
+											</p:commandButton>
+
+
+										</f:facet>
+									</p:dataTable>
+								</p:dialog>
 							</div>
+
 						</p:panel>
 
 					</p:tab>
+
+
 
 					<p:tab id="tapConsulta" title="Consulta / Modificación">
 
@@ -93,6 +168,21 @@
 							<p:panel id="panelModificar">
 
 								<div class="ui-g">
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Ciudad: " />
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="ciudad2" maxlength="200"
+											value="#{MBSede.ciudadModifica.nombre}">
+										</p:inputText>
+
+										<p:commandButton value="Ciudad" type="button"
+											onclick="PF('dlg2').show();" />
+									</div>
 
 
 									<div class="ui-g-12 ui-lg-6">
@@ -107,15 +197,23 @@
 
 									<div class="ui-g-12 ui-lg-6">
 										<h:outputText style="    font-weight: bold; "
-											value="Unidad Estrategica: " />
+											value="Direccion: " />
 									</div>
 
 									<div class="ui-g-12 ui-lg-6">
-										<p:selectOneMenu id="ues2"
-											value="#{MBSede.idUnidadEstrategicaModif}">
-											<f:selectItem itemLabel="Seleccione" itemValue="" />
-											<f:selectItems value="#{MBSede.listUnidadEstrategica}" />
-										</p:selectOneMenu>
+										<p:inputText id="direccion2" maxlength="200"
+											value="#{MBSede.sedeModificar.direccion}">
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Piso: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="piso2" maxlength="200"
+											value="#{MBSede.sedeModificar.piso}">
+										</p:inputText>
 									</div>
 
 									<div class="ui-g-12 ui-lg-6">
@@ -126,13 +224,55 @@
 											action="#{MBSede.modificarSede}" id="guardar2">
 										</p:commandButton>
 									</div>
+									<p:dialog header="Ciudad" widgetVar="dlg2" modal="true">
+
+										<h1 class="brand_name">Ciudades</h1>
+
+										<p:dataTable id="tblCiudad2" var="var" selectionMode="single"
+											selection="#{MBSede.ciudadModifica}" rowKey="#{var.idCiudad}"
+											value="#{MBSede.listCiudad}"
+											emptyMessage="No hay registros para mostrar" rows="10"
+											paginator="true"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="5,10,15">
+
+											<f:facet name="header">
+                                        Seleccione una Ciudad
+                                    </f:facet>
+
+											<p:column headerText="Codigo">
+												<h:outputText value="#{var.idCiudad}" />
+											</p:column>
+
+											<p:column headerText="Sede">
+												<h:outputText value="#{var.nombre}" />
+											</p:column>
+
+											<f:facet name="footer">
+
+												<p:commandButton value="Seleccionar" style="width: 100px;"
+													update=":formPrincipal"
+													action="#{MBSede.seleccionarCiudadModi}"
+													id="seleccionarCiudad2">
+												</p:commandButton>
+
+												<p:commandButton value="Limpiar" style="width: 100px;"
+													update="tblCiudad2" action="#{MBSede.limpiarCiudad}"
+													id="limpiarCiudad2">
+												</p:commandButton>
+
+												<p:commandButton value="Cancelar" style="width: 100px;"
+													update=":formPrincipal" action="#{MBSede.limpiarCiudad}"
+													id="cancelarCiudad2">
+												</p:commandButton>
 
 
+											</f:facet>
+										</p:dataTable>
+									</p:dialog>
 								</div>
 
 								<br></br>
-
-
 
 								<p:dataTable id="tblSede" var="var" selectionMode="single"
 									selection="#{MBSede.sedeSeleccionado}" rowKey="#{var.idSede}"
@@ -149,12 +289,20 @@
 										<h:outputText value="#{var.idSede}" />
 									</p:column>
 
-									<p:column headerText="Nombre">
+									<p:column headerText="Ciudad">
+										<h:outputText value="#{var.ciudad.nombre}" />
+									</p:column>
+
+									<p:column headerText="Sede">
 										<h:outputText value="#{var.nombre}" />
 									</p:column>
 
-									<p:column headerText="Unidad Estrategica">
-										<h:outputText value="#{var.unidadEstrategicaServicio.nombre}" />
+									<p:column headerText="Direccion">
+										<h:outputText value="#{var.direccion}" />
+									</p:column>
+
+									<p:column headerText="Piso">
+										<h:outputText value="#{var.piso}" />
 									</p:column>
 
 								</p:dataTable>

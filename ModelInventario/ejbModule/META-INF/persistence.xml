@@ -24,7 +24,6 @@
 		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.SistemaOperativo</class>
 		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.TipoComputo</class>
 		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.TipoUsuario</class>
-		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.Ubicacion</class>
 		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.UnidadEstrategicaServicio</class>
 		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.Usuario</class>
 		<class>com.psicovirtual.procesos.modelo.ejb.entity.inventario.UsuariosCronograma</class>
