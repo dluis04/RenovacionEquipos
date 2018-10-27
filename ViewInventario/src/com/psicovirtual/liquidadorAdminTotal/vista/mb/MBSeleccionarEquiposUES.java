@@ -17,6 +17,7 @@ import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNDetalleListaCompu;
 import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNListaChequeo;
 import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNUnidadEstrategica;
 import com.psicovirtual.procesos.modelo.ejb.entity.inventario.Computador;
+import com.psicovirtual.procesos.modelo.ejb.entity.inventario.DetalleListaComputo;
 import com.psicovirtual.procesos.modelo.ejb.entity.inventario.ListaCheqeoComputador;
 import com.psicovirtual.procesos.modelo.ejb.entity.inventario.UnidadEstrategicaServicio;
 import com.psicovirtual.procesos.modelo.ejb.entity.inventario.Usuario;
@@ -32,7 +33,7 @@ public class MBSeleccionarEquiposUES implements Serializable {
 	DNUnidadEstrategica dNUnidadEstrategica;
 
 	List<Computador> listComputadors;
-	List<Computador> listComputadorUES;
+	ArrayList<Computador> listComputadorUES;
 	List<SelectItem> listUnidad;
 	List<ListaCheqeoComputador> listChequeo;
 
@@ -41,9 +42,11 @@ public class MBSeleccionarEquiposUES implements Serializable {
 	private Computador computadorSeleccionadoUES;
 	private Computador computador;
 	private Usuario usuario;
+	private String idUnidad;
 
 	public MBSeleccionarEquiposUES() {
 
+		idUnidad = "";
 		computador = new Computador();
 		computadorSeleccionado = new Computador();
 		computadorSeleccionadoUES = new Computador();
@@ -56,13 +59,11 @@ public class MBSeleccionarEquiposUES implements Serializable {
 
 			inicializarDelegados();
 			listComputadors = dnComputadors.consultarComputadoresNuevosSeleccionLista();
-
+			listComputadorUES = new ArrayList<>();
 			listUnidad = new ArrayList<>();
 			for (UnidadEstrategicaServicio list : dNUnidadEstrategica.consultarAllUnidadEstrategicaServicioActivos()) {
 				listUnidad.add(new SelectItem(list.getIdUnidad(), list.getNombre()));
 			}
-
-			listChequeo = dNListaChequeo.consultarAllListaCheqeoComputadorActivosNuevos();
 
 		} catch (Exception e) {
 			System.out.println("Error en el metodo cargarListaComputadors -->> " + e);
@@ -72,49 +73,78 @@ public class MBSeleccionarEquiposUES implements Serializable {
 	public void registrarComputadoresUES() {
 		try {
 			inicializarDelegados();
+			Boolean isUES = false;
+			for (Computador computadorUES : listComputadorUES) {
+				dnComputadors.actualizarComputador(computadorUES);
+
+				listChequeo = dNListaChequeo.consultarAllListaChequeoUESOrdenASCNuevo(
+						"" + computadorUES.getUnidadEstrategicaServicio().getIdUnidad());
+				DetalleListaComputo detalle = null;
+				for (ListaCheqeoComputador listaChequeo : listChequeo) {
+					detalle = new DetalleListaComputo();
+					detalle.setActividad("NUEVO");
+					detalle.setListaCheqeoComputador(listaChequeo);
+					detalle.setCheckList(0);
+					detalle.setComputador(computadorUES);
+
+					dNDetalleListaCompu.crearDetalleListaComputo(detalle);
+				}
+
+				isUES = true;
+			}
+
+			if (isUES) {
+				limpiar();
+				cargarListaCargarTodo();
+				mensajes.mostrarMensaje("Cambios guardados exitosamente", 1);
+			}
 
 		} catch (Exception e) {
-			System.out.println("Error en el metodo registrarComputador -->> " + e);
+			System.out.println("Error en el metodo registrarComputadoresUES -->> " + e);
 		}
 	}
 
 	public void seleccionarComputadorSinUES() {
+		try {
+			if (computadorSeleccionado == null) {
+				computadorSeleccionado = new Computador();
+				mensajes.mostrarMensaje("Debe seleccionar un computador", 2);
+			} else {
+				if (!(idUnidad == null)) {
+					computadorSeleccionado.setUnidadEstrategicaServicio(
+							dNUnidadEstrategica.consultarDetalleUnidadEstrategicaServicio(idUnidad));
+					listComputadorUES.add(computadorSeleccionado);
+					listComputadors.remove(computadorSeleccionado);
+					computadorSeleccionado = new Computador();
+				} else {
+					mensajes.mostrarMensaje("Debe seleccionar una unidad estrategica de servicio", 1);
+				}
+			}
 
-		if (computadorSeleccionado == null) {
-			computadorSeleccionado = new Computador();
-			mensajes.mostrarMensaje("Debe seleccionar un computador", 2);
-		} else {
-			listComputadorUES.add(computadorSeleccionado);
-			listComputadors.remove(computadorSeleccionado);
+		} catch (Exception e) {
+			System.out.println("Error en el metodo seleccionarComputadorSinUES -->> " + e);
 		}
 
 	}
 
-	public void seleccionarComputadorSinUES2() {
-
-//		if (computadorSeleccionadoUES == null) {
-//			computadorSeleccionadoUES = new Computador();
-//			mensajes.mostrarMensaje("Debe seleccionar un computador", 2);
-//		} else {
-//			listComputadorUES.add(computadorSeleccionadoUES);
-//			listComputadors.remove(computadorSeleccionadoUES);
-//		}
-
-	}
-
-	public void cancelarComputadorUES2() {
-		computadorSeleccionadoUES = null;
-		computadorSeleccionadoUES = new Computador();
-	}
-
 	public void cancelarComputadorUES() {
-		computadorSeleccionado = null;
-		computadorSeleccionado = new Computador();
+
+		if (computadorSeleccionadoUES == null) {
+			computadorSeleccionadoUES = new Computador();
+			mensajes.mostrarMensaje("Debe seleccionar un computador para cancelar", 2);
+		} else {
+			listComputadorUES.remove(computadorSeleccionadoUES);
+			listComputadors.add(computadorSeleccionadoUES);
+			computadorSeleccionadoUES = null;
+			computadorSeleccionadoUES = new Computador();
+		}
 	}
 
 	public void limpiar() {
 		computador = new Computador();
 		computadorSeleccionado = new Computador();
+		computadorSeleccionadoUES = new Computador();
+		idUnidad = "";
 
 	}
 
@@ -153,6 +183,14 @@ public class MBSeleccionarEquiposUES implements Serializable {
 
 	}
 
+	public String getIdUnidad() {
+		return idUnidad;
+	}
+
+	public void setIdUnidad(String idUnidad) {
+		this.idUnidad = idUnidad;
+	}
+
 	public Computador getComputadorSeleccionadoUES() {
 		return computadorSeleccionadoUES;
 	}
@@ -161,11 +199,11 @@ public class MBSeleccionarEquiposUES implements Serializable {
 		this.computadorSeleccionadoUES = computadorSeleccionadoUES;
 	}
 
-	public List<Computador> getListComputadorUES() {
+	public ArrayList<Computador> getListComputadorUES() {
 		return listComputadorUES;
 	}
 
-	public void setListComputadorUES(List<Computador> listComputadorUES) {
+	public void setListComputadorUES(ArrayList<Computador> listComputadorUES) {
 		this.listComputadorUES = listComputadorUES;
 	}
 

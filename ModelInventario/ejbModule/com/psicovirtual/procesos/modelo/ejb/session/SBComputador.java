@@ -125,7 +125,10 @@ public class SBComputador implements SBComputadorLocal {
 	public List<Computador> consultarComputadoresNuevosSeleccionLista() throws Exception {
 		List<Computador> listComputador = new ArrayList<Computador>();
 
-		String query = "select compu.ID_COMPUTADOR,compu.NOMBRE_COMPUTO,compu.SERIAL__MONITOR,compu.SERIAL_MOUSE,compu.SERIAL_TECLADO, compu.ID_MODELO from COMPUTADOR compu "
+		String query = "select compu.ID_COMPUTADOR,compu.NOMBRE_COMPUTO,compu.SERIAL__MONITOR,compu.SERIAL_MOUSE,compu.SERIAL_TECLADO, "
+				+ "compu.ID_MODELO, compu.ID_TIPO, compu.ID_SISTEMA, " + "compu.ID_CARACTERISTICAS, compu.ID_SERVICIO, "
+				+ "compu.DIRECCION_IP, compu.MAC, compu.ID_USUARIO_REG, " + "compu.ID_USUARIO_MOD, "
+				+ "compu.ID_ESTADO_COMPU, compu.ID_ESTADO from COMPUTADOR compu "
 				+ "LEFT join DETALLE_LISTA_COMPUTO deta on compu.ID_COMPUTADOR=deta.ID_COMPUTADOR where compu.ID_UNIDAD is null and compu.ID_ESTADO_COMPU='1' ";
 
 		HashMap parametros = new HashMap();
@@ -143,7 +146,21 @@ public class SBComputador implements SBComputadorLocal {
 			compu.setSerialMouse(registrosList.get(i)[3].toString());
 			compu.setSerialTeclado(registrosList.get(i)[4].toString());
 			compu.setModeloComputo(sBModeloComputo.consultarDetalleModeloComputo(registrosList.get(i)[5].toString()));
+			compu.setTipoComputo(sBTipoComputo.consultarDetalleTipoComputo(registrosList.get(i)[6].toString()));
+			compu.setSistemaOperativo(
+					sBSistemaOperativo.consultarDetalleSistemaOperativo(registrosList.get(i)[7].toString()));
+			compu.setCaracteristicasComputo(sBCaracteristicasComputo
+					.consultarDetalleCaracteristicasComputo(registrosList.get(i)[8].toString()));
 
+			compu.setOperacionServicio(
+					sBOperacionServicio.consultarDetalleOperacionServicio(registrosList.get(i)[9].toString()));
+
+			compu.setDireccionIp(registrosList.get(i)[10].toString());
+			compu.setMac(registrosList.get(i)[11].toString());
+			compu.setIdUsuarioReg(Integer.parseInt(registrosList.get(i)[12].toString()));
+			compu.setIdUsuarioMod(Integer.parseInt(registrosList.get(i)[13].toString()));
+			compu.setIdEstadoCompu(Integer.parseInt(registrosList.get(i)[14].toString()));
+			compu.setIdEstado(Integer.parseInt(registrosList.get(i)[15].toString()));
 			listComputador.add(compu);
 
 		}
