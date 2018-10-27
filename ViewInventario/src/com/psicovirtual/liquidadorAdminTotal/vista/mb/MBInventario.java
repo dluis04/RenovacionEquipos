@@ -13,9 +13,12 @@ import com.psicovirtual.estandar.vista.mb.MBMensajes;
 import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNComputador;
 import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNDetalleInventario;
 import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNDetalleInventarioHistorial;
+import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNSede;
+import com.psicovirtual.procesos.modelo.ejb.entity.inventario.Ciudad;
 import com.psicovirtual.procesos.modelo.ejb.entity.inventario.Computador;
 import com.psicovirtual.procesos.modelo.ejb.entity.inventario.DetalleInventario;
 import com.psicovirtual.procesos.modelo.ejb.entity.inventario.DetalleInventarioHistorial;
+import com.psicovirtual.procesos.modelo.ejb.entity.inventario.Sede;
 import com.psicovirtual.procesos.modelo.ejb.entity.inventario.Usuario;
 
 @ManagedBean(name = "MBInventario")
@@ -26,12 +29,15 @@ public class MBInventario implements Serializable {
 	DNComputador dnComputador;
 	DNDetalleInventario dNDetalleInventario;
 	DNDetalleInventarioHistorial dNDetalleInventarioHistorial;
+	DNSede dNSede;
 
 	List<Computador> listComputadorNuevos;
 	List<DetalleInventario> listInventarioNuevo;
+	List<Sede> listSedes;
 
+	private Sede sedeSeleccionado;
+	private Sede sedeSeleccionadoM;
 	private Computador computadorSeleccionado;
-	private Computador computadorSeleccionadoM;
 	private DetalleInventario inventario;
 	private DetalleInventario inventarioSeleccionado;
 	private DetalleInventario modificarInventario;
@@ -39,9 +45,13 @@ public class MBInventario implements Serializable {
 	private Usuario usuario;
 
 	public MBInventario() {
+		sedeSeleccionado = new Sede();
+		sedeSeleccionadoM = new Sede();
+		Ciudad ciudad = new Ciudad();
+		sedeSeleccionado.setCiudad(ciudad);
+		sedeSeleccionadoM.setCiudad(ciudad);
 		inventarioHis = new DetalleInventarioHistorial();
 		computadorSeleccionado = new Computador();
-		computadorSeleccionadoM = new Computador();
 		modificarInventario = new DetalleInventario();
 		inventarioSeleccionado = new DetalleInventario();
 		inventario = new DetalleInventario();
@@ -54,6 +64,7 @@ public class MBInventario implements Serializable {
 			inicializarDelegados();
 			listComputadorNuevos = dnComputador.consultarAllComputadorNuevos();
 			listInventarioNuevo = dNDetalleInventario.consultarAllDetalleInventarioComputadorNuevos();
+			listSedes = dNSede.consultarAllSedeActivos();
 		} catch (Exception e) {
 			System.out.println("Error en el metodo cargarTablas -->> " + e);
 		}
@@ -63,18 +74,27 @@ public class MBInventario implements Serializable {
 		try {
 
 			inicializarDelegados();
-			Boolean isUbicacion = false;
 			Boolean isComputador = false;
+			Boolean isSede = false;
 
 			if (computadorSeleccionado == null) {
 				computadorSeleccionado = new Computador();
+				mensajes.mostrarMensaje("Debe seleccionar un computador", 2);
 			} else {
 				isComputador = true;
 			}
 
-			if (isComputador && isUbicacion) {
+			if (sedeSeleccionado == null) {
+				sedeSeleccionado = new Sede();
+				mensajes.mostrarMensaje("Debe seleccionar una sede", 2);
+			} else {
+				isSede = true;
+			}
+
+			if (isComputador && isSede) {
 				inventario.setIdUsuarioReg(usuario.getIdUsuario());
 				inventario.setComputador(computadorSeleccionado);
+				inventario.setSede(sedeSeleccionado);
 				inventario.setIdEstado(1);
 				dNDetalleInventario.crearDetalleInventario(inventario);
 				registrarHistorialInventario(inventario);
@@ -125,8 +145,11 @@ public class MBInventario implements Serializable {
 	public void limpiar() {
 		cargarTablas();
 		computadorSeleccionado = new Computador();
-		computadorSeleccionadoM = new Computador();
-
+		sedeSeleccionado = new Sede();
+		sedeSeleccionadoM = new Sede();
+		Ciudad ciudad = new Ciudad();
+		sedeSeleccionado.setCiudad(ciudad);
+		sedeSeleccionadoM.setCiudad(ciudad);
 		inventario = null;
 		inventario = new DetalleInventario();
 		inventarioHis = new DetalleInventarioHistorial();
@@ -135,8 +158,6 @@ public class MBInventario implements Serializable {
 	public void limpiarComputadorNuevo() {
 		computadorSeleccionado = null;
 		computadorSeleccionado = new Computador();
-		computadorSeleccionadoM = null;
-		computadorSeleccionadoM = new Computador();
 		limpiarIsNull();
 	}
 
@@ -146,14 +167,52 @@ public class MBInventario implements Serializable {
 			computadorSeleccionado = new Computador();
 		}
 
-		if (computadorSeleccionadoM == null) {
-			computadorSeleccionadoM = new Computador();
+		if (sedeSeleccionado == null) {
+			sedeSeleccionado = new Sede();
+			Ciudad ciudad = new Ciudad();
+			sedeSeleccionado.setCiudad(ciudad);
+			sedeSeleccionadoM.setCiudad(ciudad);
 		}
 
+		if (sedeSeleccionadoM == null) {
+			sedeSeleccionadoM = new Sede();
+			Ciudad ciudad = new Ciudad();
+			sedeSeleccionado.setCiudad(ciudad);
+			sedeSeleccionadoM.setCiudad(ciudad);
+		}
+	}
+
+	public void seleccionarSede() {
+		if (sedeSeleccionado != null) {
+			mensajes.mostrarMensaje("Sede seleccionada exitosamente", 1);
+		} else {
+			mensajes.mostrarMensaje("Debe seleccionar una Sede", 2);
+		}
+		limpiarIsNull();
+	}
+
+	public void seleccionarSedeM() {
+		if (sedeSeleccionadoM != null) {
+			mensajes.mostrarMensaje("Sede seleccionada exitosamente", 1);
+		} else {
+			mensajes.mostrarMensaje("Debe seleccionar una Sede", 2);
+		}
+		limpiarIsNull();
+	}
+
+	public void limpiarSede() {
+		sedeSeleccionado = null;
+		sedeSeleccionadoM = null;
+		sedeSeleccionado = new Sede();
+		sedeSeleccionadoM = new Sede();
+		Ciudad ciudad = new Ciudad();
+		sedeSeleccionado.setCiudad(ciudad);
+		sedeSeleccionadoM.setCiudad(ciudad);
+		limpiarIsNull();
 	}
 
 	public void seleccionarCompu() {
-		if (computadorSeleccionado != null || computadorSeleccionadoM != null) {
+		if (computadorSeleccionado != null) {
 			mensajes.mostrarMensaje("Computador seleccionado exitosamente", 1);
 		} else {
 			mensajes.mostrarMensaje("Debe seleccionar un computador", 2);
@@ -189,6 +248,34 @@ public class MBInventario implements Serializable {
 			dNDetalleInventarioHistorial = new DNDetalleInventarioHistorial();
 		}
 
+		if (dNSede == null) {
+			dNSede = new DNSede();
+		}
+
+	}
+
+	public List<Sede> getListSedes() {
+		return listSedes;
+	}
+
+	public void setListSedes(List<Sede> listSedes) {
+		this.listSedes = listSedes;
+	}
+
+	public Sede getSedeSeleccionado() {
+		return sedeSeleccionado;
+	}
+
+	public void setSedeSeleccionado(Sede sedeSeleccionado) {
+		this.sedeSeleccionado = sedeSeleccionado;
+	}
+
+	public Sede getSedeSeleccionadoM() {
+		return sedeSeleccionadoM;
+	}
+
+	public void setSedeSeleccionadoM(Sede sedeSeleccionadoM) {
+		this.sedeSeleccionadoM = sedeSeleccionadoM;
 	}
 
 	public DetalleInventario getInventarioSeleccionado() {
@@ -213,14 +300,6 @@ public class MBInventario implements Serializable {
 
 	public void setInventarioHis(DetalleInventarioHistorial inventarioHis) {
 		this.inventarioHis = inventarioHis;
-	}
-
-	public Computador getComputadorSeleccionadoM() {
-		return computadorSeleccionadoM;
-	}
-
-	public void setComputadorSeleccionadoM(Computador computadorSeleccionadoM) {
-		this.computadorSeleccionadoM = computadorSeleccionadoM;
 	}
 
 	public DetalleInventario getModificarInventario() {

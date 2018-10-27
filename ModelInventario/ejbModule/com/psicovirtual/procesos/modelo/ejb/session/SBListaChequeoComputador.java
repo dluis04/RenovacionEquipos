@@ -58,4 +58,13 @@ public class SBListaChequeoComputador implements SBListaChequeoComputadorLocal {
 
 		return listListaCheqeoComputador;
 	}
+
+	@Override
+	public List<ListaCheqeoComputador> consultarAllListaCheqeoComputadorActivosNuevos() throws Exception {
+		String query = "SELECT u FROM ListaCheqeoComputador u where u.tipoLista='NUEVO' and u.idEstado='1' ";
+		List<ListaCheqeoComputador> listListaCheqeoComputador = sbFacade.executeQuery(query, null);
+
+		return listListaCheqeoComputador;
+	}
+
 }

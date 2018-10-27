@@ -109,6 +109,11 @@ public class MBSede implements Serializable {
 
 	public void seleccionarCiudadModi() {
 		if (ciudadModifica != null) {
+
+			listSedes.remove(sedeSeleccionado);
+			sedeSeleccionado.setCiudad(ciudadModifica);
+			listSedes.add(sedeSeleccionado);
+
 			mensajes.mostrarMensaje("Ciudad seleccionada exitosamente", 1);
 		} else {
 			mensajes.mostrarMensaje("Debe seleccionar una Ciudad", 2);

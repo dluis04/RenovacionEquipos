@@ -48,28 +48,26 @@
 											onclick="PF('dlg2').show();" />
 									</div>
 
-
-									<div class="ui-g-12 ui-lg-6">
-										<h:outputText style="    font-weight: bold; "
-											value="Unidad Estrategica: " />
-									</div>
-
-									<div class="ui-g-12 ui-lg-6">
-										<p:inputText id="ues" maxlength="200"
-											value="#{MBInventario.ubicacionSeleccionado.sede.unidadEstrategicaServicio.nombre}">
-										</p:inputText>
-
-										<p:commandButton value="Unidad Estrategica" type="button"
-											onclick="PF('dlg3').show();" />
-									</div>
-
 									<div class="ui-g-12 ui-lg-6">
 										<h:outputText style="    font-weight: bold; " value="Sede: " />
 									</div>
 
 									<div class="ui-g-12 ui-lg-6">
 										<p:inputText id="sede" maxlength="200"
-											value="#{MBInventario.ubicacionSeleccionado.sede.nombre}">
+											value="#{MBInventario.sedeSeleccionado.nombre}">
+										</p:inputText>
+
+										<p:commandButton value="Sede" type="button"
+											onclick="PF('dlg1').show();" />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<h:outputText style="    font-weight: bold; " value="Ciudad: " />
+									</div>
+
+									<div class="ui-g-12 ui-lg-6">
+										<p:inputText id="ciudad" maxlength="200"
+											value="#{MBInventario.sedeSeleccionado.ciudad.nombre}">
 										</p:inputText>
 									</div>
 
@@ -132,6 +130,65 @@
 									</div>
 
 								</div>
+
+								<p:dialog header="Sede" widgetVar="dlg1" modal="true">
+
+									<h1 class="brand_name">Sedes</h1>
+
+									<p:dataTable id="tblSede" var="var" selectionMode="single"
+										selection="#{MBInventario.sedeSeleccionado}"
+										rowKey="#{var.idSede}" value="#{MBInventario.listSedes}"
+										emptyMessage="No hay registros para mostrar" rows="10"
+										paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<f:facet name="header">
+                                        Seleccione una Sedes
+                                    </f:facet>
+
+										<p:column headerText="Codigo">
+											<h:outputText value="#{var.idSede}" />
+										</p:column>
+
+										<p:column headerText="Sede">
+											<h:outputText value="#{var.nombre}" />
+										</p:column>
+
+										<p:column headerText="Ciudad">
+											<h:outputText value="#{var.ciudad.nombre}" />
+										</p:column>
+
+										<p:column headerText="Direccion">
+											<h:outputText value="#{var.direccion}" />
+										</p:column>
+
+										<p:column headerText="Piso">
+											<h:outputText value="#{var.piso}" />
+										</p:column>
+
+
+										<f:facet name="footer">
+
+											<p:commandButton value="Seleccionar" style="width: 100px;"
+												update=":formPrincipal"
+												action="#{MBInventario.seleccionarSede}"
+												id="seleccionarSede">
+											</p:commandButton>
+
+											<p:commandButton value="Limpiar" style="width: 100px;"
+												update="tblSede" action="#{MMBInventario.limpiarSede}"
+												id="limpiarSede">
+											</p:commandButton>
+
+											<p:commandButton value="Cancelar" style="width: 100px;"
+												update=":formPrincipal" action="#{MBInventario.limpiarSede}"
+												id="cancelarSede">
+											</p:commandButton>
+
+										</f:facet>
+									</p:dataTable>
+								</p:dialog>
 
 								<p:dialog header="Computador" widgetVar="dlg2" modal="true">
 
@@ -210,74 +267,6 @@
 
 								</p:dialog>
 
-
-
-
-								<p:dialog header="Computador" widgetVar="dlg3" modal="true">
-
-
-									<h1 class="brand_name">Sede / Ubicacion</h1>
-
-									<p:dataTable id="tblUbicacion" var="var" selectionMode="single"
-										selection="#{MBInventario.ubicacionSeleccionado}"
-										rowKey="#{var.idUbicacion}"
-										value="#{MBInventario.listUbicacions}"
-										emptyMessage="No hay registros para mostrar">
-
-										<f:facet name="header">
-                                        Seleccione una ubicacion
-                                    </f:facet>
-
-										<p:column headerText="Codigo">
-											<h:outputText value="#{var.idUbicacion}" />
-										</p:column>
-
-										<p:column headerText="Ciudad">
-											<h:outputText
-												value="#{var.sede.unidadEstrategicaServicio.ciudad.nombre}" />
-										</p:column>
-
-										<p:column headerText="Unidad Estrategica Servicio">
-											<h:outputText
-												value="#{var.sede.unidadEstrategicaServicio.nombre}" />
-										</p:column>
-
-										<p:column headerText="Sede">
-											<h:outputText value="#{var.sede.nombre}" />
-										</p:column>
-
-										<p:column headerText="Direccion">
-											<h:outputText value="#{var.nombre}" />
-										</p:column>
-
-										<p:column headerText="Piso">
-											<h:outputText value="#{var.piso}" />
-										</p:column>
-
-										<f:facet name="footer">
-
-											<p:commandButton value="Seleccionar" style="width: 100px;"
-												update=":formPrincipal"
-												action="#{MBInventario.seleccionarUbicacion}"
-												id="seleccionarUbicacion">
-											</p:commandButton>
-
-											<p:commandButton value="Limpiar" style="width: 100px;"
-												update="tblUbicacion"
-												action="#{MBInventario.limpiarUbicacion}"
-												id="limpiarUbicacion">
-											</p:commandButton>
-
-											<p:commandButton value="Cancelar" style="width: 100px;"
-												update=":formPrincipal"
-												action="#{MBInventario.limpiarUbicacion}"
-												id="cancelarUbicacion">
-											</p:commandButton>
-										</f:facet>
-
-
-									</p:dataTable>
-								</p:dialog>
 
 							</div>
 
@@ -360,26 +349,16 @@
 											<h:outputText value="#{var.computador.nombreComputo}" />
 										</p:column>
 
-										<p:column headerText="Ciudad">
-											<h:outputText
-												value="#{var.ubicacion.sede.unidadEstrategicaServicio.ciudad.nombre}" />
-										</p:column>
-
-										<p:column headerText="Unidad Estrategica Servicio">
-											<h:outputText
-												value="#{var.ubicacion.sede.unidadEstrategicaServicio.nombre}" />
-										</p:column>
-
 										<p:column headerText="Sede">
-											<h:outputText value="#{var.ubicacion.sede.nombre}" />
+											<h:outputText value="#{var.sede.nombre}" />
 										</p:column>
 
 										<p:column headerText="Direccion">
-											<h:outputText value="#{var.ubicacion.nombre}" />
+											<h:outputText value="#{var.sede.direccion}" />
 										</p:column>
 
 										<p:column headerText="Piso">
-											<h:outputText value="#{var.ubicacion.piso}" />
+											<h:outputText value="#{var.sede.piso}" />
 										</p:column>
 
 									</p:dataTable>

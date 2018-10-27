@@ -4,39 +4,41 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
-
 /**
  * The persistent class for the DETALLE_LISTA_COMPUTO database table.
  * 
  */
 @Entity
-@Table(name="DETALLE_LISTA_COMPUTO")
-@NamedQuery(name="DetalleListaComputo.findAll", query="SELECT d FROM DetalleListaComputo d")
+@Table(name = "DETALLE_LISTA_COMPUTO")
+@NamedQuery(name = "DetalleListaComputo.findAll", query = "SELECT d FROM DetalleListaComputo d")
 public class DetalleListaComputo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ID_DETA_LIST_COMPU")
+	@Column(name = "ID_DETA_LIST_COMPU")
 	private int idDetaListCompu;
 
-	@Column(name="ACTIVIDAD")
+	@Column(name = "ACTIVIDAD")
 	private String actividad;
 
-	@Column(name="CHECK_LIST")
+	@Column(name = "OBSERVACIONES")
+	private String observaciones;
+
+	@Column(name = "CHECK_LIST")
 	private int checkList;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="FECHA_CHECK")
+	@Column(name = "FECHA_CHECK")
 	private Date fechaCheck;
 
-	//bi-directional many-to-one association to Computador
+	// bi-directional many-to-one association to Computador
 	@ManyToOne
-	@JoinColumn(name="ID_COMPUTADOR")
+	@JoinColumn(name = "ID_COMPUTADOR")
 	private Computador computador;
 
-	//bi-directional many-to-one association to ListaCheqeoComputador
+	// bi-directional many-to-one association to ListaCheqeoComputador
 	@ManyToOne
-	@JoinColumn(name="ID_LISTA")
+	@JoinColumn(name = "ID_LISTA")
 	private ListaCheqeoComputador listaCheqeoComputador;
 
 	public DetalleListaComputo() {
@@ -56,6 +58,14 @@ public class DetalleListaComputo implements Serializable {
 
 	public void setActividad(String actividad) {
 		this.actividad = actividad;
+	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
 	}
 
 	public int getCheckList() {

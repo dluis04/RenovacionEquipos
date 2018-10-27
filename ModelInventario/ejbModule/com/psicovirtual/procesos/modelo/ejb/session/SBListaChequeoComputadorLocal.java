@@ -16,4 +16,8 @@ public interface SBListaChequeoComputadorLocal {
 	public ListaCheqeoComputador consultarDetalleListaCheqeoComputador(String id) throws Exception;
 
 	public List<ListaCheqeoComputador> consultarAllListaCheqeoComputadorActivos() throws Exception;
+
+	public List<ListaCheqeoComputador> consultarAllListaCheqeoComputadorActivosNuevos() throws Exception;
+	
+	
 }

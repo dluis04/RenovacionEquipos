@@ -121,4 +121,34 @@ public class SBComputador implements SBComputadorLocal {
 		return listComputador;
 	}
 
+	@Override
+	public List<Computador> consultarComputadoresNuevosSeleccionLista() throws Exception {
+		List<Computador> listComputador = new ArrayList<Computador>();
+
+		String query = "select compu.ID_COMPUTADOR,compu.NOMBRE_COMPUTO,compu.SERIAL__MONITOR,compu.SERIAL_MOUSE,compu.SERIAL_TECLADO, compu.ID_MODELO from COMPUTADOR compu "
+				+ "LEFT join DETALLE_LISTA_COMPUTO deta on compu.ID_COMPUTADOR=deta.ID_COMPUTADOR where compu.ID_UNIDAD is null and compu.ID_ESTADO_COMPU='1' ";
+
+		HashMap parametros = new HashMap();
+
+		List<Object[]> registrosList = sbFacade.executeNativeQuery(query, parametros);
+		Computador compu = null;
+
+		for (int i = 0; i < registrosList.size(); i++) {
+
+			compu = new Computador();
+
+			compu.setIdComputador(Integer.parseInt(registrosList.get(i)[0].toString()));
+			compu.setNombreComputo(registrosList.get(i)[1].toString());
+			compu.setSerialMonitor(registrosList.get(i)[2].toString());
+			compu.setSerialMouse(registrosList.get(i)[3].toString());
+			compu.setSerialTeclado(registrosList.get(i)[4].toString());
+			compu.setModeloComputo(sBModeloComputo.consultarDetalleModeloComputo(registrosList.get(i)[5].toString()));
+
+			listComputador.add(compu);
+
+		}
+
+		return listComputador;
+	}
+
 }

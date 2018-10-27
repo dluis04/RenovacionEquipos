@@ -16,6 +16,8 @@ public interface SBComputadorLocal {
 	public Computador consultarDetalleComputador(String id) throws Exception;
 
 	public List<Computador> consultarAllComputadorActivos() throws Exception;
-	
+
 	public List<Computador> consultarAllComputadorNuevos() throws Exception;
+
+	public List<Computador> consultarComputadoresNuevosSeleccionLista() throws Exception;
 }
