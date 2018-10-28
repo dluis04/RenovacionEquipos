@@ -39,27 +39,27 @@
 								<div class="ui-g">
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 
 
 										<h:outputText style="    font-weight: bold; " value="Nit : " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="nit" maxlength="100"
 											value="#{MBAfiliado.afiliado.nit}">
 										</p:inputText>
 									</div>
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Nombre : " />
 									</div>
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="idNombre" maxlength="100"
 											value="#{MBAfiliado.afiliado.nombre}">
 										</p:inputText>
 									</div>
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 
 
 
@@ -72,7 +72,7 @@
 											action="#{MBAfiliado.guardarAfiliado}" id="guardar">
 										</p:commandButton>
 									</div>
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Limpiar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
@@ -99,16 +99,16 @@
 
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Nombre : " />
 									</div>
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="idNombreM" maxlength="100"
 											value="#{MBAfiliado.afiliadoSeleccionado.nombre}">
 										</p:inputText>
 									</div>
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 
 										<p:commandButton value="Modificar" style="width: 220px;"
 											update=":formPrincipal:tapView:panelModificar, messages1
@@ -117,7 +117,7 @@
 										</p:commandButton>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Limpiar" style="width: 220px;"
 											action="#{MBAfiliado.limpiar}"
 											update=":formPrincipal:tapView:panelModificar"

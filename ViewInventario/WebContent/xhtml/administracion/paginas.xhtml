@@ -36,29 +36,29 @@
 
 								<div class="ui-g">
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; " value="Pagina: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="nit" maxlength="200"
 											value="#{MBPagina.pagina.pagina}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Descripcion: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="idNombre" maxlength="100"
 											value="#{MBPagina.pagina.descripcion}">
 										</p:inputText>
 									</div>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Guardar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
@@ -69,7 +69,7 @@
 									</div>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Limpiar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
@@ -93,29 +93,29 @@
 							<p:panel id="panelModificar">
 								<div class="ui-g">
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; " value="Pagina: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="nit2" maxlength="200"
 											value="#{MBPagina.paginaSeleccionada.pagina}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Descripcion: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="idNombre2" maxlength="100"
 											value="#{MBPagina.paginaSeleccionada.descripcion}">
 										</p:inputText>
 									</div>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Modificar" style="width: 220px;"
 											update=":formPrincipal:tapView:panelModificar, messages1
 							,:formPrincipal:tapView:tbl"
@@ -123,7 +123,7 @@
 										</p:commandButton>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Limpiar" style="width: 220px;"
 											action="#{MBPagina.limpiar}"
 											update=":formPrincipal:tapView:panelModificar"

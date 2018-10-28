@@ -34,12 +34,12 @@
 
 								<div class="ui-g">
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Unidad Estrategica: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:selectOneMenu id="unidadEstrategica"
 											value="#{MBSeleccionarEquiposUES.idUnidad}">
 											<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -138,13 +138,19 @@
 										</f:facet>
 
 									</p:dataTable>
+<br />  
 
+
+		<div class="ui-g-12 ui-lg-12">
+		
+		
+		
 									<p:commandButton value="Guardar Cambios" style="width: 150px;"
 										update=":formPrincipal"
 										action="#{MBSeleccionarEquiposUES.registrarComputadoresUES}"
 										id="registrarUES">
 									</p:commandButton>
-
+</div>
 								</div>
 
 							</div>

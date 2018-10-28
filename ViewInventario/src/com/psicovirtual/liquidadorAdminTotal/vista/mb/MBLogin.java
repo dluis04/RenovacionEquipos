@@ -24,9 +24,17 @@ public class MBLogin implements Serializable {
 
 	private String usuarioLogin;
 	private String password;
+	
+	private boolean administrador;
+	private boolean proveedor;
+	private boolean usuarioComfandi;
+	
 
 	public MBLogin() {
 		usuario = new Usuario();
+		administrador=false;
+		proveedor=false;
+		usuarioComfandi=false;
 	}
 
 	public void navegarControl() {
@@ -56,6 +64,25 @@ public class MBLogin implements Serializable {
 
 				Usuario logueado = dnUsuarios.consultarDetalleUsuario(usuarioLogin);
 
+				
+//				
+//				1	ADMINISTRADOR
+//				2	PROVEEDOR
+//				3	USUARIOS COMFANDI
+				
+				if (logueado.getTipoUsuario().getIdTipo() == 1) {
+					administrador=true;
+				} else	if (logueado.getTipoUsuario().getIdTipo() == 2) {
+					proveedor=true;
+					
+				} else	if (logueado.getTipoUsuario().getIdTipo() == 3) {
+					
+				} 
+				
+				
+				
+				
+				
 				FacesContext context = FacesContext.getCurrentInstance();
 				ExternalContext extContext = context.getExternalContext();
 
@@ -215,6 +242,33 @@ public class MBLogin implements Serializable {
 
 	public String getPassword() {
 		return password;
+	}
+
+	
+	
+	
+	public boolean isAdministrador() {
+		return administrador;
+	}
+
+	public void setAdministrador(boolean administrador) {
+		this.administrador = administrador;
+	}
+
+	public boolean isProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(boolean proveedor) {
+		this.proveedor = proveedor;
+	}
+
+	public boolean isUsuarioComfandi() {
+		return usuarioComfandi;
+	}
+
+	public void setUsuarioComfandi(boolean usuarioComfandi) {
+		this.usuarioComfandi = usuarioComfandi;
 	}
 
 	public void setPassword(String password) {

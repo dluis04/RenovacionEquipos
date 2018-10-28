@@ -39,8 +39,7 @@ public class SBDetalleListaComputo implements SBDetalleListaComputoLocal {
 	@Override
 	public DetalleListaComputo consultarDetalleDetalleListaComputo(String id) throws Exception {
 
-		String query = "SELECT u FROM DetalleListaComputo u where u.idDetaListCompu='" + id
-				+ "' and u.idEstado='1' ";
+		String query = "SELECT u FROM DetalleListaComputo u where u.idDetaListCompu='" + id + "' ";
 		List<DetalleListaComputo> listDetalleListaComputo = sbFacade.executeQuery(query, null);
 		DetalleListaComputo temp = null;
 
@@ -54,6 +53,15 @@ public class SBDetalleListaComputo implements SBDetalleListaComputoLocal {
 	public List<DetalleListaComputo> consultarAllDetalleListaComputoActivos() throws Exception {
 
 		String query = "SELECT u FROM DetalleListaComputo u ";
+		List<DetalleListaComputo> listDetalleListaComputo = sbFacade.executeQuery(query, null);
+
+		return listDetalleListaComputo;
+	}
+
+	@Override
+	public List<DetalleListaComputo> consultarAllDetalleListaComputo(String idComputador) throws Exception {
+		String query = "SELECT u FROM DetalleListaComputo u where u.computador.idComputador='" + idComputador
+				+ "' order by u.listaCheqeoComputador.orden asc ";
 		List<DetalleListaComputo> listDetalleListaComputo = sbFacade.executeQuery(query, null);
 
 		return listDetalleListaComputo;

@@ -21,6 +21,53 @@
 	<f:event type="preRenderView" listener="#{MBLogin.verificarSesion()}"></f:event>
 
 	<style>
+	
+	
+	
+	/* Container holding the image and the text */
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+/* Bottom left text */
+.bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+}
+
+/* Top left text */
+.top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+}
+
+/* Top right text */
+.top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+/* Bottom right text */
+.bottom-right {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+}
+
+/* Centered text */
+.centered {
+    position: absolute;
+    top: 3%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+	
+	
 @media screen and (max-width: 810px) {
 	.ui-tabs.ui-tabs-top>.ui-tabs-nav li {
 		width: 100% !important;
@@ -55,10 +102,7 @@
 	font-weight: bold;
 }
 
-/*=======================================================
-						Components
-=========================================================*/
-/*==================     Brand     ======================*/
+
 .brand {
 	display: inline-block;
 }
@@ -67,7 +111,7 @@
 	display: inline-block;
 	overflow: hidden;
 	font-weight: 400;
-	/* 	font-size: 40px; */
+	
 	font-size: 1.75rem;
 	line-height: 62px;
 	color: #0066b0;
@@ -99,7 +143,7 @@ pe
 
 
 
-			<p:submenu label="Gestion" icon="ui-icon-contact">
+			<p:submenu rendered="#{MBLogin.administrador}"  label="Gestion" icon="ui-icon-contact">
 
 				<p:menuitem value="Gestion Usuarios"
 					url="/xhtml/usuarios/registro.xhtml" />
@@ -107,12 +151,15 @@ pe
 				<p:menuitem value="Gestion Lista Chequeo"
 					url="/xhtml/gestion/gestionLista.xhtml" />
 
-				<p:menuitem value="Seleccionar Equipos ()UES)"
+				<p:menuitem value="Seleccionar Equipos (UES)"
 					url="/xhtml/gestion/seleccionarEquiposUES.xhtml" />
+
+				<p:menuitem value="Configurar Equipos Lista"
+					url="/xhtml/gestion/configurarEquiposLista.xhtml" />
 
 			</p:submenu>
 
-			<p:submenu label="Computador" icon="ui-icon-contact">
+			<p:submenu rendered="#{MBLogin.administrador}" label="Computador" icon="ui-icon-contact">
 
 				<p:menuitem value="Unidad Estrategica Servicio (UES)"
 					url="/xhtml/computador/gestionUnidadEstrategica.xhtml" />
@@ -138,7 +185,7 @@ pe
 			</p:submenu>
 
 
-			<p:submenu label="Sedes" icon="ui-icon-contact">
+			<p:submenu rendered="#{MBLogin.administrador}" label="Sedes" icon="ui-icon-contact">
 
 				<p:menuitem value="Ciudad" url="/xhtml/sedes/gestionCiudad.xhtml" />
 
@@ -147,14 +194,14 @@ pe
 			</p:submenu>
 
 
-			<p:submenu label="Inventario" icon="ui-icon-contact">
+			<p:submenu rendered="#{MBLogin.administrador}" label="Inventario" icon="ui-icon-contact">
 
 				<p:menuitem value="Equipos Nuevos"
 					url="/xhtml/inventario/adicionarEquiposNuevos.xhtml" />
 
 			</p:submenu>
 
-			<p:submenu label="Usuarios" icon="ui-icon-contact">
+			<p:submenu rendered="#{MBLogin.administrador}" label="Usuarios" icon="ui-icon-contact">
 
 				<p:menuitem value="Gestion" url="/xhtml/usuarios/registro.xhtml" />
 
@@ -169,6 +216,24 @@ pe
 
 
 
+			<p:submenu rendered="#{MBLogin.proveedor}"  label="Gestion" icon="ui-icon-contact">
+
+				<p:menuitem value="Gestion Usuarios"
+					url="/xhtml/usuarios/registro.xhtml" />
+
+				<p:menuitem value="Gestion Lista Chequeo"
+					url="/xhtml/gestion/gestionLista.xhtml" />
+
+				<p:menuitem value="Seleccionar Equipos (UES)"
+					url="/xhtml/gestion/seleccionarEquiposUES.xhtml" />
+
+				<p:menuitem value="Configurar Equipos Lista"
+					url="/xhtml/gestion/configurarEquiposLista.xhtml" />
+
+			</p:submenu>
+
+
+
 			<f:facet name="options">
 
 
@@ -176,10 +241,10 @@ pe
 
 				<p:outputLabel style="margin-right:15px;font-weight: bold;" />
 				<p:commandButton value="Cerrar Sesión"
-					style=" font-size: 15px !important; color: #ffffff;
-	background-color: #0066b0;
+					style=" font-size: 15px !important; color: #000000;
+	
 	border-color: #0066b0"
-					actionListener="#{MBLogin.cerrarSesion}" icon="ui-icon-extlink" />
+					actionListener="#{MBLogin.cerrarSesion}" />
 			</f:facet>
 		</p:menubar>
 

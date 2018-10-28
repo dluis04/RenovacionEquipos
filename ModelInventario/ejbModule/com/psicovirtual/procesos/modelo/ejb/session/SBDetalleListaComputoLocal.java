@@ -17,4 +17,5 @@ public interface SBDetalleListaComputoLocal {
 
 	public List<DetalleListaComputo> consultarAllDetalleListaComputoActivos() throws Exception;
 
+	public List<DetalleListaComputo> consultarAllDetalleListaComputo(String idComputador) throws Exception;
 }

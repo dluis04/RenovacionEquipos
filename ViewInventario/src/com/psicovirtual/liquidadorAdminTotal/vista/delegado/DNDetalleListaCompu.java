@@ -38,4 +38,8 @@ public class DNDetalleListaCompu {
 		return sBDetalleListaComputoLocal.consultarAllDetalleListaComputoActivos();
 	}
 
+	public List<DetalleListaComputo> consultarAllDetalleListaComputo(String idComputador) throws Exception {
+		return sBDetalleListaComputoLocal.consultarAllDetalleListaComputo(idComputador);
+	}
+
 }

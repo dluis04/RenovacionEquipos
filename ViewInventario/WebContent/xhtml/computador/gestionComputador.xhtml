@@ -35,141 +35,142 @@
 
 								<div class="ui-g">
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Nombre Computador: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="nombre" maxlength="200"
 											value="#{MBComputador.computador.nombreComputo}">
 										</p:inputText>
 									</div>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Modelo computador:" />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="Carac" maxlength="200"
 											value="#{MBComputador.modeloComputoSeleccionado.modelo}">
 										</p:inputText>
 
-										<p:commandButton value="Modelos" type="button"
+										<p:commandButton type="button"
+										icon="ui-icon-plus"
 											onclick="PF('dlg2').show();" />
 									</div>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Caracteristica computador:" />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="MComput" maxlength="200"
 											value="#{MBComputador.caracteristicasComputoSeleccionado.procesador}">
 										</p:inputText>
 
-										<p:commandButton value="Caracteristica" type="button"
+										<p:commandButton icon="ui-icon-plus" type="button"
 											onclick="PF('dlg3').show();" />
 									</div>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Tipo Computador:" />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="TipoCo" maxlength="200"
 											value="#{MBComputador.tipoComputoSeleccionado.tipoComputo}">
 										</p:inputText>
 
-										<p:commandButton value="Tipo" type="button"
+										<p:commandButton icon="ui-icon-plus" type="button"
 											onclick="PF('dlg4').show();" />
 									</div>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Sistema Operativo:" />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="sis" maxlength="200"
 											value="#{MBComputador.sistemaOperativoSeleccionado.sistema}">
 										</p:inputText>
 
-										<p:commandButton value="Sistema OP" type="button"
+										<p:commandButton icon="ui-icon-plus" type="button"
 											onclick="PF('dlg5').show();" />
 									</div>
 
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Serial Monitor: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="serialM" maxlength="200"
 											value="#{MBComputador.computador.serialMonitor}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Serial Teclado: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="serialT" maxlength="200"
 											value="#{MBComputador.computador.serialTeclado}">
 										</p:inputText>
 									</div>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Serial Mouse: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="serialMo" maxlength="200"
 											value="#{MBComputador.computador.serialMouse}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Direccion IP: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="direccionIP" maxlength="200"
 											value="#{MBComputador.computador.direccionIp}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Direccion MAC: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="mac" maxlength="200"
 											value="#{MBComputador.computador.mac}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Estado Computador: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:selectOneMenu id="estadoCompu"
 											value="#{MBComputador.idEstadoCompu}">
 											<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -202,11 +203,18 @@
 										</p:column>
 
 										<p:column headerText="Fecha Inicio">
-											<h:outputText value="#{var.fechaInicio}" />
+											<h:outputText value="#{var.fechaInicio}" >
+											
+											 <f:convertDateTime pattern="dd-MM-yyyy" />
+											</h:outputText>
 										</p:column>
 
 										<p:column headerText="Fecha Fin">
-											<h:outputText value="#{var.fechaFin}" />
+											<h:outputText value="#{var.fechaFin}" >
+											
+											 <f:convertDateTime pattern="dd-MM-yyyy" />
+											</h:outputText>
+											
 										</p:column>
 
 										<p:column headerText="Valor Mensual Compu">
@@ -220,7 +228,7 @@
 									</p:dataTable>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Registrar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
@@ -231,7 +239,7 @@
 									</div>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Limpiar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
@@ -503,67 +511,67 @@
 
 								<div class="ui-g">
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Nombre Computador: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="nombre2" maxlength="200"
 											value="#{MBComputador.computadorModificar.nombreComputo}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Serial Monitor: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="serialM2" maxlength="200"
 											value="#{MBComputador.computadorModificar.serialMonitor}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Serial Teclado: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="serialT2" maxlength="200"
 											value="#{MBComputador.computadorModificar.serialTeclado}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Serial Mouse: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="serialMo2" maxlength="200"
 											value="#{MBComputador.computadorModificar.serialMouse}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Direccion IP: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="direccionIP2" maxlength="200"
 											value="#{MBComputador.computadorModificar.direccionIp}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Estado Computador: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:selectOneMenu id="estadoCompu2"
 											value="#{MBComputador.idEstadoCompuModi}">
 											<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -572,19 +580,19 @@
 										</p:selectOneMenu>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Direccion MAC: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="mac2" maxlength="200"
 											value="#{MBComputador.computadorModificar.mac}">
 										</p:inputText>
 									</div>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Modificar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"

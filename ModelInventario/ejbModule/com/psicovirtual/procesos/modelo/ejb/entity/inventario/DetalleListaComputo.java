@@ -27,6 +27,9 @@ public class DetalleListaComputo implements Serializable {
 	@Column(name = "CHECK_LIST")
 	private int checkList;
 
+	@Transient
+	private Boolean isCheck;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "FECHA_CHECK")
 	private Date fechaCheck;
@@ -42,6 +45,14 @@ public class DetalleListaComputo implements Serializable {
 	private ListaCheqeoComputador listaCheqeoComputador;
 
 	public DetalleListaComputo() {
+	}
+
+	public Boolean getIsCheck() {
+		return isCheck;
+	}
+
+	public void setIsCheck(Boolean isCheck) {
+		this.isCheck = isCheck;
 	}
 
 	public int getIdDetaListCompu() {

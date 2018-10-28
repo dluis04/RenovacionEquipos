@@ -46,4 +46,8 @@ public class DNComputador {
 		return sBComputadorLocal.consultarComputadoresNuevosSeleccionLista();
 	}
 
+	public List<Computador> consultarComputadoresNuevosUES() throws Exception {
+		return sBComputadorLocal.consultarComputadoresNuevosUES();
+	}
+
 }

@@ -34,83 +34,89 @@
 
 								<div class="ui-g">
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Computador: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="computadorNuevo" maxlength="200"
 											value="#{MBInventario.computadorSeleccionado.nombreComputo}">
 										</p:inputText>
 
-										<p:commandButton value="Computador Nuevo" type="button"
+										<p:commandButton icon="ui-icon-plus" type="button"
 											onclick="PF('dlg2').show();" />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; " value="Sede: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="sede" maxlength="200"
 											value="#{MBInventario.sedeSeleccionado.nombre}">
 										</p:inputText>
 
-										<p:commandButton value="Sede" type="button"
+										<p:commandButton  icon="ui-icon-plus" type="button"
 											onclick="PF('dlg1').show();" />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; " value="Ciudad: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="ciudad" maxlength="200"
+										
+										style="    width: 230px;"
 											value="#{MBInventario.sedeSeleccionado.ciudad.nombre}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Serial Inventario: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="serialI" maxlength="200"
+										style="    width: 230px;"
 											value="#{MBInventario.inventario.serialInventario}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Placa Inventario: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="placa" maxlength="200"
+										style="    width: 230px;"
 											value="#{MBInventario.inventario.placaInventario}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Segunda Placa: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="segundaPlaca" maxlength="200"
+										style="    width: 230px;"
 											value="#{MBInventario.inventario.segundaPlaca}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Observacion: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputTextarea id="observacion" maxlength="200" rows="5"
+									
 											cols="30" counter="display"
 											counterTemplate="{0} Caracteres disponibles"
 											autoResize="false"
@@ -119,7 +125,7 @@
 										<h:outputText id="display" />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Registrar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
@@ -279,45 +285,45 @@
 							<p:panel id="panelModificar">
 								<div class="ui-g">
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Serial Inventario: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="serialI2" maxlength="200"
 											value="#{MBInventario.modificarInventario.serialInventario}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Placa Inventario: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="placa2" maxlength="200"
 											value="#{MBInventario.modificarInventario.placaInventario}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Segundo Placa: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="segundaPlaca2" maxlength="200"
 											value="#{MBInventario.modificarInventario.segundaPlaca}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Observacion: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputTextarea id="observacion2" maxlength="200" rows="5"
 											cols="30" counter="display2"
 											counterTemplate="{0} Caracteres disponibles"
@@ -365,7 +371,7 @@
 
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Modificar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"

@@ -34,32 +34,28 @@
 
 								<div class="ui-g">
 
-									<div class="ui-g-12 ui-lg-6">
-										<h:outputText style="    font-weight: bold; "
-											value="Unidad Estrategica: " />
-									</div>
 
-									<div class="ui-g-12 ui-lg-6">
-										<p:selectOneMenu id="unidadEstrategica"
-											value="#{MBSeleccionarEquiposUES.idUnidad}">
-											<f:selectItem itemLabel="Seleccione" itemValue="" />
-											<f:selectItems value="#{MBSeleccionarEquiposUES.listUnidad}" />
-										</p:selectOneMenu>
-									</div>
-									<br />
-
-									<p:dataTable id="tblLista" var="var" selectionMode="single"
-										selection="#{MBSeleccionarEquiposUES.computadorSeleccionado}"
+									<p:dataTable id="tblComputador" var="var"
+										selectionMode="single"
+										selection="#{MBConfigurarEquiposLista.computadorSeleccionado}"
 										rowKey="#{var.idComputador}"
-										value="#{MBSeleccionarEquiposUES.listComputadors}"
+										value="#{MBConfigurarEquiposLista.listComputadors}"
 										emptyMessage="No hay registros para mostrar">
 
 										<f:facet name="header">
                                         Seleccione una computador
                                     </f:facet>
 
+										<p:ajax event="rowSelect"
+											listener="#{MBConfigurarEquiposLista.onRowSelect}"
+											update=":formPrincipal:tapView:panelRegistrar" />
+
 										<p:column headerText="Nombre">
 											<h:outputText value="#{var.nombreComputo}" />
+										</p:column>
+
+										<p:column headerText="Unidad Estrategica Servicio">
+											<h:outputText value="#{var.unidadEstrategicaServicio.nombre}" />
 										</p:column>
 
 										<p:column headerText="Modelo">
@@ -77,73 +73,45 @@
 										<p:column headerText="serial Mouse">
 											<h:outputText value="#{var.serialMouse}" />
 										</p:column>
-
-										<f:facet name="footer">
-
-											<p:commandButton value="Seleccionar" style="width: 150px;"
-												update=":formPrincipal"
-												action="#{MBSeleccionarEquiposUES.seleccionarComputadorSinUES}"
-												id="seleccionarComputador">
-											</p:commandButton>
-
-										</f:facet>
 
 									</p:dataTable>
 
 
 									<br />
 
-									<p:dataTable id="tblLista2" var="var" selectionMode="single"
-										selection="#{MBSeleccionarEquiposUES.computadorSeleccionadoUES}"
-										rowKey="#{var.idComputador}"
-										value="#{MBSeleccionarEquiposUES.listComputadorUES}"
+									<p:dataTable id="tblDetalle" var="var" 
+										value="#{MBConfigurarEquiposLista.listDetalleLista}"
 										emptyMessage="No hay registros para mostrar">
 
 										<f:facet name="header">
-                                        Computadores con unidades estrategicas de servicio
+                                        Seleccione un item de la lista
                                     </f:facet>
 
-										<p:column headerText="Unidad Servicio">
-											<h:outputText value="#{var.unidadEstrategicaServicio.nombre}" />
+										<p:column headerText="Actividad">
+											<h:outputText value="#{var.listaCheqeoComputador.itemLista}" />
 										</p:column>
 
 										<p:column headerText="Nombre">
-											<h:outputText value="#{var.nombreComputo}" />
+											<h:outputText value="#{var.computador.nombreComputo}" />
 										</p:column>
 
 										<p:column headerText="Modelo">
-											<h:outputText value="#{var.modeloComputo.modelo}" />
+											<h:outputText value="#{var.computador.modeloComputo.modelo}" />
 										</p:column>
 
-										<p:column headerText="Serial Monitor">
-											<h:outputText value="#{var.serialMonitor}" />
+										<p:column headerText="Unidad Estrategica Servicio">
+											<h:outputText
+												value="#{var.computador.unidadEstrategicaServicio.nombre}" />
 										</p:column>
 
-										<p:column headerText="serial Teclado">
-											<h:outputText value="#{var.serialTeclado}" />
+
+										<p:column headerText="Estado" style="    text-align: center;">
+											<p:selectBooleanCheckbox value="#{var.isCheck}" />
 										</p:column>
 
-										<p:column headerText="serial Mouse">
-											<h:outputText value="#{var.serialMouse}" />
-										</p:column>
 
-										<f:facet name="footer">
-
-											<p:commandButton value="Cancelar" style="width: 150px;"
-												update=":formPrincipal"
-												action="#{MBSeleccionarEquiposUES.cancelarComputadorUES}"
-												id="cancelarUES">
-											</p:commandButton>
-
-										</f:facet>
 
 									</p:dataTable>
-
-									<p:commandButton value="Guardar Cambios" style="width: 150px;"
-										update=":formPrincipal"
-										action="#{MBSeleccionarEquiposUES.registrarComputadoresUES}"
-										id="registrarUES">
-									</p:commandButton>
 
 								</div>
 
@@ -161,7 +129,6 @@
 								<div class="ui-g"></div>
 
 								<br></br>
-
 
 
 

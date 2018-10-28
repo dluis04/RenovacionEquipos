@@ -36,22 +36,22 @@
 
 								<div class="ui-g">
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; " value="Accion: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="accion" maxlength="200"
 											value="#{MBAccionesPagina.accionesPagina.accion}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Descripcion: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="descripcion" maxlength="100"
 											value="#{MBAccionesPagina.accionesPagina.descripcion}">
 										</p:inputText>
@@ -81,7 +81,7 @@
 									</p:dataTable>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Guardar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
@@ -93,7 +93,7 @@
 									</div>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Limpiar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
@@ -118,22 +118,22 @@
 								<div class="ui-g">
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; " value="Accion: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="accion2" maxlength="200"
 											value="#{MBAccionesPagina.accionesPaginaSeleccionada.accion}">
 										</p:inputText>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<h:outputText style="    font-weight: bold; "
 											value="Descripcion: " />
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:inputText id="descripcion2" maxlength="100"
 											value="#{MBAccionesPagina.accionesPaginaSeleccionada.descripcion}">
 										</p:inputText>
@@ -172,7 +172,7 @@
 									</p:dataTable>
 
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Modificar" style="width: 220px;"
 											update=":formPrincipal:tapView:panelModificar, messages1
 							,:formPrincipal:tapView:tbl"
@@ -181,7 +181,7 @@
 										</p:commandButton>
 									</div>
 
-									<div class="ui-g-12 ui-lg-6">
+									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Limpiar" style="width: 220px;"
 											action="#{MBAccionesPagina.limpiar}"
 											update=":formPrincipal:tapView:panelModificar"
