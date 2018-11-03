@@ -67,7 +67,7 @@
 
 										<p:calendar id="fechaIni"
 											value="#{MBOperacionServicio.operacionServicio.fechaInicio}"
-											navigator="true" pattern="yyyy-MMM-dd" />
+											navigator="true" />
 
 									</div>
 
@@ -80,7 +80,7 @@
 
 										<p:calendar id="fechaFin"
 											value="#{MBOperacionServicio.operacionServicio.fechaFin}"
-											navigator="true" pattern="yyyy-MMM-dd" />
+											navigator="true" />
 
 									</div>
 
@@ -222,7 +222,11 @@
 									selection="#{MBOperacionServicio.operacionServicioSeleccionado}"
 									rowKey="#{var.idServicio}"
 									value="#{MBOperacionServicio.listOperacionServicios}"
-									emptyMessage="No hay registros para mostrar">
+									emptyMessage="No hay registros para mostrar" rows="10"
+									paginator="true"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15"
+									filteredValue="#{MBOperacionServicio.filterOperacion}">
 
 									<f:facet name="header">
                                         Seleccione una Operacion a modificar
@@ -235,20 +239,26 @@
 										<h:outputText value="#{var.idServicio}" />
 									</p:column>
 
-									<p:column headerText="Codigo Servicio">
+									<p:column headerText="Codigo Servicio"
+										filterBy="#{var.codigoServicio}">
 										<h:outputText value="#{var.codigoServicio}" />
 									</p:column>
 
-									<p:column headerText="Operacion">
+									<p:column headerText="Operacion" filterBy="#{var.bancoPropio}">
 										<h:outputText value="#{var.bancoPropio}" />
 									</p:column>
 
 									<p:column headerText="Fecha Inicio">
-										<h:outputText value="#{var.fechaInicio}" />
+										<h:outputText value="#{var.fechaInicio}">
+											<f:convertDateTime pattern="dd-MM-yyyy" />
+										</h:outputText>
+
 									</p:column>
 
 									<p:column headerText="Fecha Fin">
-										<h:outputText value="#{var.fechaFin}" />
+										<h:outputText value="#{var.fechaFin}">
+											<f:convertDateTime pattern="dd-MM-yyyy" />
+										</h:outputText>
 									</p:column>
 
 									<p:column headerText="Valor Mensual Compu">

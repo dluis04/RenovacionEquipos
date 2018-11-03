@@ -81,10 +81,17 @@ public class SBUsuario implements SBUsuarioLocal {
 		Email x = new Email();
 
 		if (x.sendMailSimples(user.getCorreo(), "Recuperacion de contraseña",
-				"Cordial Saludo, " + " \n Su contraseña es: "+user.getPassword()) == 1) {
+				"Cordial Saludo, " + " \n Su contraseña es: " + user.getPassword()) == 1) {
 			isEnvio = true;
 		}
 		return isEnvio;
+	}
+
+	@Override
+	public List<Usuario> consultarAllUsuariosActivosAdministrativos() throws Exception {
+		String query = "SELECT u FROM Usuario u where u.idEstado='1' and u.tipoUsuario.idTipo='3' ";
+		List<Usuario> listUsuario = sbFacade.executeQuery(query, null);
+		return listUsuario;
 	}
 
 }

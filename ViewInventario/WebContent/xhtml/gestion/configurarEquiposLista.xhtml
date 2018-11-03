@@ -40,7 +40,10 @@
 										selection="#{MBConfigurarEquiposLista.computadorSeleccionado}"
 										rowKey="#{var.idComputador}"
 										value="#{MBConfigurarEquiposLista.listComputadors}"
-										emptyMessage="No hay registros para mostrar">
+										emptyMessage="No hay registros para mostrar" rows="5"
+										paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
 
 										<f:facet name="header">
                                         Seleccione una computador
@@ -79,63 +82,58 @@
 
 									<br />
 
-									<p:dataTable id="tblDetalle" var="var" 
+									<p:dataTable id="tblDetalle" var="var"
 										value="#{MBConfigurarEquiposLista.listDetalleLista}"
-										emptyMessage="No hay registros para mostrar">
+										emptyMessage="No hay registros para mostrar" rows="15"
+										paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15"
+										filteredValue="#{MBConfigurarEquiposLista.filterDetalleLista}">
 
 										<f:facet name="header">
-                                        Seleccione un item de la lista
+                                        Configuración computadores (Lista Chequeo)
                                     </f:facet>
 
-										<p:column headerText="Actividad">
+										<p:column headerText="Orden" style="    text-align: center;">
+											<h:outputText value="#{var.listaCheqeoComputador.orden}" />
+										</p:column>
+
+										<p:column headerText="Actividad"
+											filterBy="#{var.listaCheqeoComputador.itemLista}">
 											<h:outputText value="#{var.listaCheqeoComputador.itemLista}" />
 										</p:column>
-
-										<p:column headerText="Nombre">
-											<h:outputText value="#{var.computador.nombreComputo}" />
-										</p:column>
-
-										<p:column headerText="Modelo">
-											<h:outputText value="#{var.computador.modeloComputo.modelo}" />
-										</p:column>
-
-										<p:column headerText="Unidad Estrategica Servicio">
-											<h:outputText
-												value="#{var.computador.unidadEstrategicaServicio.nombre}" />
-										</p:column>
-
 
 										<p:column headerText="Estado" style="    text-align: center;">
 											<p:selectBooleanCheckbox value="#{var.isCheck}" />
 										</p:column>
 
 
+										<p:column headerText="Observaciones"
+											style="    text-align: center;">
+											<p:inputText id="observaciones" maxlength="200"
+												value="#{var.observaciones}">
+											</p:inputText>
+
+										</p:column>
+
 
 									</p:dataTable>
 
+									<div class="ui-g-12 ui-lg-12">
+										<p:commandButton value="Guardar Cambios" style="width: 220px;"
+											onstart="PF('statusDialog').show();  "
+											oncomplete="PF('statusDialog').hide();"
+											update=":formPrincipal:tapView:panelRegistrar, messages1"
+											action="#{MBConfigurarEquiposLista.guardarCambios}"
+											id="guardar">
+										</p:commandButton>
+									</div>
 								</div>
+
 
 							</div>
 						</p:panel>
 
-					</p:tab>
-
-					<p:tab id="tapConsulta" title="Consulta / Modificación">
-
-						<div align="center">
-
-							<p:panel id="panelModificar">
-
-								<div class="ui-g"></div>
-
-								<br></br>
-
-
-
-							</p:panel>
-
-
-						</div>
 					</p:tab>
 
 				</p:tabView>

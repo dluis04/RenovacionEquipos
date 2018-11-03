@@ -57,8 +57,7 @@
 											value="#{MBComputador.modeloComputoSeleccionado.modelo}">
 										</p:inputText>
 
-										<p:commandButton type="button"
-										icon="ui-icon-plus"
+										<p:commandButton type="button" icon="ui-icon-plus"
 											onclick="PF('dlg2').show();" />
 									</div>
 
@@ -179,56 +178,22 @@
 										</p:selectOneMenu>
 									</div>
 
-									<p:dataTable id="tblOperacionServicio" var="var"
-										selectionMode="single"
-										selection="#{MBComputador.operacionServicioSeleccionado}"
-										rowKey="#{var.idServicio}"
-										value="#{MBComputador.listOperacionServicios}"
-										emptyMessage="No hay registros para mostrar">
-
-										<f:facet name="header">
-                                        Seleccione una Operacion
-                                    </f:facet>
-
-										<p:column headerText="Codigo">
-											<h:outputText value="#{var.idServicio}" />
-										</p:column>
-
-										<p:column headerText="Codigo Servicio">
-											<h:outputText value="#{var.codigoServicio}" />
-										</p:column>
-
-										<p:column headerText="Operacion">
-											<h:outputText value="#{var.bancoPropio}" />
-										</p:column>
-
-										<p:column headerText="Fecha Inicio">
-											<h:outputText value="#{var.fechaInicio}" >
-											
-											 <f:convertDateTime pattern="dd-MM-yyyy" />
-											</h:outputText>
-										</p:column>
-
-										<p:column headerText="Fecha Fin">
-											<h:outputText value="#{var.fechaFin}" >
-											
-											 <f:convertDateTime pattern="dd-MM-yyyy" />
-											</h:outputText>
-											
-										</p:column>
-
-										<p:column headerText="Valor Mensual Compu">
-											<h:outputText value="#{var.valorMensualCompu}" />
-										</p:column>
-
-										<p:column headerText="Valor Mensual Compu">
-											<h:outputText value="#{var.valorMensualOperacion}" />
-										</p:column>
-
-									</p:dataTable>
-
+									<div class="ui-g-12 ui-lg-3">
+										<h:outputText style="    font-weight: bold; "
+											value="Servicio: " />
+									</div>
 
 									<div class="ui-g-12 ui-lg-3">
+										<p:inputText id="servicio" maxlength="200"
+											value="#{MBComputador.operacionServicioSeleccionado.codigoServicio}">
+										</p:inputText>
+
+										<p:commandButton icon="ui-icon-plus" type="button"
+											onclick="PF('dlg7').show();" />
+									</div>
+
+
+									<div class="ui-g-12 ui-lg-12">
 										<p:commandButton value="Registrar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
@@ -236,10 +201,7 @@
 							,:formPrincipal:tapView:tblComputador"
 											action="#{MBComputador.registrarComputador}" id="guardar">
 										</p:commandButton>
-									</div>
 
-
-									<div class="ui-g-12 ui-lg-3">
 										<p:commandButton value="Limpiar" style="width: 220px;"
 											onstart="PF('statusDialog').show();  "
 											oncomplete="PF('statusDialog').hide();"
@@ -247,6 +209,90 @@
 											action="#{MBComputador.limpiar}" id="limpiar">
 										</p:commandButton>
 									</div>
+
+
+									<p:dialog header="Operacion Servicio" widgetVar="dlg7"
+										modal="true">
+
+
+										<h1 class="brand_name">Servicio Operación</h1>
+
+										<p:dataTable id="tblOperacionServicio" var="var"
+											selectionMode="single"
+											selection="#{MBComputador.operacionServicioSeleccionado}"
+											rowKey="#{var.idServicio}"
+											value="#{MBComputador.listOperacionServicios}"
+											emptyMessage="No hay registros para mostrar" rows="10"
+											paginator="true"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="5,10,15"
+											filteredValue="#{MBComputador.filterOperacion}">
+
+											<f:facet name="header">
+                                        Seleccione una Operacion
+                                    </f:facet>
+
+											<p:column headerText="Codigo">
+												<h:outputText value="#{var.idServicio}" />
+											</p:column>
+
+											<p:column headerText="Codigo Servicio"
+												filterBy="#{var.codigoServicio}">
+												<h:outputText value="#{var.codigoServicio}" />
+											</p:column>
+
+											<p:column headerText="Operacion"
+												filterBy="#{var.bancoPropio}">
+												<h:outputText value="#{var.bancoPropio}" />
+											</p:column>
+
+											<p:column headerText="Fecha Inicio">
+												<h:outputText value="#{var.fechaInicio}">
+
+													<f:convertDateTime pattern="dd-MM-yyyy" />
+												</h:outputText>
+											</p:column>
+
+											<p:column headerText="Fecha Fin">
+												<h:outputText value="#{var.fechaFin}">
+
+													<f:convertDateTime pattern="dd-MM-yyyy" />
+												</h:outputText>
+
+											</p:column>
+
+											<p:column headerText="Valor Mensual Compu">
+												<h:outputText value="#{var.valorMensualCompu}" />
+											</p:column>
+
+											<p:column headerText="Valor Mensual Compu">
+												<h:outputText value="#{var.valorMensualOperacion}" />
+											</p:column>
+
+											<f:facet name="footer">
+
+												<p:commandButton value="Seleccionar" style="width: 100px;"
+													update=":formPrincipal"
+													action="#{MBComputador.seleccionarOperacion}"
+													id="seleccionarOperacion">
+												</p:commandButton>
+
+												<p:commandButton value="Limpiar" style="width: 100px;"
+													update="tblOperacionServicio"
+													action="#{MBComputador.limpiarOperacion}"
+													id="limpiarOperacion">
+												</p:commandButton>
+
+												<p:commandButton value="Cancelar" style="width: 100px;"
+													update=":formPrincipal:tapView:panelRegistrar"
+													action="#{MBComputador.limpiarOperacion}"
+													id="cancelarOperacion">
+												</p:commandButton>
+											</f:facet>
+
+										</p:dataTable>
+
+									</p:dialog>
 
 
 
@@ -263,7 +309,10 @@
 											selection="#{MBComputador.modeloComputoSeleccionado}"
 											rowKey="#{var.idModelo}"
 											value="#{MBComputador.listModeloComputo}"
-											emptyMessage="No hay registros para mostrar">
+											emptyMessage="No hay registros para mostrar" rows="10"
+											paginator="true"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="5,10,15">
 
 											<f:facet name="header">
                                         Seleccione un Modelo Computador
@@ -612,7 +661,8 @@
 									selection="#{MBComputador.computadorSeleccionado}"
 									rowKey="#{var.idComputador}"
 									value="#{MBComputador.listComputadors}"
-									emptyMessage="No hay registros para mostrar">
+									emptyMessage="No hay registros para mostrar"
+									filteredValue="#{MBComputador.filterComputadorModi}">
 
 									<f:facet name="header">
                                         Seleccione un computador a modificar
@@ -625,7 +675,7 @@
 										<h:outputText value="#{var.idComputador}" />
 									</p:column>
 
-									<p:column headerText="Nombre">
+									<p:column headerText="Nombre" filterBy="#{var.nombreComputo}">
 										<h:outputText value="#{var.nombreComputo}" />
 									</p:column>
 

@@ -18,4 +18,9 @@ public interface SBDetalleInventarioLocal {
 	public List<DetalleInventario> consultarAllDetalleInventarioActivos() throws Exception;
 
 	public List<DetalleInventario> consultarAllDetalleInventarioComputadorNuevos() throws Exception;
+
+	public List<DetalleInventario> consultarAllDetalleInventarioComputadorBase() throws Exception;
+
+	public DetalleInventario consultarComputadoresInventarioById(String idComputador) throws Exception;
+
 }

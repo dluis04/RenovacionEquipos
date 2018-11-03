@@ -46,4 +46,8 @@ public class DNUsuario {
 		return sBUsuarioLocal.recuperarContrasena(user);
 	}
 
+	public List<Usuario> consultarAllUsuariosActivosAdministrativos() throws Exception {
+		return sBUsuarioLocal.consultarAllUsuariosActivosAdministrativos();
+	}
+
 }

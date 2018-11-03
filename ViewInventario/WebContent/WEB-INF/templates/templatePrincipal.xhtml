@@ -21,53 +21,50 @@
 	<f:event type="preRenderView" listener="#{MBLogin.verificarSesion()}"></f:event>
 
 	<style>
-	
-	
-	
-	/* Container holding the image and the text */
+
+/* Container holding the image and the text */
 .container {
-    position: relative;
-    text-align: center;
-    color: white;
+	position: relative;
+	text-align: center;
+	color: white;
 }
 
 /* Bottom left text */
 .bottom-left {
-    position: absolute;
-    bottom: 8px;
-    left: 16px;
+	position: absolute;
+	bottom: 8px;
+	left: 16px;
 }
 
 /* Top left text */
 .top-left {
-    position: absolute;
-    top: 8px;
-    left: 16px;
+	position: absolute;
+	top: 8px;
+	left: 16px;
 }
 
 /* Top right text */
 .top-right {
-    position: absolute;
-    top: 8px;
-    right: 16px;
+	position: absolute;
+	top: 8px;
+	right: 16px;
 }
 
 /* Bottom right text */
 .bottom-right {
-    position: absolute;
-    bottom: 8px;
-    right: 16px;
+	position: absolute;
+	bottom: 8px;
+	right: 16px;
 }
 
 /* Centered text */
 .centered {
-    position: absolute;
-    top: 3%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	position: absolute;
+	top: 3%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
-	
-	
+
 @media screen and (max-width: 810px) {
 	.ui-tabs.ui-tabs-top>.ui-tabs-nav li {
 		width: 100% !important;
@@ -102,7 +99,6 @@
 	font-weight: bold;
 }
 
-
 .brand {
 	display: inline-block;
 }
@@ -111,7 +107,6 @@
 	display: inline-block;
 	overflow: hidden;
 	font-weight: 400;
-	
 	font-size: 1.75rem;
 	line-height: 62px;
 	color: #0066b0;
@@ -143,7 +138,8 @@ pe
 
 
 
-			<p:submenu rendered="#{MBLogin.administrador}"  label="Gestion" icon="ui-icon-contact">
+			<p:submenu rendered="#{MBLogin.administrador}" label="Gestion"
+				icon="ui-icon-contact">
 
 				<p:menuitem value="Gestion Usuarios"
 					url="/xhtml/usuarios/registro.xhtml" />
@@ -159,7 +155,9 @@ pe
 
 			</p:submenu>
 
-			<p:submenu rendered="#{MBLogin.administrador}" label="Computador" icon="ui-icon-contact">
+
+			<p:submenu rendered="#{MBLogin.administrador}" label="Computador"
+				icon="ui-icon-contact">
 
 				<p:menuitem value="Unidad Estrategica Servicio (UES)"
 					url="/xhtml/computador/gestionUnidadEstrategica.xhtml" />
@@ -185,7 +183,8 @@ pe
 			</p:submenu>
 
 
-			<p:submenu rendered="#{MBLogin.administrador}" label="Sedes" icon="ui-icon-contact">
+			<p:submenu rendered="#{MBLogin.administrador}" label="Sedes"
+				icon="ui-icon-contact">
 
 				<p:menuitem value="Ciudad" url="/xhtml/sedes/gestionCiudad.xhtml" />
 
@@ -194,14 +193,24 @@ pe
 			</p:submenu>
 
 
-			<p:submenu rendered="#{MBLogin.administrador}" label="Inventario" icon="ui-icon-contact">
+			<p:submenu rendered="#{MBLogin.administrador}" label="Inventario"
+				icon="ui-icon-contact">
 
 				<p:menuitem value="Equipos Nuevos"
 					url="/xhtml/inventario/adicionarEquiposNuevos.xhtml" />
 
 			</p:submenu>
 
-			<p:submenu rendered="#{MBLogin.administrador}" label="Usuarios" icon="ui-icon-contact">
+			<p:submenu rendered="#{MBLogin.administrador}" label="Renovación"
+				icon="ui-icon-contact">
+
+				<p:menuitem value="Equipos Nuevos"
+					url="/xhtml/renovacion/RenovacionEquiposNuevos.xhtml" />
+
+			</p:submenu>
+
+			<p:submenu rendered="#{MBLogin.administrador}" label="Usuarios"
+				icon="ui-icon-contact">
 
 				<p:menuitem value="Gestion" url="/xhtml/usuarios/registro.xhtml" />
 
@@ -210,27 +219,56 @@ pe
 
 
 
+			<p:submenu rendered="#{MBLogin.proveedor}" label="Gestion Proveedor"
+				icon="ui-icon-contact">
 
-
-
-
-
-
-			<p:submenu rendered="#{MBLogin.proveedor}"  label="Gestion" icon="ui-icon-contact">
-
-				<p:menuitem value="Gestion Usuarios"
-					url="/xhtml/usuarios/registro.xhtml" />
-
-				<p:menuitem value="Gestion Lista Chequeo"
-					url="/xhtml/gestion/gestionLista.xhtml" />
-
-				<p:menuitem value="Seleccionar Equipos (UES)"
+				<p:menuitem value="Gestionar Equipos (UES)"
 					url="/xhtml/gestion/seleccionarEquiposUES.xhtml" />
 
-				<p:menuitem value="Configurar Equipos Lista"
+				<p:menuitem value="Gestionar Equipos Lista"
 					url="/xhtml/gestion/configurarEquiposLista.xhtml" />
 
 			</p:submenu>
+
+			<p:submenu rendered="#{MBLogin.proveedor}" label="Computador"
+				icon="ui-icon-contact">
+
+				<p:menuitem value="Operacion Servicio"
+					url="/xhtml/computador/gestionOperacionServicio.xhtml" />
+
+				<p:menuitem value="Modelo"
+					url="/xhtml/computador/gestionModelo.xhtml" />
+
+				<p:menuitem value="Caracteristicas"
+					url="/xhtml/computador/gestionCaracteristicas.xhtml" />
+
+				<p:menuitem value="Tipo Computo"
+					url="/xhtml/computador/gestionTipoComputo.xhtml" />
+
+				<p:menuitem value="Sistema Operativo"
+					url="/xhtml/computador/gestionSistemaOperativo.xhtml" />
+
+				<p:menuitem value="Computador"
+					url="/xhtml/computador/gestionComputador.xhtml" />
+
+			</p:submenu>
+
+			<p:submenu rendered="#{MBLogin.proveedor}" label="Inventario"
+				icon="ui-icon-contact">
+
+				<p:menuitem value="Equipos Nuevos"
+					url="/xhtml/inventario/adicionarEquiposNuevos.xhtml" />
+
+			</p:submenu>
+
+			<p:submenu rendered="#{MBLogin.proveedor}" label="Renovación"
+				icon="ui-icon-contact">
+
+				<p:menuitem value="Equipos Nuevos"
+					url="/xhtml/renovacion/RenovacionEquiposNuevos.xhtml" />
+
+			</p:submenu>
+
 
 
 

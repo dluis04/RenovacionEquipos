@@ -254,7 +254,10 @@
 
 								<p:dataTable id="tblUsuario" var="var" selectionMode="single"
 									selection="#{MBUsuario.usuarioSeleccionado}"
-									rowKey="#{var.idUsuario}" value="#{MBUsuario.listUsuarios}">
+									rowKey="#{var.idUsuario}" value="#{MBUsuario.listUsuarios}"
+									rows="10" paginator="true"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15">
 
 									<f:facet name="header">
                                         Seleccione Usuario a modificar

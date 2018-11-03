@@ -180,7 +180,7 @@
 											value="#{MBSede.ciudadModifica.nombre}">
 										</p:inputText>
 
-										<p:commandButton icon="ui-icon-plus"  type="button"
+										<p:commandButton icon="ui-icon-plus" type="button"
 											onclick="PF('dlg2').show();" />
 									</div>
 
@@ -277,7 +277,11 @@
 								<p:dataTable id="tblSede" var="var" selectionMode="single"
 									selection="#{MBSede.sedeSeleccionado}" rowKey="#{var.idSede}"
 									value="#{MBSede.listSedes}"
-									emptyMessage="No hay registros para mostrar">
+									emptyMessage="No hay registros para mostrar" rows="10"
+									paginator="true"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15"
+									filteredValue="#{MBSede.filterSede}">
 
 									<f:facet name="header">
                                         Seleccione una Sede a modificar
@@ -289,11 +293,11 @@
 										<h:outputText value="#{var.idSede}" />
 									</p:column>
 
-									<p:column headerText="Ciudad">
+									<p:column headerText="Ciudad" filterBy="#{var.ciudad.nombre}">
 										<h:outputText value="#{var.ciudad.nombre}" />
 									</p:column>
 
-									<p:column headerText="Sede">
+									<p:column headerText="Sede" filterBy="#{var.nombre}">
 										<h:outputText value="#{var.nombre}" />
 									</p:column>
 

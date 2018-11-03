@@ -19,7 +19,10 @@ public class MBListaChequeo implements Serializable {
 
 	MBMensajes mensajes = new MBMensajes();
 	DNListaChequeo dnListaCheqeoComputadors;
+
 	List<ListaCheqeoComputador> listListaChequeoComputadors;
+	List<ListaCheqeoComputador> filterChequeo;
+
 	private ListaCheqeoComputador listaChequeoComputadorSeleccionado;
 	private ListaCheqeoComputador listaChequeoComputadorModificar;
 	private ListaCheqeoComputador listaCheqeoComputador;
@@ -113,6 +116,14 @@ public class MBListaChequeo implements Serializable {
 		if (dnListaCheqeoComputadors == null) {
 			dnListaCheqeoComputadors = new DNListaChequeo();
 		}
+	}
+
+	public List<ListaCheqeoComputador> getFilterChequeo() {
+		return filterChequeo;
+	}
+
+	public void setFilterChequeo(List<ListaCheqeoComputador> filterChequeo) {
+		this.filterChequeo = filterChequeo;
 	}
 
 	public String getTipoListaModi() {

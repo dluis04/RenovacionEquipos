@@ -19,7 +19,10 @@ public class MBOperacionServicio implements Serializable {
 
 	MBMensajes mensajes = new MBMensajes();
 	DNOperacionServicio dnOperacionServicios;
+
 	List<OperacionServicio> listOperacionServicios;
+	List<OperacionServicio> filterOperacion;
+
 	private OperacionServicio operacionServicioSeleccionado;
 	private OperacionServicio operacionServicioModificar;
 	private OperacionServicio operacionServicio;
@@ -102,6 +105,14 @@ public class MBOperacionServicio implements Serializable {
 		if (dnOperacionServicios == null) {
 			dnOperacionServicios = new DNOperacionServicio();
 		}
+	}
+
+	public List<OperacionServicio> getFilterOperacion() {
+		return filterOperacion;
+	}
+
+	public void setFilterOperacion(List<OperacionServicio> filterOperacion) {
+		this.filterOperacion = filterOperacion;
 	}
 
 	public List<OperacionServicio> getListOperacionServicios() {

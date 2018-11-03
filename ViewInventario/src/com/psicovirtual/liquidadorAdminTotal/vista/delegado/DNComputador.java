@@ -50,4 +50,12 @@ public class DNComputador {
 		return sBComputadorLocal.consultarComputadoresNuevosUES();
 	}
 
+	public List<Computador> consultarAllComputadoresBase() throws Exception {
+		return sBComputadorLocal.consultarAllComputadoresBase();
+	}
+
+	public List<Computador> consultarComputadoresNuevosParaRenovacion() throws Exception {
+		return sBComputadorLocal.consultarComputadoresNuevosParaRenovacion();
+	}
+
 }

@@ -43,8 +43,8 @@ public class DNListaChequeo {
 		return sBListaCheqeoComputadorLocal.consultarAllListaCheqeoComputadorActivosNuevos();
 	}
 
-	public List<ListaCheqeoComputador> consultarAllListaChequeoUESOrdenASCNuevo(String idUnidad) throws Exception {
-		return sBListaCheqeoComputadorLocal.consultarAllListaChequeoUESOrdenASCNuevo(idUnidad);
+	public List<ListaCheqeoComputador> consultarAllListaChequeoUESOrdenASCNuevo() throws Exception {
+		return sBListaCheqeoComputadorLocal.consultarAllListaChequeoUESOrdenASCNuevo();
 	}
 
 }

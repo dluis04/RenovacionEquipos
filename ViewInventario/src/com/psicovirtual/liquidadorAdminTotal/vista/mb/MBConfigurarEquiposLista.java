@@ -1,25 +1,20 @@
 package com.psicovirtual.liquidadorAdminTotal.vista.mb;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 
 import com.psicovirtual.estandar.vista.mb.MBMensajes;
 import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNComputador;
 import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNDetalleListaCompu;
-import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNListaChequeo;
-import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNUnidadEstrategica;
 import com.psicovirtual.procesos.modelo.ejb.entity.inventario.Computador;
 import com.psicovirtual.procesos.modelo.ejb.entity.inventario.DetalleListaComputo;
-import com.psicovirtual.procesos.modelo.ejb.entity.inventario.ListaCheqeoComputador;
-import com.psicovirtual.procesos.modelo.ejb.entity.inventario.UnidadEstrategicaServicio;
 import com.psicovirtual.procesos.modelo.ejb.entity.inventario.Usuario;
 
 @ManagedBean(name = "MBConfigurarEquiposLista")
@@ -32,6 +27,7 @@ public class MBConfigurarEquiposLista implements Serializable {
 
 	List<Computador> listComputadors;
 	List<DetalleListaComputo> listDetalleLista;
+	List<DetalleListaComputo> filterDetalleLista;
 
 	private DetalleListaComputo detalleSeleccionado;
 	private Computador computadorSeleccionado;
@@ -49,10 +45,19 @@ public class MBConfigurarEquiposLista implements Serializable {
 		try {
 			listDetalleLista = dNDetalleListaCompu
 					.consultarAllDetalleListaComputo("" + computadorSeleccionado.getIdComputador());
+
+			for (DetalleListaComputo list : listDetalleLista) {
+				if (list.getCheckList() == 1) {
+					list.setIsCheck(true);
+				} else {
+					list.setIsCheck(false);
+				}
+			}
+
 		} catch (Exception e) {
 			System.out.println("Error en el metodo onRowSelect configuracionEquipos -->> " + e);
 		}
-		
+
 	}
 
 	public void cargarListaCargarTodo() {
@@ -64,27 +69,33 @@ public class MBConfigurarEquiposLista implements Serializable {
 		} catch (Exception e) {
 			System.out.println("Error en el metodo cargarListaCargarTodo -->> " + e);
 		}
+
 	}
 
-	public void registrarComputadoresUES() {
+	public void guardarCambios() {
 		try {
 			inicializarDelegados();
+			Date fecha = new Date();
+			for (DetalleListaComputo list : listDetalleLista) {
+
+				if (list.getIsCheck()) {
+					list.setCheckList(1);
+					list.setActividad("NUEVO");
+					list.setFechaCheck(fecha);
+					dNDetalleListaCompu.actualizarDetalleListaComputo(list);
+				} else {
+					list.setCheckList(0);
+					list.setActividad("NUEVO");
+					list.setFechaCheck(fecha);
+					dNDetalleListaCompu.actualizarDetalleListaComputo(list);
+				}
+			}
+
+			mensajes.mostrarMensaje("Cambios guardado exitosamente", 1);
 
 		} catch (Exception e) {
 			System.out.println("Error en el metodo registrarComputadoresUES -->> " + e);
 		}
-	}
-
-	public void seleccionarComputadorSinUES() {
-		try {
-
-		} catch (Exception e) {
-			System.out.println("Error en el metodo seleccionarComputadorSinUES -->> " + e);
-		}
-
-	}
-
-	public void cancelarComputadorUES() {
 	}
 
 	public void limpiar() {
@@ -118,6 +129,14 @@ public class MBConfigurarEquiposLista implements Serializable {
 			dNDetalleListaCompu = new DNDetalleListaCompu();
 		}
 
+	}
+
+	public List<DetalleListaComputo> getFilterDetalleLista() {
+		return filterDetalleLista;
+	}
+
+	public void setFilterDetalleLista(List<DetalleListaComputo> filterDetalleLista) {
+		this.filterDetalleLista = filterDetalleLista;
 	}
 
 	public List<DetalleListaComputo> getListDetalleLista() {

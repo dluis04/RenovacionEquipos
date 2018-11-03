@@ -19,7 +19,7 @@ public interface SBListaChequeoComputadorLocal {
 
 	public List<ListaCheqeoComputador> consultarAllListaCheqeoComputadorActivosNuevos() throws Exception;
 	
-	public List<ListaCheqeoComputador> consultarAllListaChequeoUESOrdenASCNuevo(String idUnidad) throws Exception;
+	public List<ListaCheqeoComputador> consultarAllListaChequeoUESOrdenASCNuevo() throws Exception;
 	
 	
 }

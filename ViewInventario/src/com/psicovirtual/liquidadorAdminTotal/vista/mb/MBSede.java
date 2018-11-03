@@ -23,6 +23,7 @@ public class MBSede implements Serializable {
 	DNSede dnSedes;
 	DNCiudad dNCiudad;
 	List<Sede> listSedes;
+	List<Sede> filterSede;
 	List<Ciudad> listCiudad;
 
 	private Ciudad ciudadSeleccionado;
@@ -170,6 +171,14 @@ public class MBSede implements Serializable {
 			dNCiudad = new DNCiudad();
 		}
 
+	}
+
+	public List<Sede> getFilterSede() {
+		return filterSede;
+	}
+
+	public void setFilterSede(List<Sede> filterSede) {
+		this.filterSede = filterSede;
 	}
 
 	public List<Ciudad> getListCiudad() {

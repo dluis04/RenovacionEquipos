@@ -42,4 +42,12 @@ public class DNDetalleInventario {
 		return sBDetalleInventarioLocal.consultarAllDetalleInventarioComputadorNuevos();
 	}
 
+	public List<DetalleInventario> consultarAllDetalleInventarioComputadorBase() throws Exception {
+		return sBDetalleInventarioLocal.consultarAllDetalleInventarioComputadorBase();
+	}
+
+	public DetalleInventario consultarComputadoresInventarioById(String idComputador) throws Exception {
+		return sBDetalleInventarioLocal.consultarComputadoresInventarioById(idComputador);
+	}
+
 }

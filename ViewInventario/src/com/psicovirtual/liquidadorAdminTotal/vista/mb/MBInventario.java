@@ -32,8 +32,11 @@ public class MBInventario implements Serializable {
 	DNSede dNSede;
 
 	List<Computador> listComputadorNuevos;
+	List<Computador> filterComputadorNuevos;
 	List<DetalleInventario> listInventarioNuevo;
+	List<DetalleInventario> filterInventarioNuevo;
 	List<Sede> listSedes;
+	List<Sede> filterSede;
 
 	private Sede sedeSeleccionado;
 	private Sede sedeSeleccionadoM;
@@ -254,6 +257,30 @@ public class MBInventario implements Serializable {
 
 	}
 
+	public List<DetalleInventario> getFilterInventarioNuevo() {
+		return filterInventarioNuevo;
+	}
+
+	public void setFilterInventarioNuevo(List<DetalleInventario> filterInventarioNuevo) {
+		this.filterInventarioNuevo = filterInventarioNuevo;
+	}
+
+	public List<Computador> getFilterComputadorNuevos() {
+		return filterComputadorNuevos;
+	}
+
+	public void setFilterComputadorNuevos(List<Computador> filterComputadorNuevos) {
+		this.filterComputadorNuevos = filterComputadorNuevos;
+	}
+
+	public List<Sede> getFilterSede() {
+		return filterSede;
+	}
+
+	public void setFilterSede(List<Sede> filterSede) {
+		this.filterSede = filterSede;
+	}
+
 	public List<Sede> getListSedes() {
 		return listSedes;
 	}
@@ -263,6 +290,11 @@ public class MBInventario implements Serializable {
 	}
 
 	public Sede getSedeSeleccionado() {
+
+		if (sedeSeleccionado == null) {
+			sedeSeleccionado = new Sede();
+		}
+
 		return sedeSeleccionado;
 	}
 
@@ -327,6 +359,10 @@ public class MBInventario implements Serializable {
 	}
 
 	public Computador getComputadorSeleccionado() {
+
+		if (computadorSeleccionado == null) {
+			computadorSeleccionado = new Computador();
+		}
 		return computadorSeleccionado;
 	}
 

@@ -157,7 +157,10 @@
 									selection="#{MBModeloComputo.modeloComputoSeleccionado}"
 									rowKey="#{var.idModelo}"
 									value="#{MBModeloComputo.listModeloComputos}"
-									emptyMessage="No hay registros para mostrar">
+									emptyMessage="No hay registros para mostrar" rows="10"
+									paginator="true"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15">
 
 									<f:facet name="header">
                                         Seleccione un Modelo Computador a modificar

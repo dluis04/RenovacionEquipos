@@ -77,8 +77,7 @@ public class MBSeleccionarEquiposUES implements Serializable {
 			for (Computador computadorUES : listComputadorUES) {
 				dnComputadors.actualizarComputador(computadorUES);
 
-				listChequeo = dNListaChequeo.consultarAllListaChequeoUESOrdenASCNuevo(
-						"" + computadorUES.getUnidadEstrategicaServicio().getIdUnidad());
+				listChequeo = dNListaChequeo.consultarAllListaChequeoUESOrdenASCNuevo();
 				DetalleListaComputo detalle = null;
 				for (ListaCheqeoComputador listaChequeo : listChequeo) {
 					detalle = new DetalleListaComputo();

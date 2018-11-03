@@ -169,7 +169,11 @@
 									selection="#{MBListaChequeo.listaChequeoComputadorSeleccionado}"
 									rowKey="#{var.idLista}"
 									value="#{MBListaChequeo.listListaChequeoComputadors}"
-									emptyMessage="No hay registros para mostrar">
+									emptyMessage="No hay registros para mostrar" rows="15"
+									paginator="true"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15"
+									filteredValue="#{MBListaChequeo.filterChequeo}">
 
 									<f:facet name="header">
                                         Seleccione una item a modificar
@@ -182,7 +186,7 @@
 										<h:outputText value="#{var.orden}" />
 									</p:column>
 
-									<p:column headerText="Item">
+									<p:column headerText="Item" filterBy="#{var.itemLista}">
 										<h:outputText value="#{var.itemLista}" />
 									</p:column>
 

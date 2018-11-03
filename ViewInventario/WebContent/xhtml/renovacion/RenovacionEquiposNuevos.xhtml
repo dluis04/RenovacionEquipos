@@ -1,0 +1,282 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+
+	<ui:composition
+		template="../../WEB-INF/templates/templatePrincipal.xhtml">
+		<ui:define name="content">
+			<h:form id="formPrincipal">
+				<div style="text-align: center;">
+					<div class="brand" style="text-align: center;">
+						<h1 class="brand_name">Renovación Equipos Base</h1>
+					</div>
+				</div>
+
+				<p:tabView id="tapView">
+
+					<p:tab id="tapRegistro" title="Registro">
+
+						<p:growl id="messages1" />
+
+						<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+							closable="false" resizable="false" showHeader="false">
+							<p:graphicImage library="images" name="ajax-loader.gif" />
+						</p:dialog>
+
+
+						<p:panel id="panelRegistrar">
+
+							<div align="center">
+
+								<div class="ui-g">
+
+
+									<p:dataTable id="tblComputadorBase" var="var"
+										selectionMode="single"
+										selection="#{MBRenovacionEquiposNuevos.computadorBaseSeleccionado}"
+										rowKey="#{var.idInventario}"
+										value="#{MBRenovacionEquiposNuevos.listComputadorBase}"
+										emptyMessage="No hay registros para mostrar" rows="5"
+										paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<f:facet name="header">
+                                        Seleccione un computador base
+                                    </f:facet>
+
+										<p:column headerText="Nombre">
+											<h:outputText value="#{var.computador.nombreComputo}" />
+										</p:column>
+
+										<p:column headerText="Nombre Usuario">
+											<h:outputText value="#{var.usuario.nombre}" />
+										</p:column>
+
+										<p:column headerText="Unidad Estrategica Servicio">
+											<h:outputText
+												value="#{var.computador.unidadEstrategicaServicio.nombre}" />
+										</p:column>
+
+										<p:column headerText="Modelo">
+											<h:outputText value="#{var.computador.modeloComputo.modelo}" />
+										</p:column>
+
+										<p:column headerText="Serial Monitor">
+											<h:outputText value="#{var.computador.serialMonitor}" />
+										</p:column>
+
+										<p:column headerText="serial Teclado">
+											<h:outputText value="#{var.computador.serialTeclado}" />
+										</p:column>
+
+										<p:column headerText="serial Mouse">
+											<h:outputText value="#{var.computador.serialMouse}" />
+										</p:column>
+
+										<f:facet name="footer">
+
+											<p:commandButton type="button" value="Cambiar Usuario"
+												style="width: 170px;" onclick="PF('dlg1').show();" />
+
+											<p:commandButton value="Limpiar" style="width: 100px;"
+												update="tblComputadorBase"
+												action="#{MBRenovacionEquiposNuevos.limpiarComputadorBase}"
+												id="limpiarComputadorBase">
+											</p:commandButton>
+
+										</f:facet>
+
+									</p:dataTable>
+
+
+									<br /> <br />
+
+									<p:dataTable id="tblComputadorNuevo" var="var"
+										selectionMode="single"
+										selection="#{MBRenovacionEquiposNuevos.computadorNuevoSeleccionado}"
+										rowKey="#{var.idComputador}"
+										value="#{MBRenovacionEquiposNuevos.listComputadorNuevos}"
+										emptyMessage="No hay registros para mostrar" rows="5"
+										paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<f:facet name="header">
+                                        Computadores Nuevos
+                                    </f:facet>
+
+										<p:column headerText="Nombre">
+											<h:outputText value="#{var.nombreComputo}" />
+										</p:column>
+
+										<p:column headerText="Unidad Estrategica Servicio">
+											<h:outputText value="#{var.unidadEstrategicaServicio.nombre}" />
+										</p:column>
+
+										<p:column headerText="Modelo">
+											<h:outputText value="#{var.modeloComputo.modelo}" />
+										</p:column>
+
+										<p:column headerText="Serial Monitor">
+											<h:outputText value="#{var.serialMonitor}" />
+										</p:column>
+
+										<p:column headerText="serial Teclado">
+											<h:outputText value="#{var.serialTeclado}" />
+										</p:column>
+
+										<p:column headerText="serial Mouse">
+											<h:outputText value="#{var.serialMouse}" />
+										</p:column>
+
+										<f:facet name="footer">
+
+											<p:commandButton value="Asignar" style="width: 100px;"
+												update=":formPrincipal"
+												action="#{MBRenovacionEquiposNuevos.asginarRenovacion}"
+												id="aignarComputadorNuevo">
+											</p:commandButton>
+
+											<p:commandButton value="Limpiar" style="width: 100px;"
+												update="tblComputadorNuevo"
+												action="#{MBRenovacionEquiposNuevos.limpiarComputadorNuevo}"
+												id="limpiarRenovacionComputadorNuevo">
+											</p:commandButton>
+
+										</f:facet>
+
+									</p:dataTable>
+
+
+
+									<br /> <br />
+
+									<p:dataTable id="tblRenovados" var="var" selectionMode="single"
+										selection="#{MBRenovacionEquiposNuevos.computadorRenovadoSeleccionado}"
+										rowKey="#{var.idInventario}"
+										value="#{MBRenovacionEquiposNuevos.listComputadoresRenovados}"
+										emptyMessage="No hay registros para mostrar" rows="5"
+										paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<f:facet name="header">
+                                        Equipos renovados
+                                    </f:facet>
+
+										<p:column headerText="Equipo Base">
+											<h:outputText value="#{var.computador.nombreComputo}" />
+										</p:column>
+
+										<p:column headerText="Equipo Renovacion">
+											<h:outputText
+												value="#{var.detalleInventario.computador.nombreComputo}" />
+										</p:column>
+
+										<p:column headerText="Unidad Estrategica Servicio">
+											<h:outputText
+												value="#{var.computador.unidadEstrategicaServicio.nombre}" />
+										</p:column>
+
+										<p:column headerText="Usuario a Cargo">
+											<h:outputText value="#{var.usuario.nombre}" />
+										</p:column>
+
+										<f:facet name="footer">
+
+											<p:commandButton value="Guardar Cambios"
+												style="width: 180px;" update=":formPrincipal"
+												action="#{MBRenovacionEquiposNuevos.guardarCambios}"
+												id="guardarCambios">
+											</p:commandButton>
+
+											<p:commandButton value="Cancelar" style="width: 180px;"
+												update=":formPrincipal"
+												action="#{MBRenovacionEquiposNuevos.cancelarAsignacion}"
+												id="cancelarAsi">
+											</p:commandButton>
+
+										</f:facet>
+
+									</p:dataTable>
+
+
+								</div>
+
+								<p:dialog header="Usuario" widgetVar="dlg1" modal="true">
+
+									<h1 class="brand_name">Usuarios</h1>
+
+									<p:dataTable id="tblUsuario" var="var" selectionMode="single"
+										selection="#{MBRenovacionEquiposNuevos.usuarioSeleccionado}"
+										rowKey="#{var.idUsuario}"
+										value="#{MBRenovacionEquiposNuevos.listUsuarioAdministrativos}"
+										rows="10" paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<f:facet name="header">
+                                        Seleccione un Usuario
+                                    </f:facet>
+X
+									<p:column headerText="Codigo">
+											<h:outputText value="#{var.idUsuario}" />
+										</p:column>
+
+										<p:column headerText="Nombre">
+											<h:outputText value="#{var.nombre}" />
+										</p:column>
+
+										<p:column headerText="Cedula">
+											<h:outputText value="#{var.cedula}" />
+										</p:column>
+
+
+										<f:facet name="footer">
+
+											<p:commandButton value="Cambiar" style="width: 100px;"
+												update=":formPrincipal"
+												action="#{MBRenovacionEquiposNuevos.cambiarUsuario}"
+												id="cambiarComputadorBase">
+											</p:commandButton>
+
+											<p:commandButton value="Limpiar" style="width: 100px;"
+												update="tblUsuario"
+												action="#{MBRenovacionEquiposNuevos.limpiarUsuario}"
+												id="limpiarComputadorBase">
+											</p:commandButton>
+
+											<p:commandButton value="Cancelar" style="width: 100px;"
+												update=":formPrincipal:tapView:panelRegistrar"
+												action="#{MBRenovacionEquiposNuevos.limpiarUsuario}"
+												id="cancelarComputadorBase">
+											</p:commandButton>
+										</f:facet>
+									</p:dataTable>
+
+								</p:dialog>
+
+							</div>
+						</p:panel>
+
+					</p:tab>
+
+				</p:tabView>
+
+			</h:form>
+
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</body>
+</html>
+

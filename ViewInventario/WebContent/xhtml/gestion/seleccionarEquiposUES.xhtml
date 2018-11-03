@@ -46,13 +46,16 @@
 											<f:selectItems value="#{MBSeleccionarEquiposUES.listUnidad}" />
 										</p:selectOneMenu>
 									</div>
-									<br />
+									<div class="ui-g-12 ui-lg-12"></div>
 
 									<p:dataTable id="tblLista" var="var" selectionMode="single"
 										selection="#{MBSeleccionarEquiposUES.computadorSeleccionado}"
 										rowKey="#{var.idComputador}"
 										value="#{MBSeleccionarEquiposUES.listComputadors}"
-										emptyMessage="No hay registros para mostrar">
+										emptyMessage="No hay registros para mostrar" rows="10"
+										paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
 
 										<f:facet name="header">
                                         Seleccione una computador
@@ -91,13 +94,16 @@
 									</p:dataTable>
 
 
-									<br />
+									<br /> <br />
 
 									<p:dataTable id="tblLista2" var="var" selectionMode="single"
 										selection="#{MBSeleccionarEquiposUES.computadorSeleccionadoUES}"
 										rowKey="#{var.idComputador}"
 										value="#{MBSeleccionarEquiposUES.listComputadorUES}"
-										emptyMessage="No hay registros para mostrar">
+										emptyMessage="No hay registros para mostrar" rows="10"
+										paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
 
 										<f:facet name="header">
                                         Computadores con unidades estrategicas de servicio
@@ -138,19 +144,16 @@
 										</f:facet>
 
 									</p:dataTable>
-<br />  
+									<br />
 
 
-		<div class="ui-g-12 ui-lg-12">
-		
-		
-		
-									<p:commandButton value="Guardar Cambios" style="width: 150px;"
-										update=":formPrincipal"
-										action="#{MBSeleccionarEquiposUES.registrarComputadoresUES}"
-										id="registrarUES">
-									</p:commandButton>
-</div>
+									<div class="ui-g-12 ui-lg-12">
+										<p:commandButton value="Guardar Cambios" style="width: 220px;"
+											update=":formPrincipal"
+											action="#{MBSeleccionarEquiposUES.registrarComputadoresUES}"
+											id="registrarUES">
+										</p:commandButton>
+									</div>
 								</div>
 
 							</div>
@@ -158,24 +161,6 @@
 
 					</p:tab>
 
-					<p:tab id="tapConsulta" title="Consulta / Modificación">
-
-						<div align="center">
-
-							<p:panel id="panelModificar">
-
-								<div class="ui-g"></div>
-
-								<br></br>
-
-
-
-
-							</p:panel>
-
-
-						</div>
-					</p:tab>
 
 				</p:tabView>
 

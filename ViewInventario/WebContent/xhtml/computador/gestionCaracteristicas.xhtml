@@ -118,7 +118,8 @@
 									</div>
 
 									<div class="ui-g-12 ui-lg-3">
-										<h:outputText style="    font-weight: bold; " value="Tipo: " />
+										<h:outputText style="    font-weight: bold; "
+											value="Memoria: " />
 									</div>
 
 									<div class="ui-g-12 ui-lg-3">
@@ -159,7 +160,10 @@
 									selection="#{MBCaracteristicasComputo.caracteristicasComputoSeleccionado}"
 									rowKey="#{var.idCaracteristicas}"
 									value="#{MBCaracteristicasComputo.listCaracteristicasComputos}"
-									emptyMessage="No hay registros para mostrar">
+									emptyMessage="No hay registros para mostrar" rows="10"
+									paginator="true"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15">
 
 									<f:facet name="header">
                                         Seleccione una Caracteristica a modificar

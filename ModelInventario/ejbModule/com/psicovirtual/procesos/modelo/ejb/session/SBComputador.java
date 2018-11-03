@@ -36,6 +36,9 @@ public class SBComputador implements SBComputadorLocal {
 	@EJB
 	SBOperacionServicioLocal sBOperacionServicio;
 
+	@EJB
+	SBUnidadEstrategicaServicioLocal sBUnidadEstrategicaServicio;
+
 	/**
 	 * Default constructor.
 	 */
@@ -174,6 +177,64 @@ public class SBComputador implements SBComputadorLocal {
 				+ "and u.unidadEstrategicaServicio != null ";
 
 		List<Computador> listComputador = sbFacade.executeQuery(query, null);
+
+		return listComputador;
+	}
+
+	@Override
+	public List<Computador> consultarAllComputadoresBase() throws Exception {
+		String query = "SELECT u FROM Computador u where u.idEstado='1' and u.idEstadoCompu='2' ";
+
+		List<Computador> listComputador = sbFacade.executeQuery(query, null);
+
+		return listComputador;
+	}
+
+	@Override
+	public List<Computador> consultarComputadoresNuevosParaRenovacion() throws Exception {
+		String query = "select compu.ID_COMPUTADOR,compu.NOMBRE_COMPUTO,compu.SERIAL__MONITOR,compu.SERIAL_MOUSE,compu.SERIAL_TECLADO, "
+				+ "compu.ID_MODELO, compu.ID_TIPO, compu.ID_SISTEMA,  compu.ID_CARACTERISTICAS, compu.ID_SERVICIO, "
+				+ "compu.DIRECCION_IP, compu.MAC, compu.ID_USUARIO_REG,  compu.ID_USUARIO_MOD, "
+				+ "compu.ID_ESTADO_COMPU, compu.ID_ESTADO, compu.ID_UNIDAD  from COMPUTADOR compu LEFT join DETALLE_INVENTARIO deta on deta.ID_INVENTARIO_RENO = compu.ID_COMPUTADOR  "
+				+ "where compu.ID_ESTADO='1' and compu.ID_ESTADO_COMPU='1' and deta.ID_ESTADO='1' ";
+
+		HashMap parametros = new HashMap();
+
+		List<Object[]> registrosList = sbFacade.executeNativeQuery(query, parametros);
+		Computador compu = null;
+		List<Computador> listComputador = new ArrayList<Computador>();
+
+		for (int i = 0; i < registrosList.size(); i++) {
+
+			compu = new Computador();
+
+			compu.setIdComputador(Integer.parseInt(registrosList.get(i)[0].toString()));
+			compu.setNombreComputo(registrosList.get(i)[1].toString());
+			compu.setSerialMonitor(registrosList.get(i)[2].toString());
+			compu.setSerialMouse(registrosList.get(i)[3].toString());
+			compu.setSerialTeclado(registrosList.get(i)[4].toString());
+			compu.setModeloComputo(sBModeloComputo.consultarDetalleModeloComputo(registrosList.get(i)[5].toString()));
+			compu.setTipoComputo(sBTipoComputo.consultarDetalleTipoComputo(registrosList.get(i)[6].toString()));
+			compu.setSistemaOperativo(
+					sBSistemaOperativo.consultarDetalleSistemaOperativo(registrosList.get(i)[7].toString()));
+			compu.setCaracteristicasComputo(sBCaracteristicasComputo
+					.consultarDetalleCaracteristicasComputo(registrosList.get(i)[8].toString()));
+
+			compu.setOperacionServicio(
+					sBOperacionServicio.consultarDetalleOperacionServicio(registrosList.get(i)[9].toString()));
+
+			compu.setDireccionIp(registrosList.get(i)[10].toString());
+			compu.setMac(registrosList.get(i)[11].toString());
+			compu.setIdUsuarioReg(Integer.parseInt(registrosList.get(i)[12].toString()));
+			compu.setIdUsuarioMod(Integer.parseInt(registrosList.get(i)[13].toString()));
+			compu.setIdEstadoCompu(Integer.parseInt(registrosList.get(i)[14].toString()));
+			compu.setIdEstado(Integer.parseInt(registrosList.get(i)[15].toString()));
+			compu.setUnidadEstrategicaServicio(sBUnidadEstrategicaServicio
+					.consultarDetalleUnidadEstrategicaServicio(registrosList.get(i)[15].toString()));
+
+			listComputador.add(compu);
+
+		}
 
 		return listComputador;
 	}

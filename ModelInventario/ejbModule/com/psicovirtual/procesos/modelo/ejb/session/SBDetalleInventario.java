@@ -66,4 +66,26 @@ public class SBDetalleInventario implements SBDetalleInventarioLocal {
 		return listDetalleInventario;
 	}
 
+	@Override
+	public List<DetalleInventario> consultarAllDetalleInventarioComputadorBase() throws Exception {
+		String query = "SELECT u FROM DetalleInventario u where u.idEstado='1' and u.computador.idEstadoCompu='2' and u.computador.idEstado='1' ";
+		List<DetalleInventario> listDetalleInventario = sbFacade.executeQuery(query, null);
+
+		return listDetalleInventario;
+	}
+
+	@Override
+	public DetalleInventario consultarComputadoresInventarioById(String idComputador) throws Exception {
+		String query = "SELECT u FROM DetalleInventario u where u.idEstado='1' and u.computador.idComputador='"
+				+ idComputador + "' ";
+		List<DetalleInventario> listDetalleInventario = sbFacade.executeQuery(query, null);
+
+		DetalleInventario temp = null;
+		for (DetalleInventario obj : listDetalleInventario) {
+			temp = obj;
+		}
+
+		return temp;
+	}
+
 }

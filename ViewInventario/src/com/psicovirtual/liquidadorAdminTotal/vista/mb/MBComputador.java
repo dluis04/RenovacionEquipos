@@ -2,8 +2,6 @@ package com.psicovirtual.liquidadorAdminTotal.vista.mb;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,8 +11,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-
-import org.primefaces.event.FlowEvent;
 
 import com.psicovirtual.estandar.vista.mb.MBMensajes;
 import com.psicovirtual.liquidadorAdminTotal.vista.delegado.DNCaracteristicasComputo;
@@ -44,11 +40,13 @@ public class MBComputador implements Serializable {
 	DNOperacionServicio dnOperacionServicios;
 
 	List<Computador> listComputadors;
+	List<Computador> filterComputadorModi;
 	List<ModeloComputo> listModeloComputo;
 	List<CaracteristicasComputo> listCaracteristicas;
 	List<TipoComputo> listTipoComputo;
 	List<SistemaOperativo> listSistemaOperativo;
 	List<OperacionServicio> listOperacionServicios;
+	List<OperacionServicio> filterOperacion;
 
 	String idEstadoCompuModi;
 	String idEstadoCompu;
@@ -202,6 +200,10 @@ public class MBComputador implements Serializable {
 			sistemaOperativoSeleccionado = new SistemaOperativo();
 		}
 
+		if (operacionServicioSeleccionado == null) {
+			operacionServicioSeleccionado = new OperacionServicio();
+		}
+
 	}
 
 	public void limpiarTipoModelo() {
@@ -231,6 +233,7 @@ public class MBComputador implements Serializable {
 	public void limpiarOperacion() {
 		operacionServicioSeleccionado = null;
 		operacionServicioSeleccionado = new OperacionServicio();
+		limpiarIsNull();
 	}
 
 	public void seleccionarSistema() {
@@ -269,6 +272,15 @@ public class MBComputador implements Serializable {
 		}
 		limpiarIsNull();
 
+	}
+
+	public void seleccionarOperacion() {
+		if (operacionServicioSeleccionado != null) {
+			mensajes.mostrarMensaje("Servicio/Operacion seleccionada exitosamente", 1);
+		} else {
+			mensajes.mostrarMensaje("Debe seleccionar una Servicio/Operacion", 2);
+		}
+		limpiarIsNull();
 	}
 
 	public void tabIsClosed() {
@@ -313,13 +325,20 @@ public class MBComputador implements Serializable {
 
 	}
 
-	public String onFlowProcess(FlowEvent event) {
-		if (skip) {
-			skip = false; // reset in case user goes back
-			return "confirm";
-		} else {
-			return event.getNewStep();
-		}
+	public List<OperacionServicio> getFilterOperacion() {
+		return filterOperacion;
+	}
+
+	public void setFilterOperacion(List<OperacionServicio> filterOperacion) {
+		this.filterOperacion = filterOperacion;
+	}
+
+	public List<Computador> getFilterComputadorModi() {
+		return filterComputadorModi;
+	}
+
+	public void setFilterComputadorModi(List<Computador> filterComputadorModi) {
+		this.filterComputadorModi = filterComputadorModi;
 	}
 
 	public String getIdEstadoCompuModi() {
@@ -347,6 +366,9 @@ public class MBComputador implements Serializable {
 	}
 
 	public OperacionServicio getOperacionServicioSeleccionado() {
+		if (operacionServicioSeleccionado == null) {
+			operacionServicioSeleccionado = new OperacionServicio();
+		}
 		return operacionServicioSeleccionado;
 	}
 

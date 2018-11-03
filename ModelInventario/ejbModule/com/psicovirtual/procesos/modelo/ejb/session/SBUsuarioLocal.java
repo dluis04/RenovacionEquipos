@@ -16,9 +16,11 @@ public interface SBUsuarioLocal {
 	public Usuario consultarDetalleUsuario(String id) throws Exception;
 
 	public int consultarUsuarioInicio(Usuario user) throws Exception;
-	
+
 	public List<Usuario> consultarAllUsuariosActivos() throws Exception;
-	
+
+	public List<Usuario> consultarAllUsuariosActivosAdministrativos() throws Exception;
+
 	public boolean recuperarContrasena(Usuario user) throws Exception;
 
 }
